@@ -1,16 +1,9 @@
-//
-//  IngredientDetailViewController.swift
-//  FitCook
-//
-//  Created by Timur Dolotkazin on 03.03.2020.
-//  Copyright © 2020 Timur Dolotkazin. All rights reserved.
-//
-
 import UIKit
+import CoreData
 
 class IngredientDetailViewController: UIViewController {
 	var selectedIngredient: Ingredient?
-	
+	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	
 	@IBOutlet weak var weightTextField: UITextField!
 	@IBOutlet weak var kcalTextField: UITextField!
@@ -27,8 +20,18 @@ class IngredientDetailViewController: UIViewController {
 	}
 		
 	@IBAction func saveButtonPressed(_ sender: UIButton) {
-		selectedIngredient?.weight = Int(weightTextField.text ?? "0")
-		selectedIngredient?.kcal = Int(kcalTextField.text ?? "0")
+		selectedIngredient?.weight = Int64(weightTextField.text ?? "0")!
+		selectedIngredient?.kcal = Int64(kcalTextField.text ?? "0")!
+		saveDetails()
 		self.navigationController?.popViewController(animated: true)
+	}
+	
+	func saveDetails() {
+		do {
+			try context.save()
+		} catch {
+			print(error)
+		}
+		
 	}
 }

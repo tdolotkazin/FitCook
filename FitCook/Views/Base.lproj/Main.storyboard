@@ -19,13 +19,13 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="690"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c1Z-Sx-IgI">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="87.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="259-h2-tj8">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="87.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ингредиент" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aj4-8w-6ib">
-                                                        <rect key="frame" x="20" y="8" width="335" height="71.333333333333329"/>
+                                                        <rect key="frame" x="20" y="8" width="335" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                         <connections>
@@ -39,7 +39,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uog-0L-4vr">
-                                        <rect key="frame" x="0.0" y="87.333333333333314" width="375" height="602.66666666666674"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="640"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="listCell" rowHeight="44" id="5Xg-aB-ge5" customClass="IngredientsListViewCell" customModule="FitCook" customModuleProvider="target">
@@ -189,7 +189,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sXJ-nm-yhc">
                                                 <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -222,6 +222,44 @@
             </objects>
             <point key="canvasLocation" x="1980" y="126"/>
         </scene>
+        <!--Meals View Controller-->
+        <scene sceneID="xuK-DX-NEh">
+            <objects>
+                <tableViewController id="f3u-Bw-YK9" customClass="MealsViewController" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ewF-Nd-XyF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="mealCell" id="toC-RQ-h2b">
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="toC-RQ-h2b" id="zLO-y1-8w1">
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="f3u-Bw-YK9" id="NnG-Xd-Mrj"/>
+                            <outlet property="delegate" destination="f3u-Bw-YK9" id="P1Z-md-38h"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wOj-Zy-b5O">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="udq-iT-hnK">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="f3u-Bw-YK9" id="FMZ-kw-yr1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toIngredients" id="3RJ-CC-hm9"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QsW-Uz-6O3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="353" y="126"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="vkS-PN-avR">
             <objects>
@@ -233,12 +271,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EkC-Va-uw9"/>
+                        <segue destination="f3u-Bw-YK9" kind="relationship" relationship="rootViewController" id="z33-wu-0Fy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjI-Og-vbm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.40000000000001" y="126.35467980295567"/>
+            <point key="canvasLocation" x="-742" y="149"/>
         </scene>
     </scenes>
 </document>
