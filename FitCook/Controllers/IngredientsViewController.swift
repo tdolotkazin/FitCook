@@ -3,7 +3,7 @@ import UIKit
 import CoreData
 
 class IngredientsViewController: UIViewController {
-	
+	//get context from singleton
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	
 	var meal: Meal? {
@@ -13,9 +13,7 @@ class IngredientsViewController: UIViewController {
 	}
 	var ingredients = [Ingredient]()
 	
-	
 	@IBOutlet var toolbar: UIToolbar!
-	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var ingredientTextField: UITextField!
 	
@@ -23,6 +21,57 @@ class IngredientsViewController: UIViewController {
 		super.viewDidLoad()
 		tableView.reloadData()
 	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if let selectedIndexPath = tableView.indexPathForSelectedRow {
+			tableView.reloadRows(at: [selectedIndexPath], with: UITableView.RowAnimation.automatic)
+			tableView.deselectRow(at: selectedIndexPath, animated: animated)
+			
+		}
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		saveIngrediends()
+	}
+	
+	//MARK: - IBActions
+	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+		if let string = ingredientTextField.text, string != "" {
+			parseAndSave(string: string)
+		}
+		ingredientTextField.resignFirstResponder()
+	}
+	
+	@IBAction func weightButtonPressed(_ sender: UIBarButtonItem) {
+		if ingredientTextField.text != "" {
+			ingredientTextField.text! = ingredientTextField.text! + ": "
+			ingredientTextField.keyboardType = .numbersAndPunctuation
+			ingredientTextField.reloadInputViews()
+		}
+	}
+	
+	@IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+		var textField = UITextField()
+		let alert = UIAlertController(title: "Переименовать блюдо", message: nil, preferredStyle: .alert)
+		let action = UIAlertAction(title: "OK", style: .default) { (alertAction) in
+			self.meal?.name = textField.text!
+			//	self.saveIngrediends()
+		}
+		alert.addAction(action)
+		alert.addTextField { (alertTextField) in
+			alertTextField.text = self.meal?.name!
+			textField = alertTextField
+		}
+		
+		present(alert, animated: true) {
+			self.saveIngrediends()
+		}
+		
+	}
+	
+	
 	//MARK: - CoreData
 	
 	func loadIngredients(_ meal: Meal) {
@@ -46,29 +95,6 @@ class IngredientsViewController: UIViewController {
 			tableView.reloadData()
 		}
 	}
-	
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		if let selectedIndexPath = tableView.indexPathForSelectedRow {
-			tableView.reloadRows(at: [selectedIndexPath], with: UITableView.RowAnimation.automatic)
-			tableView.deselectRow(at: selectedIndexPath, animated: animated)
-			
-		}
-	}
-	
-	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-		if let string = ingredientTextField.text, string != "" {
-			parseAndSave(string: string)
-		}
-		ingredientTextField.resignFirstResponder()
-	}
-	
-	@IBAction func weightButtonPressed(_ sender: UIBarButtonItem) {
-		if ingredientTextField.text != "" {
-			ingredientTextField.text! = ingredientTextField.text! + " : "
-		}
-	}
 }
 
 //MARK: - UITextfield Delegate
@@ -86,11 +112,13 @@ extension IngredientsViewController: UITextFieldDelegate {
 			return false
 		}
 		parseAndSave(string: text)
+		textField.keyboardType = .default
+		textField.reloadInputViews()
 		return true
 	}
 	
 	func parseAndSave(string: String) {
-		let name = string.components(separatedBy: " ").first
+		let name = string.components(separatedBy: ": ").first
 		let newIngredient = Ingredient(context: self.context)
 		newIngredient.name = name
 		let weightString = string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
@@ -98,6 +126,7 @@ extension IngredientsViewController: UITextFieldDelegate {
 			newIngredient.weight = Int64(weight) }
 		newIngredient.addToInMeals(meal!)
 		//need to implement extra check for ":" in this line. Everything after this line should be weight. Just in case user wants to have name of ingredient with digits, e.g. "Cream of 20% fat"
+		//also need to implement regexp, so "Coconut Oil 100" should parse correctly
 		ingredients.insert(newIngredient, at: 0)
 		saveIngrediends()
 		tableView.reloadData()
@@ -158,10 +187,38 @@ extension IngredientsViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension IngredientsViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let detailVC = segue.destination as! IngredientDetailViewController
-		if let indexPath = tableView.indexPathForSelectedRow {
-			detailVC.selectedIngredient = ingredients[indexPath.row]
+		if segue.identifier == "toIngredientDetail" {
+			let detailVC = segue.destination as! IngredientDetailViewController
+			if let indexPath = tableView.indexPathForSelectedRow {
+				detailVC.selectedIngredient = ingredients[indexPath.row]
+			}
 		}
+		if segue.identifier == "goToCalculation" {
+			let calculationVC = segue.destination as! CalculationViewController
+			calculationVC.ingredients = ingredients
+			calculationVC.meal = meal
+		}
+		
+	}
+	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+		if identifier == "goToCalculation" {
+			for item in ingredients {
+				if item.weight == 0 || item.kcal == 0 {
+					let alert = UIAlertController(title: "Ну уж нет", message: "Сначала введите вес и калорийность всех ингредиентов =)", preferredStyle: .alert)
+					alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
+					present(alert, animated: true, completion: nil)
+					return false
+				}
+			}
+			if ingredients.count == 0 {
+				let alert = UIAlertController(title: "А из чего готовить будем?", message: "Ну хоть что-нибудь введите =)", preferredStyle: .alert)
+				alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
+				present(alert, animated: true, completion: nil)
+				return false
+			}
+			
+		}
+		return true
 	}
 }
 

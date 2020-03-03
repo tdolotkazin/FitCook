@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C80CCB71240EA67200EE21A3 /* CalculationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */; };
 		C81F7969240E637400EC6024 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C81F7968240E637400EC6024 /* GoogleService-Info.plist */; };
 		C823BA37240E5C0200048111 /* IngredientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823BA36240E5C0200048111 /* IngredientDetailViewController.swift */; };
 		C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C856EEF8240E79C200EB3586 /* Model.xcdatamodeld */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewController.swift; sourceTree = "<group>"; };
 		C81F7968240E637400EC6024 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C823BA36240E5C0200048111 /* IngredientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDetailViewController.swift; sourceTree = "<group>"; };
 		C856EEF9240E79C200EB3586 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -57,10 +59,11 @@
 		C823BA38240E5C1700048111 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */,
-				C8CCD8D023FFD7C50061B3F3 /* IngredientsViewController.swift */,
 				C8C3A17A240E70170031F16A /* MealsViewController.swift */,
+				C8CCD8D023FFD7C50061B3F3 /* IngredientsViewController.swift */,
 				C823BA36240E5C0200048111 /* IngredientDetailViewController.swift */,
+				C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */,
+				C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C80CCB71240EA67200EE21A3 /* CalculationViewController.swift in Sources */,
 				C8CCD8E323FFFEAD0061B3F3 /* IngredientsListViewCell.swift in Sources */,
 				C823BA37240E5C0200048111 /* IngredientDetailViewController.swift in Sources */,
 				C8CCD8D123FFD7C50061B3F3 /* IngredientsViewController.swift in Sources */,

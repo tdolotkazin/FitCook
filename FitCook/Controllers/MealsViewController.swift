@@ -9,7 +9,11 @@ class MealsViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		loadMeals()
+	}
+	override func viewDidAppear(_ animated: Bool) {
+		tableView.reloadData()
 		
+		//transfer tableView row deselection here. And as we deselect - we know indexPath - we can reload only one row.
 	}
 	
 	@IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -27,6 +31,7 @@ class MealsViewController: UITableViewController {
 		alert.addTextField { (field) in
 			textField = field
 			textField.placeholder = "Add new meal"
+			textField.autocapitalizationType = .sentences
 		}
 		present(alert, animated: true, completion: nil)
 	}
@@ -68,6 +73,19 @@ class MealsViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		performSegue(withIdentifier: "toIngredients", sender: self)
+	}
+	
+	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+			self.context.delete(self.meals[indexPath.row])
+			self.saveMeals()
+			self.meals.remove(at: indexPath.row)
+			tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+			completionHandler(true)
+		}
+		let config = UISwipeActionsConfiguration(actions: [delete])
+		config.performsFirstActionWithFullSwipe = true
+		return config
 	}
 	
 	
