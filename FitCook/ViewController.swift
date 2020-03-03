@@ -9,114 +9,70 @@
 import UIKit
 
 class ViewController: UIViewController {
-	var activeTextField: UITextField?
-	var selectedRow: IndexPath?
+	
 	var meal = [Ingredient(name: "Подсолнечное масло"), Ingredient(name: "Морковь")]
-
+	
 	@IBOutlet var toolbar: UIToolbar!
 	
-	@IBOutlet weak var toolBarButton: UIBarButtonItem!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var ingredientTextField: UITextField!
-	@IBOutlet weak var weightTextField: UITextField!
-	@IBOutlet weak var kcalTextField: UITextField!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		meal[0].weight = 12
 		meal[0].kcal = 899
-		//        meal[1].weight = 220
-		//        meal[1].kcal = 300
-		// Do any additional setup after loading the view.
-	}
-	
-	@IBAction func nextButtonPressed(_ sender: UIBarButtonItem) {
-		switch activeTextField {
-			case ingredientTextField:
-				weightTextField.becomeFirstResponder()
-			case weightTextField:
-				kcalTextField.becomeFirstResponder()
-			case kcalTextField: kcalTextField.resignFirstResponder()
-			default:
-			print("error")
-		}
 		
 	}
 	
-//	@IBAction func addButtonPressed(_ sender: UIButton) {
-//		if ingredientTextField.text != "" {
-//			let newIngredient = Ingredient(name: ingredientTextField.text!)
-//			newIngredient.weight = Int(weightTextField.text ?? "0")
-//			newIngredient.kcal = Int(kcalTextField.text ?? "0")
-//			meal.insert(newIngredient, at: 0)
-//			clearTextFields()
-//			activeTextField?.resignFirstResponder()
-//			tableView.reloadData()
-//
-//		}
-//	}
+	
+	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+		if let string = ingredientTextField.text, string != "" {
+			parseAndSave(string: string)
+		}
+		ingredientTextField.resignFirstResponder()
+	}
+	
+	@IBAction func weightButtonPressed(_ sender: UIBarButtonItem) {
+		if ingredientTextField.text != "" {
+			ingredientTextField.text! = ingredientTextField.text! + ": "
+		}
+				
+	}
+	
+	
 }
 
 
 //MARK: - UITextfield Delegate
 
 extension ViewController: UITextFieldDelegate {
+	
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		if textField != kcalTextField {
-			toolBarButton.title = "Next"
-			textField.inputAccessoryView = toolbar }
-		else {
-			toolBarButton.title = "Done"
-			textField.inputAccessoryView = toolbar
-		}
+		textField.inputAccessoryView = toolbar
 		return true
 	}
 	
-	func textFieldDidBeginEditing(_ textField: UITextField) {
-		activeTextField = textField
-	}
-	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		if let row = selectedRow {
-			if ingredientTextField.text != "" {
-				meal[row.row].name = ingredientTextField.text!
-				meal[row.row].weight = Int(weightTextField.text ?? "0")
-				meal[row.row].kcal = Int(kcalTextField.text ?? "0")
-			} else {
-				print("Enter ingredient name!")
-				return false
-			}
-			tableView.deselectRow(at: row, animated: true)
-			selectedRow = nil
-			tableView.reloadRows(at: [row], with: UITableView.RowAnimation.automatic)
-			textField.resignFirstResponder()
-			clearTextFields()
-			return true
-		} else {
-			//create new ingredient
-			if ingredientTextField.text != "" {
-				let newIngredient = Ingredient(name: ingredientTextField.text!)
-				newIngredient.weight = Int(weightTextField.text ?? "0")
-				newIngredient.kcal = Int(kcalTextField.text ?? "0")
-				meal.insert(newIngredient, at: 0)
-				clearTextFields()
-				tableView.reloadData()
-			} else {
-				print("Enter ingredient name!")
-				return false
-			}
-			return true
+		guard let text = textField.text, !text.isEmpty else {
+			print("Error")
+			return false
 		}
-	}
-	func clearTextFields() {
-		ingredientTextField.text = ""
-		weightTextField.text = ""
-		kcalTextField.text = ""
+		parseAndSave(string: text)
+		return true
 	}
 	
-	
-	
+	func parseAndSave(string: String) {
+		let weightString = string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+		let weight = Int(weightString)
+		let name = string.components(separatedBy: CharacterSet.decimalDigits).first
+		let newIngredient = Ingredient(name: name!, weight: weight)
+		//need to implement extra check for ":" in this line. Everything after this line should be weight. Just in case user wants to have name of ingredient with digits, e.g. "Cream of 20% fat"
+		meal.insert(newIngredient, at: 0)
+		tableView.reloadData()
+		ingredientTextField.text = nil
+	}
 }
+
 
 //MARK: - TableView methods
 
@@ -153,27 +109,12 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		selectedRow = indexPath
-		ingredientTextField.text = meal[selectedRow!.row].name
-		if let weight = meal[selectedRow!.row].weight {
-			weightTextField.text = "\(weight)"
-		}
-		if let kcal = meal[selectedRow!.row].kcal {
-			kcalTextField.text = "\(kcal)"
-		}
-	}
-	
-	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-		selectedRow = nil
-		clearTextFields()
+		
 	}
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
 			self.meal.remove(at: indexPath.row)
-			if self.selectedRow == indexPath {
-				self.selectedRow = nil
-			}
 			tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
 			completionHandler(true)
 		}

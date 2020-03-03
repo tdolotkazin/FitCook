@@ -13,7 +13,9 @@ class Ingredient {
         
     }
     
-    init(name: String) {
+	init(name: String, weight: Int? = nil, kcal: Int? = nil) {
         self.name = name
+		self.weight = weight
+		self.kcal = kcal
     }
 }
