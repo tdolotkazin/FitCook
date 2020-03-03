@@ -16,5 +16,25 @@ class IngredientsListViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+	func showIngredient(_ ingredient: Ingredient) -> IngredientsListViewCell {
+		self.nameLabel.text = ingredient.name
+		let weight = ingredient.weight
+		if weight != 0 {
+			self.weightLabel.text = "\(weight)гр"
+			self.weightLabel.textColor = .label
+		} else {
+			self.weightLabel.text = "гр"
+			self.weightLabel.textColor = .systemGray
+		}
+		let kcal = ingredient.kcal
+		if kcal != 0 {
+			self.kcalLabel.text = "\(kcal)ккал/100гр"
+			self.kcalLabel.textColor = .label
+		} else {
+			self.kcalLabel.text = "ккал/100гр"
+			self.kcalLabel.textColor = .systemGray
+		}
+		return self
+	}
 
 }

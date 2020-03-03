@@ -8,7 +8,7 @@ class IngredientsViewController: UIViewController {
 	
 	var meal: Meal? {
 		didSet {
-			loadIngredients(meal!)
+			loadIngredients(in: meal, to: &ingredients)
 		}
 	}
 	var ingredients = [Ingredient]()
@@ -27,21 +27,24 @@ class IngredientsViewController: UIViewController {
 		if let selectedIndexPath = tableView.indexPathForSelectedRow {
 			tableView.reloadRows(at: [selectedIndexPath], with: UITableView.RowAnimation.automatic)
 			tableView.deselectRow(at: selectedIndexPath, animated: animated)
-			
 		}
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
-		saveIngrediends()
+		save()
 	}
 	
 	//MARK: - IBActions
 	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
 		if let string = ingredientTextField.text, string != "" {
-			parseAndSave(string: string)
+			ingredients.insert(parseIngredient(string: string, meal: meal!), at: 0)
+			ingredientTextField.text = ""
+			tableView.reloadData()
+			
 		}
 		ingredientTextField.resignFirstResponder()
+		
 	}
 	
 	@IBAction func weightButtonPressed(_ sender: UIBarButtonItem) {
@@ -57,42 +60,14 @@ class IngredientsViewController: UIViewController {
 		let alert = UIAlertController(title: "Переименовать блюдо", message: nil, preferredStyle: .alert)
 		let action = UIAlertAction(title: "OK", style: .default) { (alertAction) in
 			self.meal?.name = textField.text!
-			//	self.saveIngrediends()
 		}
 		alert.addAction(action)
 		alert.addTextField { (alertTextField) in
 			alertTextField.text = self.meal?.name!
 			textField = alertTextField
 		}
-		
 		present(alert, animated: true) {
-			self.saveIngrediends()
-		}
-		
-	}
-	
-	
-	//MARK: - CoreData
-	
-	func loadIngredients(_ meal: Meal) {
-		let request: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
-		let mealPredicate = NSPredicate(format: "%@ IN inMeals", meal)
-		request.predicate = mealPredicate
-		do {
-			ingredients = try context.fetch(request)
-		} catch {
-			print("Error loading ingredients! \(error)")
-		}
-	}
-	
-	func saveIngrediends() {
-		if context.hasChanges {
-			do {
-				try context.save()
-			} catch {
-				print(error)
-			}
-			tableView.reloadData()
+			save()
 		}
 	}
 }
@@ -107,29 +82,14 @@ extension IngredientsViewController: UITextFieldDelegate {
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		parseAndSave(string: textField.text!)
+		ingredients.insert(parseIngredient(string: textField.text!, meal: meal!), at: 0)
+		tableView.reloadData()
+		ingredientTextField.text = ""
 		textField.keyboardType = .default
 		textField.reloadInputViews()
 		return true
 	}
-	
-	func parseAndSave(string: String) {
-		let name = string.components(separatedBy: ": ").first
-		let newIngredient = Ingredient(context: self.context)
-		newIngredient.name = name
-		let weightString = string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-		if let weight = Int(weightString) {
-			newIngredient.weight = Int64(weight) }
-		newIngredient.addToInMeals(meal!)
-		//need to implement extra check for ":" in this line. Everything after this line should be weight. Just in case user wants to have name of ingredient with digits, e.g. "Cream of 20% fat"
-		//also need to implement regexp, so "Coconut Oil 100" should parse correctly
-		ingredients.insert(newIngredient, at: 0)
-		saveIngrediends()
-		tableView.reloadData()
-		ingredientTextField.text = nil
-	}
 }
-
 
 //MARK: - TableView methods
 
@@ -141,24 +101,7 @@ extension IngredientsViewController: UITableViewDataSource, UITableViewDelegate 
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") as! IngredientsListViewCell
-		cell.nameLabel.text = ingredients[indexPath.row].name
-		let weight = ingredients[indexPath.row].weight
-		if weight != 0 {
-			cell.weightLabel.text = "\(weight)гр"
-			cell.weightLabel.textColor = .label
-		} else {
-			cell.weightLabel.text = "гр"
-			cell.weightLabel.textColor = .systemGray
-		}
-		let kcal = ingredients[indexPath.row].kcal
-		if kcal != 0 {
-			cell.kcalLabel.text = "\(kcal)ккал/100гр"
-			cell.kcalLabel.textColor = .label
-		} else {
-			cell.kcalLabel.text = "ккал/100гр"
-			cell.kcalLabel.textColor = .systemGray
-		}
-		return cell
+		return cell.showIngredient(ingredients[indexPath.row])
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -167,8 +110,7 @@ extension IngredientsViewController: UITableViewDataSource, UITableViewDelegate 
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
-			self.context.delete(self.ingredients[indexPath.row])
-			self.saveIngrediends()
+			deleteIngredient(ingredient: self.ingredients[indexPath.row])
 			self.ingredients.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
 			completionHandler(true)
@@ -198,24 +140,23 @@ extension IngredientsViewController {
 	}
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		if identifier == "goToCalculation" {
-			for item in ingredients {
-				if item.weight == 0 || item.kcal == 0 {
-					let alert = UIAlertController(title: "Ну уж нет", message: "Сначала введите вес и калорийность всех ингредиентов =)", preferredStyle: .alert)
+			return checkIfReadyForCalculation(meal: meal!, ingredients: ingredients) { (error) in
+				switch error {
+					case "Fill Ingredients":
+						let alert = UIAlertController(title: "Ну уж нет", message: "Сначала введите вес и калорийность всех ингредиентов =)", preferredStyle: .alert)
+						alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
+						present(alert, animated: true, completion: nil)
+					case "Add Ingredients": let alert = UIAlertController(title: "А из чего готовить будем?", message: "Ну хоть что-нибудь введите =)", preferredStyle: .alert)
 					alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
 					present(alert, animated: true, completion: nil)
-					return false
+					default: break
+					
+					
 				}
-			}
-			if ingredients.count == 0 {
-				let alert = UIAlertController(title: "А из чего готовить будем?", message: "Ну хоть что-нибудь введите =)", preferredStyle: .alert)
-				alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
-				present(alert, animated: true, completion: nil)
-				return false
 			}
 			
 		}
 		return true
 	}
+	
 }
-
-
