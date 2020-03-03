@@ -107,11 +107,7 @@ extension IngredientsViewController: UITextFieldDelegate {
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		guard let text = textField.text, !text.isEmpty else {
-			print("Error")
-			return false
-		}
-		parseAndSave(string: text)
+		parseAndSave(string: textField.text!)
 		textField.keyboardType = .default
 		textField.reloadInputViews()
 		return true

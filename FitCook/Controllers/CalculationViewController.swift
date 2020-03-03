@@ -95,6 +95,7 @@ extension CalculationViewController: UITextFieldDelegate {
 		activeTextField = textField
 		return true
 	}
+	
 	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
 		guard textField.text != "" else {
 			return false
