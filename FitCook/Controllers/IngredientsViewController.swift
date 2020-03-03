@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class IngredientsViewController: UIViewController {
 	
 	var meal = [Ingredient(name: "Подсолнечное масло"), Ingredient(name: "Морковь")]
 	
@@ -24,6 +24,13 @@ class ViewController: UIViewController {
 		
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		if let selectedIndexPath = tableView.indexPathForSelectedRow {
+			tableView.reloadRows(at: [selectedIndexPath], with: UITableView.RowAnimation.automatic)
+			tableView.deselectRow(at: selectedIndexPath, animated: animated)
+		}
+	}
 	
 	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
 		if let string = ingredientTextField.text, string != "" {
@@ -36,16 +43,12 @@ class ViewController: UIViewController {
 		if ingredientTextField.text != "" {
 			ingredientTextField.text! = ingredientTextField.text! + ": "
 		}
-				
 	}
-	
-	
 }
-
 
 //MARK: - UITextfield Delegate
 
-extension ViewController: UITextFieldDelegate {
+extension IngredientsViewController: UITextFieldDelegate {
 	
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 		textField.inputAccessoryView = toolbar
@@ -76,7 +79,7 @@ extension ViewController: UITextFieldDelegate {
 
 //MARK: - TableView methods
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension IngredientsViewController: UITableViewDataSource, UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return meal.count
@@ -109,7 +112,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
+		performSegue(withIdentifier: "toIngredientDetail", sender: self)
 	}
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -124,6 +127,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 }
+//MARK: - Navigation
 
+extension IngredientsViewController {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		let detailVC = segue.destination as! IngredientDetailViewController
+		if let indexPath = tableView.indexPathForSelectedRow {
+			detailVC.selectedIngredient = meal[indexPath.row]
+		}
+		
+	}
+}
 
 
