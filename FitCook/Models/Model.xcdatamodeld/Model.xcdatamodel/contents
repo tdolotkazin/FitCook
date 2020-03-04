@@ -14,7 +14,7 @@
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="inMeals" inverseEntity="Ingredient"/>
     </entity>
     <elements>
-        <element name="Ingredient" positionX="-22.70703125" positionY="21.48828125" width="128" height="103"/>
+        <element name="Ingredient" positionX="-85.421875" positionY="-41.7265625" width="128" height="103"/>
         <element name="Meal" positionX="239.94921875" positionY="-31.2421875" width="128" height="118"/>
     </elements>
 </model>

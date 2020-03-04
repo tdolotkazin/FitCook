@@ -21,6 +21,8 @@ func save() {
 	}
 }
 
+
+//change inout to returning an array!
 func loadIngredients(in meal: Meal?, to ingredients: inout [Ingredient]) {
 	guard let meal = meal else {
 		fatalError("Unknown meal for ingredients list")
@@ -34,18 +36,37 @@ func loadIngredients(in meal: Meal?, to ingredients: inout [Ingredient]) {
 		print("Error loading ingredients! \(error)")
 	}
 }
+
+func loadResults(string: String) -> [Ingredient] {
+	var ingredients = [Ingredient]()
+	let request: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
+	let predicate = NSPredicate(format: "name CONTAINS %@", string)
+	request.predicate = predicate
+	do {
+		ingredients = try context.fetch(request)
+	} catch {
+		print("Error loading suggestions \(error)")
+	}
+	return ingredients
+}
+
 func parseIngredient(string: String, meal: Meal) -> Ingredient {
 	let name = string.components(separatedBy: ": ").first
-	let newIngredient = Ingredient(context: context)
-	newIngredient.name = name
-	let weightString = string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-	if let weight = Int(weightString) { newIngredient.weight = Int64(weight) }
-	newIngredient.addToInMeals(meal)
-	//need to implement extra check for ":" in this line. Everything after this line should be weight. Just in case user wants to have name of ingredient with digits, e.g. "Cream of 20% fat"
-	//also need to implement regexp, so "Coconut Oil 100" should parse correctly
-	save()
-	return newIngredient
+	if let oldIngredient = loadResults(string: name!).first {
+		return oldIngredient
+	} else {
+		let newIngredient = Ingredient(context: context)
+		newIngredient.name = name
+		let weightString = string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+		if let weight = Int(weightString) { newIngredient.weight = Int64(weight) }
+		newIngredient.addToInMeals(meal)
+		//need to implement extra check for ":" in this line. Everything after this line should be weight. Just in case user wants to have name of ingredient with digits, e.g. "Cream of 20% fat"
+		//also need to implement regexp, so "Coconut Oil 100" should parse correctly
+		save()
+		return newIngredient
+	}
 }
+
 
 func deleteIngredient(ingredient: Ingredient) {
 	context.delete(ingredient)

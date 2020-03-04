@@ -2,8 +2,8 @@ import UIKit
 import CoreData
 
 class MealsViewController: UITableViewController {
-	var meals = [Meal]()
 	
+	var meals = [Meal]()
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	
 	override func viewDidLoad() {
@@ -12,7 +12,6 @@ class MealsViewController: UITableViewController {
 	}
 	override func viewDidAppear(_ animated: Bool) {
 		tableView.reloadData()
-		
 		//transfer tableView row deselection here. And as we deselect - we know indexPath - we can reload only one row.
 	}
 	
@@ -23,7 +22,8 @@ class MealsViewController: UITableViewController {
 			let newMeal = Meal(context: self.context)
 			newMeal.name = textField.text!
 			self.meals.append(newMeal)
-			self.saveMeals()
+			save()
+			self.tableView.reloadData()
 		}
 		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 		alert.addAction(action)
@@ -46,15 +46,6 @@ class MealsViewController: UITableViewController {
 		tableView.reloadData()
 	}
 	
-	func saveMeals() {
-		do {
-			try context.save()
-		} catch {
-			print(error)
-		}
-		tableView.reloadData()
-	}
-	
 	// MARK: - Table view data source
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,7 +53,6 @@ class MealsViewController: UITableViewController {
 		return meals.count
 		
 	}
-	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath)
@@ -78,7 +68,7 @@ class MealsViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
 			self.context.delete(self.meals[indexPath.row])
-			self.saveMeals()
+			save()
 			self.meals.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
 			completionHandler(true)

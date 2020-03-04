@@ -89,6 +89,15 @@ extension IngredientsViewController: UITextFieldDelegate {
 		textField.reloadInputViews()
 		return true
 	}
+	
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		if let field = textField as? CustomTextField {
+			var textstring = field.text!
+			textstring.append(string)
+			field.suggest(textstring)
+		}
+		return true
+	}
 }
 
 //MARK: - TableView methods
@@ -150,13 +159,9 @@ extension IngredientsViewController {
 					alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
 					present(alert, animated: true, completion: nil)
 					default: break
-					
-					
 				}
 			}
-			
 		}
 		return true
 	}
-	
 }
