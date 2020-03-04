@@ -6,12 +6,8 @@ class IngredientsViewController: UIViewController {
 	//get context from singleton
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	
-	var meal: Meal? {
-		didSet {
-			loadIngredients(in: meal, to: &ingredients)
-		}
-	}
-	var ingredients = [Ingredient]()
+	var meal: Meal?
+	var recipeItems = [RecipeItem]()
 	
 	@IBOutlet var toolbar: UIToolbar!
 	@IBOutlet weak var tableView: UITableView!
@@ -19,6 +15,7 @@ class IngredientsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		recipeItems = loadRecipeItems(in: meal)
 		tableView.reloadData()
 	}
 	
@@ -38,7 +35,10 @@ class IngredientsViewController: UIViewController {
 	//MARK: - IBActions
 	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
 		if let string = ingredientTextField.text, string != "" {
-			ingredients.insert(parseIngredient(string: string, meal: meal!), at: 0)
+			guard let newIngredient = parseIngredient(string: string, meal: meal!) else {
+				fatalError("Already have this ingredient!")
+			}
+			recipeItems.insert(newIngredient, at: 0)
 			ingredientTextField.text = ""
 			tableView.reloadData()
 			
@@ -82,7 +82,10 @@ extension IngredientsViewController: UITextFieldDelegate {
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		ingredients.insert(parseIngredient(string: textField.text!, meal: meal!), at: 0)
+		guard let newIngredient = parseIngredient(string: textField.text!, meal: meal!) else {
+			fatalError("Already has this ingredient!")
+		}
+		recipeItems.insert(newIngredient, at: 0)
 		tableView.reloadData()
 		ingredientTextField.text = ""
 		textField.keyboardType = .default
@@ -105,12 +108,12 @@ extension IngredientsViewController: UITextFieldDelegate {
 extension IngredientsViewController: UITableViewDataSource, UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return ingredients.count
+		return recipeItems.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") as! IngredientsListViewCell
-		return cell.showIngredient(ingredients[indexPath.row])
+		return cell.showIngredient(recipeItems[indexPath.row])
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -119,8 +122,8 @@ extension IngredientsViewController: UITableViewDataSource, UITableViewDelegate 
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
-			deleteIngredient(ingredient: self.ingredients[indexPath.row])
-			self.ingredients.remove(at: indexPath.row)
+			deleteRecipeItem(recipeItem: self.recipeItems[indexPath.row])
+			self.recipeItems.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
 			completionHandler(true)
 		}
@@ -137,19 +140,19 @@ extension IngredientsViewController {
 		if segue.identifier == "toIngredientDetail" {
 			let detailVC = segue.destination as! IngredientDetailViewController
 			if let indexPath = tableView.indexPathForSelectedRow {
-				detailVC.selectedIngredient = ingredients[indexPath.row]
+				detailVC.selectedIngredient = recipeItems[indexPath.row].ingredient!
 			}
 		}
 		if segue.identifier == "goToCalculation" {
 			let calculationVC = segue.destination as! CalculationViewController
-			calculationVC.ingredients = ingredients
+			calculationVC.ingredients = recipeItems
 			calculationVC.meal = meal
 		}
 		
 	}
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		if identifier == "goToCalculation" {
-			return checkIfReadyForCalculation(meal: meal!, ingredients: ingredients) { (error) in
+			return checkIfReadyForCalculation(meal: meal!, ingredients: recipeItems) { (error) in
 				switch error {
 					case "Fill Ingredients":
 						let alert = UIAlertController(title: "Ну уж нет", message: "Сначала введите вес и калорийность всех ингредиентов =)", preferredStyle: .alert)

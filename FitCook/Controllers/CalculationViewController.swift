@@ -5,13 +5,13 @@ class CalculationViewController: UIViewController {
 	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 	var activeTextField: UITextField?
 	var meal: Meal?
-	var ingredients = [Ingredient]()
+	var ingredients = [RecipeItem]()
 	var totalWeight: Int64 = 0
 	var totalCalories: Int64 {
 		get {
 			var total: Int64 = 0
 			for item in ingredients {
-				total += item.kcal * item.weight / 100
+	//			total += item.kcal * item.weight / 100
 			}
 			return total
 		}
@@ -57,7 +57,7 @@ class CalculationViewController: UIViewController {
 	
 	func calcTotalWeight() {
 		for item in ingredients {
-			totalWeight += item.weight
+	//		totalWeight += item.weight
 		}
 	}
 	func updateView() {

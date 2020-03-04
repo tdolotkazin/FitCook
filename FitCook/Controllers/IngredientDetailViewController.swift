@@ -11,16 +11,16 @@ class IngredientDetailViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.navigationItem.title = selectedIngredient?.name
-		if let weight = selectedIngredient?.weight {
-			weightTextField.text = "\(weight)"
-		}
+//		if let weight = selectedIngredient?.weight {
+//			weightTextField.text = "\(weight)"
+//		}
 		if let kcal = selectedIngredient?.kcal {
 			kcalTextField.text = "\(kcal)"
 		}
 	}
 		
 	@IBAction func saveButtonPressed(_ sender: UIButton) {
-		selectedIngredient?.weight = Int64(weightTextField.text ?? "0")!
+	//	selectedIngredient?.weight = Int64(weightTextField.text ?? "0")!
 		selectedIngredient?.kcal = Int64(kcalTextField.text ?? "0")!
 		saveDetails()
 		self.navigationController?.popViewController(animated: true)
