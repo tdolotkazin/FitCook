@@ -1,11 +1,3 @@
-//
-//  Model.swift
-//  FitCook
-//
-//  Created by Timur Dolotkazin on 03.03.2020.
-//  Copyright © 2020 Timur Dolotkazin. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
@@ -21,8 +13,6 @@ func save() {
 	}
 }
 
-
-//change inout to returning an array!
 func loadRecipeItems(in meal: Meal?) -> [RecipeItem] {
 	guard let meal = meal else {
 		fatalError("Unknown meal for ingredients list")
@@ -50,6 +40,21 @@ func loadResults(string: String) -> [Ingredient] {
 		print("Error loading suggestions \(error)")
 	}
 	return ingredients
+}
+
+func loadAllIngredients() -> [Ingredient] {
+	var ingredients: [Ingredient] = []
+	let request: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
+	do {
+		ingredients = try context.fetch(request)
+	} catch {
+		print("Error loading ingredients \(error)")
+	}
+	return ingredients
+}
+
+func deleteIngredient(_ ingredient: Ingredient){
+		context.delete(ingredient)
 }
 
 func checkForExistingIngredient(string: String) -> Ingredient? {
@@ -88,23 +93,23 @@ func parseIngredient(string: String, meal: Meal) -> RecipeItem? {
 }
 
 func deleteRecipeItem(recipeItem: RecipeItem) {
-	if recipeItem.ingredient?.inRecipe?.count == 1 {
-		context.delete(recipeItem.ingredient!)
-	}
+//	if recipeItem.ingredient?.inRecipe?.count == 1 {
+//		context.delete(recipeItem.ingredient!)
+//	}
 	context.delete(recipeItem)
 }
 
 func checkIfReadyForCalculation(meal: Meal, ingredients: [RecipeItem], handler: (_ error: String) -> Void) -> Bool {
-//	for item in ingredients {
-//		if item.weight == 0 || item.kcal == 0 {
-//			handler("Fill Ingredients")
-//			return false
-//		}
-//	}
-//	if ingredients.count == 0 {
-//		handler("Add Ingredients")
-//		return false
-//	}
+	for item in ingredients {
+		if item.weight == 0 || item.ingredient!.kcal == 0 {
+			handler("Fill Ingredients")
+			return false
+		}
+	}
+	if ingredients.count == 0 {
+		handler("Add Ingredients")
+		return false
+	}
 	return true
 }
 

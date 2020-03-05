@@ -10,36 +10,40 @@
 		C80CCB71240EA67200EE21A3 /* CalculationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */; };
 		C80CCB75240ED70700EE21A3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80CCB74240ED70700EE21A3 /* Model.swift */; };
 		C81F7969240E637400EC6024 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C81F7968240E637400EC6024 /* GoogleService-Info.plist */; };
-		C823BA37240E5C0200048111 /* IngredientDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823BA36240E5C0200048111 /* IngredientDetailViewController.swift */; };
+		C823BA37240E5C0200048111 /* RecipeItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823BA36240E5C0200048111 /* RecipeItemViewController.swift */; };
+		C83683A324113A230075419F /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83683A224113A230075419F /* IngredientsViewController.swift */; };
 		C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C856EEF8240E79C200EB3586 /* Model.xcdatamodeld */; };
 		C8754C59240FA3050099EDAF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8754C58240FA3050099EDAF /* CustomTextField.swift */; };
 		C8C3A17B240E70170031F16A /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C3A17A240E70170031F16A /* MealsViewController.swift */; };
 		C8CCD8CD23FFD7C50061B3F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8CC23FFD7C50061B3F3 /* AppDelegate.swift */; };
 		C8CCD8CF23FFD7C50061B3F3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8CE23FFD7C50061B3F3 /* SceneDelegate.swift */; };
-		C8CCD8D123FFD7C50061B3F3 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8D023FFD7C50061B3F3 /* IngredientsViewController.swift */; };
+		C8CCD8D123FFD7C50061B3F3 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8D023FFD7C50061B3F3 /* RecipeViewController.swift */; };
 		C8CCD8D423FFD7C50061B3F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8CCD8D223FFD7C50061B3F3 /* Main.storyboard */; };
 		C8CCD8D623FFD7C60061B3F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8CCD8D523FFD7C60061B3F3 /* Assets.xcassets */; };
 		C8CCD8D923FFD7C60061B3F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8CCD8D723FFD7C60061B3F3 /* LaunchScreen.storyboard */; };
 		C8CCD8E323FFFEAD0061B3F3 /* IngredientsListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */; };
+		C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewController.swift; sourceTree = "<group>"; };
 		C80CCB74240ED70700EE21A3 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C81F7968240E637400EC6024 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		C823BA36240E5C0200048111 /* IngredientDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDetailViewController.swift; sourceTree = "<group>"; };
+		C823BA36240E5C0200048111 /* RecipeItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeItemViewController.swift; sourceTree = "<group>"; };
+		C83683A224113A230075419F /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		C856EEF9240E79C200EB3586 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		C8754C58240FA3050099EDAF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C8C3A17A240E70170031F16A /* MealsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		C8CCD8C923FFD7C50061B3F3 /* FitCook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitCook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8CCD8CC23FFD7C50061B3F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8CCD8CE23FFD7C50061B3F3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C8CCD8D023FFD7C50061B3F3 /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
+		C8CCD8D023FFD7C50061B3F3 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		C8CCD8D323FFD7C50061B3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C8CCD8D523FFD7C60061B3F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8CCD8D823FFD7C60061B3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8CCD8DA23FFD7C60061B3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsListViewCell.swift; sourceTree = "<group>"; };
+		C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +68,12 @@
 			isa = PBXGroup;
 			children = (
 				C8C3A17A240E70170031F16A /* MealsViewController.swift */,
-				C8754C58240FA3050099EDAF /* CustomTextField.swift */,
-				C8CCD8D023FFD7C50061B3F3 /* IngredientsViewController.swift */,
-				C823BA36240E5C0200048111 /* IngredientDetailViewController.swift */,
+				C8CCD8D023FFD7C50061B3F3 /* RecipeViewController.swift */,
+				C823BA36240E5C0200048111 /* RecipeItemViewController.swift */,
 				C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */,
+				C83683A224113A230075419F /* IngredientsViewController.swift */,
+				C8754C58240FA3050099EDAF /* CustomTextField.swift */,
+				C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */,
 				C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */,
 			);
 			path = Controllers;
@@ -198,9 +204,11 @@
 				C80CCB75240ED70700EE21A3 /* Model.swift in Sources */,
 				C80CCB71240EA67200EE21A3 /* CalculationViewController.swift in Sources */,
 				C8CCD8E323FFFEAD0061B3F3 /* IngredientsListViewCell.swift in Sources */,
-				C823BA37240E5C0200048111 /* IngredientDetailViewController.swift in Sources */,
+				C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */,
+				C823BA37240E5C0200048111 /* RecipeItemViewController.swift in Sources */,
 				C8754C59240FA3050099EDAF /* CustomTextField.swift in Sources */,
-				C8CCD8D123FFD7C50061B3F3 /* IngredientsViewController.swift in Sources */,
+				C83683A324113A230075419F /* IngredientsViewController.swift in Sources */,
+				C8CCD8D123FFD7C50061B3F3 /* RecipeViewController.swift in Sources */,
 				C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */,
 				C8C3A17B240E70170031F16A /* MealsViewController.swift in Sources */,
 				C8CCD8CD23FFD7C50061B3F3 /* AppDelegate.swift in Sources */,

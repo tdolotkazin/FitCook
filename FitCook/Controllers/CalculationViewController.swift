@@ -11,7 +11,7 @@ class CalculationViewController: UIViewController {
 		get {
 			var total: Int64 = 0
 			for item in ingredients {
-	//			total += item.kcal * item.weight / 100
+				total += item.ingredient!.kcal * item.weight / 100
 			}
 			return total
 		}
@@ -57,7 +57,7 @@ class CalculationViewController: UIViewController {
 	
 	func calcTotalWeight() {
 		for item in ingredients {
-	//		totalWeight += item.weight
+			totalWeight += item.weight
 		}
 	}
 	func updateView() {

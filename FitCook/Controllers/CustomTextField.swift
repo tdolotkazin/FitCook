@@ -29,7 +29,7 @@ class CustomTextField: UITextField {
 	
 	func suggest(_ string:String) {
 		resultsList = loadResults(string: string)
-		print("------")
+		tableView?.isHidden = false
 		tableView?.reloadData()
 	}
 	
@@ -41,7 +41,6 @@ class CustomTextField: UITextField {
 			tableView.dataSource = self
 			self.window?.addSubview(tableView)
 		} else {
-			print("TableView created")
 			tableView = UITableView(frame: CGRect.zero)
 		}
 		updateTableView()
@@ -68,7 +67,7 @@ class CustomTextField: UITextField {
 			tableView.separatorInset = UIEdgeInsets.zero
 			tableView.layer.cornerRadius = 5
 			tableView.separatorColor = UIColor.lightGray
-			tableView.backgroundColor = UIColor.red.withAlphaComponent(0.4)
+			tableView.backgroundColor = UIColor.white
 			if self.isFirstResponder {
 				superview?.bringSubviewToFront(self)
 			}
@@ -92,6 +91,8 @@ extension CustomTextField: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		print("Row \(indexPath.row) is selected")
 		self.text = resultsList[indexPath.row].name
+		
+//		NEED TO SAVE SUGGESTED INGREDIENT!!!
 		
 		tableView.isHidden = true
 		self.endEditing(true)

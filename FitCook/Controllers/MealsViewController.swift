@@ -119,7 +119,7 @@ class MealsViewController: UITableViewController {
 	
 	// In a storyboard-based application, you will often want to do a little preparation before navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let nextVC = segue.destination as! IngredientsViewController
+		let nextVC = segue.destination as! RecipeViewController
 		if let selectedRow = tableView.indexPathForSelectedRow {
 			nextVC.meal = meals[selectedRow.row]
 		}

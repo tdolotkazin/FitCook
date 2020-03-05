@@ -18,14 +18,14 @@ class IngredientsListViewCell: UITableViewCell {
     }
 	func showIngredient(_ recipeItem: RecipeItem) -> IngredientsListViewCell {
 		self.nameLabel.text = recipeItem.ingredient!.name
-//		let weight = ingredient.weight
-//		if weight != 0 {
-//			self.weightLabel.text = "\(weight)гр"
-//			self.weightLabel.textColor = .label
-//		} else {
-//			self.weightLabel.text = "гр"
-//			self.weightLabel.textColor = .systemGray
-//		}
+		let weight = recipeItem.weight
+		if weight != 0 {
+			self.weightLabel.text = "\(weight)гр"
+			self.weightLabel.textColor = .label
+		} else {
+			self.weightLabel.text = "гр"
+			self.weightLabel.textColor = .systemGray
+		}
 		let kcal = recipeItem.ingredient!.kcal
 		if kcal != 0 {
 			self.kcalLabel.text = "\(kcal)ккал/100гр"
