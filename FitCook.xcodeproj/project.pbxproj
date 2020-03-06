@@ -23,6 +23,8 @@
 		C8CCD8D923FFD7C60061B3F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8CCD8D723FFD7C60061B3F3 /* LaunchScreen.storyboard */; };
 		C8CCD8E323FFFEAD0061B3F3 /* IngredientsListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */; };
 		C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */; };
+		C8D38AE1241152D70012EB03 /* KitchenWareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38ADF241152D70012EB03 /* KitchenWareCell.swift */; };
+		C8D38AE2241152D70012EB03 /* KitchenWareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		C8CCD8DA23FFD7C60061B3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsListViewCell.swift; sourceTree = "<group>"; };
 		C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareController.swift; sourceTree = "<group>"; };
+		C8D38ADF241152D70012EB03 /* KitchenWareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareCell.swift; sourceTree = "<group>"; };
+		C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KitchenWareCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 				C8754C58240FA3050099EDAF /* CustomTextField.swift */,
 				C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */,
 				C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */,
+				C8D38ADF241152D70012EB03 /* KitchenWareCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 		C8C3A179240E6FDE0031F16A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */,
 				C8CCD8D223FFD7C50061B3F3 /* Main.storyboard */,
 				C8CCD8D723FFD7C60061B3F3 /* LaunchScreen.storyboard */,
 			);
@@ -189,6 +195,7 @@
 			files = (
 				C8CCD8D923FFD7C60061B3F3 /* LaunchScreen.storyboard in Resources */,
 				C81F7969240E637400EC6024 /* GoogleService-Info.plist in Resources */,
+				C8D38AE2241152D70012EB03 /* KitchenWareCell.xib in Resources */,
 				C8CCD8D623FFD7C60061B3F3 /* Assets.xcassets in Resources */,
 				C8CCD8D423FFD7C50061B3F3 /* Main.storyboard in Resources */,
 			);
@@ -207,6 +214,7 @@
 				C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */,
 				C823BA37240E5C0200048111 /* RecipeItemViewController.swift in Sources */,
 				C8754C59240FA3050099EDAF /* CustomTextField.swift in Sources */,
+				C8D38AE1241152D70012EB03 /* KitchenWareCell.swift in Sources */,
 				C83683A324113A230075419F /* IngredientsViewController.swift in Sources */,
 				C8CCD8D123FFD7C50061B3F3 /* RecipeViewController.swift in Sources */,
 				C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */,
