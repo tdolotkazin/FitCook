@@ -33,7 +33,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        save()
+//        save()
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {

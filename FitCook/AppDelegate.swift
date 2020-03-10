@@ -20,29 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 	
 	func applicationWillTerminate(_ application: UIApplication) {
-		self.saveContext()
+		
 	}
 	
-	lazy var persistentContainer: NSPersistentContainer = {
-		let container = NSPersistentContainer(name: "Model")
-		container.loadPersistentStores { (storeDescription, error) in
-			if let error = error as NSError? {
-				fatalError("CoreData error \(error)")
-			}
-		}
-		return container
-	}()
 	
-	func saveContext () {
-		let context = persistentContainer.viewContext
-		if context.hasChanges {
-			do {
-				try context.save()
-			} catch {
-				print("Error")
-			}
-		}
-	}
+
 	
 
     // MARK: UISceneSession Lifecycle

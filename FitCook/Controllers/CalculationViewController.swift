@@ -2,7 +2,8 @@ import UIKit
 import CoreData
 
 class CalculationViewController: UIViewController {
-	let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+	
+	var coreData: CoreDataHelper?
 	var activeTextField: UITextField?
 	var meal: Meal?
 	var ingredients = [RecipeItem]()
@@ -47,7 +48,7 @@ class CalculationViewController: UIViewController {
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
-		save()
+		coreData?.save()
 	}
 	
 	@IBAction func servingsStepper(_ sender: UIStepper) {
@@ -73,18 +74,8 @@ class CalculationViewController: UIViewController {
 		meal?.totalWeight = totalWeight
 		meal?.calPerWeight = caloriesPerWeight
 		meal?.calPerServing = caloriesPerServing
-		save()
+		coreData?.save()
 		activeTextField?.resignFirstResponder()
-	}
-	
-	func save() {
-		if context.hasChanges {
-			do {
-				try context.save()
-			} catch {
-				print(error)
-			}
-		}
 	}
 }
 
@@ -111,7 +102,7 @@ extension CalculationViewController: UITextFieldDelegate {
 			default:
 				print("Error")
 		}
-		save()
+		coreData?.save()
 		activeTextField = nil
 		return true
 	}
