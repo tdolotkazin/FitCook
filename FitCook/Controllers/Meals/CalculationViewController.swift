@@ -106,7 +106,4 @@ extension CalculationViewController: UITextFieldDelegate {
 		activeTextField = nil
 		return true
 	}
-	
-	
-	
 }

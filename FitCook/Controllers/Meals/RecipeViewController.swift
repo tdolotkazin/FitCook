@@ -36,7 +36,6 @@ class RecipeViewController: UIViewController {
 				ingredientTextField.text = ""
 			} else {
 				showAlert()
-				
 			}
 		}
 		ingredientTextField.resignFirstResponder()
@@ -103,24 +102,27 @@ extension RecipeViewController: UITextFieldDelegate {
 		return false
 	}
 	
-	//	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-	//		if let field = textField as? CustomTextField {
-	//			var textstring = field.text!
-	//			textstring.append(string)
-	//			field.suggest(textstring)
-	//		}
-	//		return true
-	//	}
-	//	func textFieldDidEndEditing(_ textField: UITextField) {
-	//		if let string = ingredientTextField.text, string != "" {
-	////			guard let newIngredient = parseIngredient(string: string, meal: meal!) else {
-	//				fatalError("Already have this ingredient!")
-	//			}
-	//			recipeItems.insert(newIngredient, at: 0)
-	//			ingredientTextField.text = ""
-	//			tableView.reloadData()
-	//		}
-	//	}
+	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+		if let field = textField as? CustomTextField {
+			field.coreData = coreData
+			var textstring = field.text!
+			textstring.append(string)
+			field.suggest(textstring)
+		}
+		return true
+	}
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		let string = ingredientTextField.text!
+		if string != "" {
+			if let newRecipeItem = coreData?.addRecipeItem(from: string, to: &recipeItems) { newRecipeItem.inMeal = meal
+				recipeItems.insert(newRecipeItem, at: 0)
+				tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+				ingredientTextField.text = ""
+			} else {
+				showAlert()
+			}
+		}
+	}
 }
 
 //MARK: - TableView methods
@@ -170,7 +172,7 @@ extension RecipeViewController {
 			calculationVC.meal = meal
 			calculationVC.coreData = coreData
 		}
-
+		
 	}
 	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
 		if identifier == "goToCalculation" {

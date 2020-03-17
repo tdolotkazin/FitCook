@@ -13,7 +13,19 @@ func parseRecipe(_ string: String) -> (name: String, weight: Int64) {
 	return recipe
 }
 
-
+func checkIfReadyForCalculation(ingredients: [RecipeItem], handler: (_ error: String) -> Void) -> Bool {
+	for item in ingredients {
+		if item.weight == 0 || item.ingredient!.kcal == 0 {
+			handler("Fill Ingredients")
+			return false
+		}
+	}
+	if ingredients.count == 0 {
+		handler("Add Ingredients")
+		return false
+	}
+	return true
+}
 
 //func loadRecipeItems(in meal: Meal?) -> [RecipeItem] {
 //	guard let meal = meal else {
@@ -101,17 +113,5 @@ func parseRecipe(_ string: String) -> (name: String, weight: Int64) {
 //	context.delete(recipeItem)
 //}
 //
-func checkIfReadyForCalculation(ingredients: [RecipeItem], handler: (_ error: String) -> Void) -> Bool {
-	for item in ingredients {
-		if item.weight == 0 || item.ingredient!.kcal == 0 {
-			handler("Fill Ingredients")
-			return false
-		}
-	}
-	if ingredients.count == 0 {
-		handler("Add Ingredients")
-		return false
-	}
-	return true
-}
+
 

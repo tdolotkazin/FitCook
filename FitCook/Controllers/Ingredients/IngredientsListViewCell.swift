@@ -8,13 +8,10 @@ class IngredientsListViewCell: UITableViewCell {
     @IBOutlet weak var totalKcalLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 	func showIngredient(_ recipeItem: RecipeItem) -> IngredientsListViewCell {
 		self.nameLabel.text = recipeItem.ingredient!.name

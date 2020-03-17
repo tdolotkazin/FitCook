@@ -10,25 +10,29 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="dish" translatesAutoresizingMaskIntoConstraints="NO" id="KGk-i7-Jjw" customClass="KitchenWareCell" customModule="FitCook" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MFd-Cx-AlT">
-                        <rect key="frame" x="8" y="8" width="135.5" height="46"/>
+                        <rect key="frame" x="8" y="8" width="154" height="68"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGf-fK-mlf">
-                                <rect key="frame" x="0.0" y="0.0" width="49.5" height="46"/>
+                                <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="4yC-3S-GSG"/>
+                                    <constraint firstAttribute="height" constant="68" id="csI-RM-3v8"/>
+                                </constraints>
                                 <state key="normal" image="camera" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="62"/>
                                 </state>
                                 <connections>
-                                    <action selector="imageButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Kgq-tA-zDf"/>
+                                    <action selector="imageButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2hv-JO-ghb"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MJ0-gg-6f6">
-                                <rect key="frame" x="57.5" y="0.0" width="78" height="46"/>
+                                <rect key="frame" x="76" y="0.0" width="78" height="68"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Кастрюля" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94E-5I-RWi">
                                         <rect key="frame" x="0.0" y="0.0" width="78" height="20.5"/>
@@ -37,7 +41,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1056 гр." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lza-e8-T9h">
-                                        <rect key="frame" x="0.0" y="25.5" width="78" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="47.5" width="78" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -54,7 +58,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="imageLabel" destination="uGf-fK-mlf" id="M1Q-M5-gUT"/>
+                <outlet property="imageButton" destination="uGf-fK-mlf" id="M1Q-M5-gUT"/>
                 <outlet property="nameLabel" destination="94E-5I-RWi" id="81H-ea-jOz"/>
                 <outlet property="weightLabel" destination="Lza-e8-T9h" id="YTd-ZQ-0dZ"/>
             </connections>

@@ -355,53 +355,58 @@
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="2730.4000000000001" y="892.61083743842369"/>
+            <point key="canvasLocation" x="846" y="930"/>
         </scene>
-        <!--Milk-->
+        <!--RecipeItem-->
         <scene sceneID="EXg-TW-6p2">
             <objects>
-                <viewController id="9he-fb-T1v" customClass="RecipeItemViewController" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="RecipeItem" id="9he-fb-T1v" customClass="RecipeItemViewController" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cGZ-6X-QXJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Sjo-uw-kHj">
-                                <rect key="frame" x="22" y="110" width="331" height="147"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Sjo-uw-kHj">
+                                <rect key="frame" x="22" y="110" width="331" height="366"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iji-QY-qkb">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="34"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eiI-sZ-9fG">
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="32"/>
+                                        <segments>
+                                            <segment title="Вес"/>
+                                            <segment title="Вес с тарой"/>
+                                            <segment title="До/после"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentedControlValueChanged:" destination="9he-fb-T1v" eventType="valueChanged" id="AGW-42-XWm"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYP-vV-guQ">
+                                        <rect key="frame" x="0.0" y="51" width="331" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="5Xw-sV-ggQ"/>
+                                            <constraint firstAttribute="width" constant="331" id="UjL-pe-NyN"/>
+                                        </constraints>
+                                    </containerView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hL1-GZ-Wme">
+                                        <rect key="frame" x="0.0" y="271" width="331" height="34"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вес" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="of6-pW-Q1z">
-                                                <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Калорийность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1o-Xj-ZdB">
+                                                <rect key="frame" x="0.0" y="0.0" width="114" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H7l-iP-HSY">
-                                                <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7i-St-1Cb">
+                                                <rect key="frame" x="231" y="0.0" width="100" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Tp0-Ds-7Go"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="83E-cp-a9R">
-                                        <rect key="frame" x="0.0" y="53" width="331" height="34"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Калорийность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4G-NK-qGM">
-                                                <rect key="frame" x="0.0" y="0.0" width="165.66666666666666" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sXJ-nm-yhc">
-                                                <rect key="frame" x="165.66666666666663" y="0.0" width="165.33333333333337" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x86-5E-1N2">
-                                        <rect key="frame" x="0.0" y="106" width="331" height="41"/>
+                                        <rect key="frame" x="0.0" y="325" width="331" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <state key="normal" title="Сохранить"/>
                                         <connections>
@@ -421,13 +426,147 @@
                     </view>
                     <navigationItem key="navigationItem" title="Milk" id="iIG-QQ-lSI"/>
                     <connections>
-                        <outlet property="kcalTextField" destination="sXJ-nm-yhc" id="QvA-y7-Vpq"/>
-                        <outlet property="weightTextField" destination="H7l-iP-HSY" id="EjX-aR-Qbj"/>
+                        <outlet property="caloriesTextField" destination="b7i-St-1Cb" id="eI1-1g-jbA"/>
+                        <outlet property="containerView" destination="KYP-vV-guQ" id="kSo-i6-eAU"/>
+                        <outlet property="segmentedControl" destination="eiI-sZ-9fG" id="IT2-dA-l7d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uqE-c7-w8X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1641" y="149"/>
+        </scene>
+        <!--TareViewController-->
+        <scene sceneID="qgy-hx-ojY">
+            <objects>
+                <viewController storyboardIdentifier="TareVC" title="TareViewController" id="AZh-hS-USm" customClass="TareVC" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvu-UB-djG">
+                        <rect key="frame" x="0.0" y="0.0" width="331" height="200"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-6L-93C">
+                                <rect key="frame" x="20" y="20" width="291" height="160"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Hxj-zu-Adh">
+                                        <rect key="frame" x="0.0" y="0.0" width="291" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вес с тарой" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNa-o4-2i2">
+                                                <rect key="frame" x="0.0" y="0.0" width="95" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6gL-9H-aI7">
+                                                <rect key="frame" x="191" y="0.0" width="100" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="ER6-Dp-GNb"/>
+                                                    <constraint firstAttribute="width" constant="100" id="idZ-k5-tsV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6z-P8-duf">
+                                        <rect key="frame" x="0.0" y="34" width="291" height="126"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="AZh-hS-USm" id="KWi-oC-pcN"/>
+                                            <outlet property="delegate" destination="AZh-hS-USm" id="Y3c-Xs-SNG"/>
+                                        </connections>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="d8h-6L-93C" secondAttribute="trailing" constant="20" symbolic="YES" id="E0Z-qD-G9m"/>
+                            <constraint firstItem="d8h-6L-93C" firstAttribute="top" secondItem="bvu-UB-djG" secondAttribute="top" constant="20" symbolic="YES" id="MCS-rz-bdG"/>
+                            <constraint firstItem="d8h-6L-93C" firstAttribute="leading" secondItem="bvu-UB-djG" secondAttribute="leading" constant="20" symbolic="YES" id="WGO-h6-Dv5"/>
+                            <constraint firstAttribute="bottom" secondItem="d8h-6L-93C" secondAttribute="bottom" constant="20" symbolic="YES" id="wnA-dJ-wCF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="AL7-Z5-Fiv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lHi-gE-NVx"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="331" height="200"/>
+                    <connections>
+                        <outlet property="tarePickerView" destination="g6z-P8-duf" id="ziU-4c-HS5"/>
+                        <outlet property="tareWeightTextField" destination="6gL-9H-aI7" id="0Q5-b9-y44"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JdL-56-jo5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="141"/>
+        </scene>
+        <!--BeforeAfterVC-->
+        <scene sceneID="ADk-FX-mib">
+            <objects>
+                <viewController storyboardIdentifier="BeforeAfterVC" title="BeforeAfterVC" id="1pr-vJ-2up" customClass="BeforeAfterVC" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lda-DD-6XE">
+                        <rect key="frame" x="0.0" y="0.0" width="331" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="a84-AI-J1U">
+                                <rect key="frame" x="20" y="20" width="291" height="160"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="BCT-ed-DmJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="291" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вес до" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADW-JF-fI8">
+                                                <rect key="frame" x="0.0" y="0.0" width="54" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4xJ-jE-ffz">
+                                                <rect key="frame" x="191" y="0.0" width="100" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="2D5-fw-7vN"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="wYV-3a-tZ5">
+                                        <rect key="frame" x="0.0" y="126" width="291" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вес после" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ig-M1-UWQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="82" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGo-al-zRk">
+                                                <rect key="frame" x="191" y="0.0" width="100" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="PfO-MJ-3VO"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="a84-AI-J1U" firstAttribute="top" secondItem="lda-DD-6XE" secondAttribute="top" constant="20" symbolic="YES" id="1D6-WU-Wwd"/>
+                            <constraint firstItem="a84-AI-J1U" firstAttribute="leading" secondItem="WPi-tG-hj3" secondAttribute="leading" constant="20" id="58R-xk-eA2"/>
+                            <constraint firstItem="WPi-tG-hj3" firstAttribute="trailing" secondItem="a84-AI-J1U" secondAttribute="trailing" constant="20" id="QFy-JF-j3t"/>
+                            <constraint firstItem="a84-AI-J1U" firstAttribute="bottom" secondItem="WPi-tG-hj3" secondAttribute="bottom" constant="-20" id="SrE-Re-d8Z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WPi-tG-hj3"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="331" height="200"/>
+                    <connections>
+                        <outlet property="afterTextField" destination="DGo-al-zRk" id="dEK-dV-IJX"/>
+                        <outlet property="beforeTextField" destination="4xJ-jE-ffz" id="8iV-qQ-S34"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="APL-cU-3WI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="375"/>
         </scene>
         <!--Meals View Controller-->
         <scene sceneID="xuK-DX-NEh">
@@ -470,7 +609,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="R6W-u6-i7b">
             <objects>
-                <tabBarController id="7Zh-md-sBM" sceneMemberID="viewController">
+                <tabBarController id="7Zh-md-sBM" customClass="TabBarController" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FCG-Wl-Evm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -478,8 +617,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="RlV-gx-naN" kind="relationship" relationship="viewControllers" id="drT-Ry-gcI"/>
-                        <segue destination="j0w-5a-zWE" kind="relationship" relationship="viewControllers" id="Tw4-LD-hZ2"/>
-                        <segue destination="LUK-4t-Np5" kind="relationship" relationship="viewControllers" id="fCI-EM-Hku"/>
+                        <segue destination="YDY-5C-x7Y" kind="relationship" relationship="viewControllers" id="0cq-0t-7mM"/>
+                        <segue destination="lnh-FE-yen" kind="relationship" relationship="viewControllers" id="CBz-j9-24V"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rda-0W-LdB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -505,104 +644,73 @@
             </objects>
             <point key="canvasLocation" x="-742" y="149"/>
         </scene>
-        <!--Ingredients View Controller-->
-        <scene sceneID="9fG-wL-J6e">
+        <!--KitchenWare-->
+        <scene sceneID="Qpe-Pv-PfX">
             <objects>
-                <tableViewController id="Mnk-ZT-IFm" customClass="IngredientsViewController" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VA6-1j-pLC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientCell" id="sHC-fx-5l2">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sHC-fx-5l2" id="5By-lY-Swb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Mnk-ZT-IFm" id="M83-02-2ui"/>
-                            <outlet property="delegate" destination="Mnk-ZT-IFm" id="Q2v-PH-liT"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="aYC-Yn-XKD"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yeG-y6-Ljy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="KitchenWare" id="YDY-5C-x7Y" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="RH2-7l-VdT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OZz-pK-9fC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2487" y="1596"/>
-        </scene>
-        <!--Kitchen Ware Controller-->
-        <scene sceneID="0hK-ya-6Ed">
-            <objects>
-                <tableViewController id="Llh-XZ-Y5h" customClass="KitchenWareController" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="djX-gy-V9m">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="Llh-XZ-Y5h" id="ocE-mh-ek0"/>
-                            <outlet property="delegate" destination="Llh-XZ-Y5h" id="hwA-7t-tLT"/>
-                        </connections>
-                    </tableView>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Fvf-AU-ilB">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="eBt-b4-JAG">
-                            <connections>
-                                <action selector="addDishPressed:" destination="Llh-XZ-Y5h" id="sqG-rd-Mc5"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z3Y-rx-gRn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1554" y="1595"/>
-        </scene>
-        <!--Посуда-->
-        <scene sceneID="Vef-fy-8qJ">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LUK-4t-Np5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Посуда" image="tray.and.arrow.down.fill" catalog="system" id="Pgh-7a-NBo"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Gzp-x8-AQ8">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Llh-XZ-Y5h" kind="relationship" relationship="rootViewController" id="DhD-za-Tb5"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Thw-AB-qjb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1554" y="893"/>
+            <point key="canvasLocation" x="-1767" y="606"/>
         </scene>
         <!--Ingredients-->
-        <scene sceneID="umU-sc-szH">
+        <scene sceneID="bMV-NJ-5Fx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j0w-5a-zWE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ingredients" image="list.dash" catalog="system" selectedImage="list.dash" id="wTC-8D-su1"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ubG-sX-TrX">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Mnk-ZT-IFm" kind="relationship" relationship="rootViewController" id="YfY-gG-l48"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tca-a1-cX3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Ingredients" id="lnh-FE-yen" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="4Lc-TF-cqe"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MBd-Wl-el7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2487.1999999999998" y="892.61083743842369"/>
+            <point key="canvasLocation" x="-2127" y="606"/>
+        </scene>
+        <!--PureWeightViewController-->
+        <scene sceneID="bkl-28-JfP">
+            <objects>
+                <viewController storyboardIdentifier="PureWeightVC" title="PureWeightViewController" id="rNH-Ar-3S5" customClass="PureWeightVC" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NTo-L6-pGf">
+                        <rect key="frame" x="0.0" y="0.0" width="331" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="e3B-df-aGh">
+                                <rect key="frame" x="20" y="20" width="291" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вес" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wl7-YT-6Ug">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4l2-xr-Om0">
+                                        <rect key="frame" x="191" y="0.0" width="100" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Ial-f1-7Wa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="e3B-df-aGh" firstAttribute="top" secondItem="NTo-L6-pGf" secondAttribute="top" constant="20" symbolic="YES" id="PXS-VO-LcK"/>
+                            <constraint firstAttribute="trailing" secondItem="e3B-df-aGh" secondAttribute="trailing" constant="20" symbolic="YES" id="TeS-6B-0ae"/>
+                            <constraint firstItem="e3B-df-aGh" firstAttribute="leading" secondItem="NTo-L6-pGf" secondAttribute="leading" constant="20" symbolic="YES" id="oOj-NS-vlu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ocK-9Q-SU2"/>
+                    </view>
+                    <size key="freeformSize" width="331" height="200"/>
+                    <connections>
+                        <outlet property="pureWeightTextField" destination="4l2-xr-Om0" id="JUg-AV-Gzk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VIC-lO-zxL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2438" y="-95"/>
         </scene>
     </scenes>
     <resources>
-        <image name="list.dash" catalog="system" width="64" height="42"/>
         <image name="star.fill" catalog="system" width="64" height="58"/>
-        <image name="tray.and.arrow.down.fill" catalog="system" width="64" height="56"/>
     </resources>
 </document>

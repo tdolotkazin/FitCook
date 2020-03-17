@@ -30,8 +30,8 @@ class CoreDataHelper {
 		return newObject
 	}
 	
-	func create() -> RecipeItem {
-		return RecipeItem(context: context)
+	func create<T: NSManagedObject>() -> T {
+		return T(context: context)
 	}
 	
 	func load<T: NSManagedObject>() -> [T] {
@@ -68,7 +68,7 @@ class CoreDataHelper {
 		}) {
 			return nil //in case there's already a recipeItem with this name
 		}
-		let newRecipeItem = create()
+		let newRecipeItem:RecipeItem = create()
 		if let ingredient = checkIfExists("Ingredient", named: parsedRecipeItem.name) {
 			newRecipeItem.ingredient = (ingredient as! Ingredient)
 		} else {
@@ -81,9 +81,29 @@ class CoreDataHelper {
 	
 	func deleteRecipeItem(recipeItem: RecipeItem) {
 		if recipeItem.ingredient?.inRecipe?.count == 1 {
+			//MARK: - IMPORTANT! BUG!
+			//If user deletes meal, then recipes are deleted as cascade
+			//After that user can delete ingredients in ingredient list.
+			//Maybe I need to make it not so easy...
+			//Not in swipe or something...
+			//Or just ingredients need to be hard to find, not in tab bar view.
 			delete(recipeItem.ingredient!)
 		}
 		delete(recipeItem)
+		save()
+	}
+	
+	func loadSearchResults(string: String) -> [Ingredient] {
+		var ingredients = [Ingredient]()
+		let request: NSFetchRequest<Ingredient> = Ingredient.fetchRequest()
+		let predicate = NSPredicate(format: "name CONTAINS %@", string)
+		request.predicate = predicate
+		do {
+			ingredients = try context.fetch(request)
+		} catch {
+			print("Error loading suggestions \(error)")
+		}
+		return ingredients
 	}
 	
 }
