@@ -4,6 +4,7 @@ class TareVC: UIViewController, WeightChildView {
 	
 	var coreData: CoreDataHelper?
 	var kitchenWare: [Dish]?
+	var selectedItem: RecipeItem?
 	
 	lazy var weight: Int64 = calculateWeight()
 	

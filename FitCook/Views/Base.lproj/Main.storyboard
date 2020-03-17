@@ -36,7 +36,7 @@
                                         <rect key="frame" x="0.0" y="168" width="375" height="423"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="listCell" rowHeight="44" id="5Xg-aB-ge5" customClass="IngredientsListViewCell" customModule="FitCook" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="listCell" rowHeight="44" id="5Xg-aB-ge5" customClass="RecipeItemCell" customModule="FitCook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Xg-aB-ge5" id="fBH-2n-Ohs">
@@ -50,30 +50,30 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="309" height="28"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подсолнечное масло" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTq-gV-6eB">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="309" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="309" height="9"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="MOo-cd-qoy">
-                                                                            <rect key="frame" x="0.0" y="2" width="309" height="26"/>
+                                                                            <rect key="frame" x="0.0" y="11" width="309" height="17"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9d-5a-MLX">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="26"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Milk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9d-5a-MLX">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="17"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptO-4a-zgx">
-                                                                                    <rect key="frame" x="103" y="0.0" width="103" height="26"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptO-4a-zgx">
+                                                                                    <rect key="frame" x="103" y="0.0" width="103" height="17"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2q-qC-ueJ">
-                                                                                    <rect key="frame" x="206" y="0.0" width="103" height="26"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2q-qC-ueJ">
+                                                                                    <rect key="frame" x="206" y="0.0" width="103" height="17"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                    <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                                                                    <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>

@@ -29,7 +29,7 @@
 		C8CCD8D423FFD7C50061B3F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8CCD8D223FFD7C50061B3F3 /* Main.storyboard */; };
 		C8CCD8D623FFD7C60061B3F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8CCD8D523FFD7C60061B3F3 /* Assets.xcassets */; };
 		C8CCD8D923FFD7C60061B3F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8CCD8D723FFD7C60061B3F3 /* LaunchScreen.storyboard */; };
-		C8CCD8E323FFFEAD0061B3F3 /* IngredientsListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */; };
+		C8CCD8E323FFFEAD0061B3F3 /* RecipeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CCD8E223FFFEAD0061B3F3 /* RecipeItemCell.swift */; };
 		C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */; };
 		C8D38AE1241152D70012EB03 /* KitchenWareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38ADF241152D70012EB03 /* KitchenWareCell.swift */; };
 		C8D38AE2241152D70012EB03 /* KitchenWareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */; };
@@ -61,7 +61,7 @@
 		C8CCD8D523FFD7C60061B3F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8CCD8D823FFD7C60061B3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8CCD8DA23FFD7C60061B3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsListViewCell.swift; sourceTree = "<group>"; };
+		C8CCD8E223FFFEAD0061B3F3 /* RecipeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeItemCell.swift; sourceTree = "<group>"; };
 		C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareController.swift; sourceTree = "<group>"; };
 		C8D38ADF241152D70012EB03 /* KitchenWareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareCell.swift; sourceTree = "<group>"; };
 		C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KitchenWareCell.xib; sourceTree = "<group>"; };
@@ -121,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				C83683A224113A230075419F /* IngredientsViewController.swift */,
-				C8CCD8E223FFFEAD0061B3F3 /* IngredientsListViewCell.swift */,
 			);
 			path = Ingredients;
 			sourceTree = "<group>";
@@ -142,6 +141,7 @@
 				C8CCD8D023FFD7C50061B3F3 /* RecipeViewController.swift */,
 				C823BA36240E5C0200048111 /* RecipeItemViewController.swift */,
 				C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */,
+				C8CCD8E223FFFEAD0061B3F3 /* RecipeItemCell.swift */,
 				C89BDB26242135FC002D5E36 /* Weight */,
 			);
 			path = Meals;
@@ -281,7 +281,7 @@
 				C80CCB71240EA67200EE21A3 /* CalculationViewController.swift in Sources */,
 				C89BDB21242135CB002D5E36 /* PureWeightVC.swift in Sources */,
 				C82DE14B24130801003C6C0F /* Meal+CoreDataProperties.swift in Sources */,
-				C8CCD8E323FFFEAD0061B3F3 /* IngredientsListViewCell.swift in Sources */,
+				C8CCD8E323FFFEAD0061B3F3 /* RecipeItemCell.swift in Sources */,
 				C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */,
 				C823BA37240E5C0200048111 /* RecipeItemViewController.swift in Sources */,
 				C8732FAD2417E299009776C0 /* TabBarController.swift in Sources */,

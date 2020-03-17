@@ -134,7 +134,7 @@ extension RecipeViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") as! IngredientsListViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: "listCell") as! RecipeItemCell
 		return cell.showIngredient(recipeItems[indexPath.row])
 	}
 	

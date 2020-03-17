@@ -1,19 +1,13 @@
 import UIKit
 
-class IngredientsListViewCell: UITableViewCell {
+class RecipeItemCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var kcalLabel: UILabel!
-    @IBOutlet weak var totalKcalLabel: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-	func showIngredient(_ recipeItem: RecipeItem) -> IngredientsListViewCell {
+	@IBOutlet weak var totalKcalLabel: UILabel!
+	
+	func showIngredient(_ recipeItem: RecipeItem) -> RecipeItemCell {
 		self.nameLabel.text = recipeItem.ingredient!.name
 		let weight = recipeItem.weight
 		if weight != 0 {
@@ -30,6 +24,12 @@ class IngredientsListViewCell: UITableViewCell {
 		} else {
 			self.kcalLabel.text = "ккал/100гр"
 			self.kcalLabel.textColor = .systemGray
+		}
+		let totalCalories = recipeItem.weight * recipeItem.ingredient!.kcal / 100
+		if totalCalories != 0 {
+			self.totalKcalLabel.text = String(totalCalories)
+		} else {
+			self.totalKcalLabel.text = ""
 		}
 		return self
 	}

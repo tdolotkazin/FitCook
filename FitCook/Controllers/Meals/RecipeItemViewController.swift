@@ -17,6 +17,7 @@ class RecipeItemViewController: UIViewController {
 	private lazy var pureWeightViewController: UIViewController = {
 		let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 		var VC = storyboard.instantiateViewController(identifier: "PureWeightVC") as! PureWeightVC
+		VC.selectedItem = self.selectedRecipeItem
 		return VC
 	}()
 	
@@ -24,12 +25,14 @@ class RecipeItemViewController: UIViewController {
 		let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 		var VC = storyboard.instantiateViewController(identifier: "TareVC") as! TareVC
 		VC.coreData = self.coreData
+		VC.selectedItem = self.selectedRecipeItem
 		return VC
 	}()
 	
 	private lazy var beforeAfterViewController: UIViewController = {
 		let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
 		var VC = storyboard.instantiateViewController(identifier: "BeforeAfterVC") as! BeforeAfterVC
+		VC.selectedItem = self.selectedRecipeItem
 		return VC
 	}()
 	
