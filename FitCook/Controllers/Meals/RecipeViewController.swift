@@ -118,6 +118,7 @@ extension RecipeViewController: UITextFieldDelegate {
 				recipeItems.insert(newRecipeItem, at: 0)
 				tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
 				ingredientTextField.text = ""
+				coreData?.save()
 			} else {
 				showAlert()
 			}

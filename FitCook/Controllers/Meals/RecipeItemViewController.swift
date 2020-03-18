@@ -92,6 +92,4 @@ class RecipeItemViewController: UIViewController {
 	@IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
 		updateView(index: sender.selectedSegmentIndex)
 	}
-	
-	
 }
