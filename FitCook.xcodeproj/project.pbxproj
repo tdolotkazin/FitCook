@@ -13,8 +13,10 @@
 		C82DE14A24130801003C6C0F /* Meal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82DE14824130801003C6C0F /* Meal+CoreDataClass.swift */; };
 		C82DE14B24130801003C6C0F /* Meal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82DE14924130801003C6C0F /* Meal+CoreDataProperties.swift */; };
 		C83683A324113A230075419F /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83683A224113A230075419F /* IngredientsViewController.swift */; };
+		C841569F242292C200C0B2A0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C841569E242292C200C0B2A0 /* UITableView.swift */; };
+		C8527CE82433919A009D12DB /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8527CE62433919A009D12DB /* MealCell.swift */; };
+		C8527CE92433919A009D12DB /* MealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8527CE72433919A009D12DB /* MealCell.xib */; };
 		C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C856EEF8240E79C200EB3586 /* Model.xcdatamodeld */; };
-		C8732FAD2417E299009776C0 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8732FAC2417E299009776C0 /* TabBarController.swift */; };
 		C8732FAF24183948009776C0 /* KitchenWareDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8732FAE24183948009776C0 /* KitchenWareDetailViewController.swift */; };
 		C8754C59240FA3050099EDAF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8754C58240FA3050099EDAF /* CustomTextField.swift */; };
 		C89BDB1D2421239C002D5E36 /* KitchenWare.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C89BDB1C2421239C002D5E36 /* KitchenWare.storyboard */; };
@@ -33,8 +35,19 @@
 		C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */; };
 		C8D38AE1241152D70012EB03 /* KitchenWareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D38ADF241152D70012EB03 /* KitchenWareCell.swift */; };
 		C8D38AE2241152D70012EB03 /* KitchenWareCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */; };
+		C8D5AA9E244074D0009DBD58 /* FitCookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D5AA9D244074D0009DBD58 /* FitCookTests.swift */; };
 		C8FE2AEF2412F1B7004A15CF /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FE2AEE2412F1B7004A15CF /* CoreDataHelper.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C8D5AAA0244074D0009DBD58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C8CCD8C123FFD7C50061B3F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C8CCD8C823FFD7C50061B3F3;
+			remoteInfo = FitCook;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewController.swift; sourceTree = "<group>"; };
@@ -43,8 +56,10 @@
 		C82DE14824130801003C6C0F /* Meal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataClass.swift"; sourceTree = "<group>"; };
 		C82DE14924130801003C6C0F /* Meal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C83683A224113A230075419F /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
+		C841569E242292C200C0B2A0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
+		C8527CE62433919A009D12DB /* MealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
+		C8527CE72433919A009D12DB /* MealCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MealCell.xib; sourceTree = "<group>"; };
 		C856EEF9240E79C200EB3586 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		C8732FAC2417E299009776C0 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C8732FAE24183948009776C0 /* KitchenWareDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareDetailViewController.swift; sourceTree = "<group>"; };
 		C8754C58240FA3050099EDAF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C89BDB1C2421239C002D5E36 /* KitchenWare.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KitchenWare.storyboard; sourceTree = "<group>"; };
@@ -65,11 +80,21 @@
 		C8D38ADB2411464C0012EB03 /* KitchenWareController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareController.swift; sourceTree = "<group>"; };
 		C8D38ADF241152D70012EB03 /* KitchenWareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareCell.swift; sourceTree = "<group>"; };
 		C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KitchenWareCell.xib; sourceTree = "<group>"; };
+		C8D5AA9B244074D0009DBD58 /* FitCookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FitCookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8D5AA9D244074D0009DBD58 /* FitCookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitCookTests.swift; sourceTree = "<group>"; };
+		C8D5AA9F244074D0009DBD58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8FE2AEE2412F1B7004A15CF /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C8CCD8C623FFD7C50061B3F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8D5AA98244074D0009DBD58 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -107,6 +132,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		C84156A0242292CD00C0B2A0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C841569E242292C200C0B2A0 /* UITableView.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C89BDB182420E5F9002D5E36 /* KitchenWare */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				C8754C58240FA3050099EDAF /* CustomTextField.swift */,
-				C8732FAC2417E299009776C0 /* TabBarController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -142,6 +174,7 @@
 				C823BA36240E5C0200048111 /* RecipeItemViewController.swift */,
 				C80CCB70240EA67200EE21A3 /* CalculationViewController.swift */,
 				C8CCD8E223FFFEAD0061B3F3 /* RecipeItemCell.swift */,
+				C8527CE62433919A009D12DB /* MealCell.swift */,
 				C89BDB26242135FC002D5E36 /* Weight */,
 			);
 			path = Meals;
@@ -162,6 +195,7 @@
 			children = (
 				C8D38AE0241152D70012EB03 /* KitchenWareCell.xib */,
 				C8CCD8D223FFD7C50061B3F3 /* Main.storyboard */,
+				C8527CE72433919A009D12DB /* MealCell.xib */,
 				C8CCD8D723FFD7C60061B3F3 /* LaunchScreen.storyboard */,
 				C89BDB1C2421239C002D5E36 /* KitchenWare.storyboard */,
 				C89BDB1E242125A0002D5E36 /* Ingredients.storyboard */,
@@ -175,6 +209,7 @@
 				C82DE14824130801003C6C0F /* Meal+CoreDataClass.swift */,
 				C82DE14924130801003C6C0F /* Meal+CoreDataProperties.swift */,
 				C8CCD8CB23FFD7C50061B3F3 /* FitCook */,
+				C8D5AA9C244074D0009DBD58 /* FitCookTests */,
 				C8CCD8CA23FFD7C50061B3F3 /* Products */,
 				B6FD2EBF28AC90403E4D0043 /* Pods */,
 			);
@@ -184,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				C8CCD8C923FFD7C50061B3F3 /* FitCook.app */,
+				C8D5AA9B244074D0009DBD58 /* FitCookTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -193,6 +229,7 @@
 			children = (
 				C8CCD8CC23FFD7C50061B3F3 /* AppDelegate.swift */,
 				C8CCD8CE23FFD7C50061B3F3 /* SceneDelegate.swift */,
+				C84156A0242292CD00C0B2A0 /* Extensions */,
 				C823BA38240E5C1700048111 /* Controllers */,
 				C823BA39240E5C5000048111 /* Models */,
 				C8C3A179240E6FDE0031F16A /* Views */,
@@ -200,6 +237,15 @@
 				C8CCD8DA23FFD7C60061B3F3 /* Info.plist */,
 			);
 			path = FitCook;
+			sourceTree = "<group>";
+		};
+		C8D5AA9C244074D0009DBD58 /* FitCookTests */ = {
+			isa = PBXGroup;
+			children = (
+				C8D5AA9D244074D0009DBD58 /* FitCookTests.swift */,
+				C8D5AA9F244074D0009DBD58 /* Info.plist */,
+			);
+			path = FitCookTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,18 +268,40 @@
 			productReference = C8CCD8C923FFD7C50061B3F3 /* FitCook.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C8D5AA9A244074D0009DBD58 /* FitCookTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8D5AAA4244074D0009DBD58 /* Build configuration list for PBXNativeTarget "FitCookTests" */;
+			buildPhases = (
+				C8D5AA97244074D0009DBD58 /* Sources */,
+				C8D5AA98244074D0009DBD58 /* Frameworks */,
+				C8D5AA99244074D0009DBD58 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C8D5AAA1244074D0009DBD58 /* PBXTargetDependency */,
+			);
+			name = FitCookTests;
+			productName = FitCookTests;
+			productReference = C8D5AA9B244074D0009DBD58 /* FitCookTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		C8CCD8C123FFD7C50061B3F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Timur Dolotkazin";
 				TargetAttributes = {
 					C8CCD8C823FFD7C50061B3F3 = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					C8D5AA9A244074D0009DBD58 = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = C8CCD8C823FFD7C50061B3F3;
 					};
 				};
 			};
@@ -251,6 +319,7 @@
 			projectRoot = "";
 			targets = (
 				C8CCD8C823FFD7C50061B3F3 /* FitCook */,
+				C8D5AA9A244074D0009DBD58 /* FitCookTests */,
 			);
 		};
 /* End PBXProject section */
@@ -262,10 +331,18 @@
 			files = (
 				C8CCD8D923FFD7C60061B3F3 /* LaunchScreen.storyboard in Resources */,
 				C8D38AE2241152D70012EB03 /* KitchenWareCell.xib in Resources */,
+				C8527CE92433919A009D12DB /* MealCell.xib in Resources */,
 				C8CCD8D623FFD7C60061B3F3 /* Assets.xcassets in Resources */,
 				C8CCD8D423FFD7C50061B3F3 /* Main.storyboard in Resources */,
 				C89BDB1D2421239C002D5E36 /* KitchenWare.storyboard in Resources */,
 				C89BDB1F242125A0002D5E36 /* Ingredients.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8D5AA99244074D0009DBD58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,8 +360,8 @@
 				C82DE14B24130801003C6C0F /* Meal+CoreDataProperties.swift in Sources */,
 				C8CCD8E323FFFEAD0061B3F3 /* RecipeItemCell.swift in Sources */,
 				C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */,
+				C841569F242292C200C0B2A0 /* UITableView.swift in Sources */,
 				C823BA37240E5C0200048111 /* RecipeItemViewController.swift in Sources */,
-				C8732FAD2417E299009776C0 /* TabBarController.swift in Sources */,
 				C8754C59240FA3050099EDAF /* CustomTextField.swift in Sources */,
 				C8D38AE1241152D70012EB03 /* KitchenWareCell.swift in Sources */,
 				C83683A324113A230075419F /* IngredientsViewController.swift in Sources */,
@@ -292,6 +369,7 @@
 				C82DE14A24130801003C6C0F /* Meal+CoreDataClass.swift in Sources */,
 				C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */,
 				C8FE2AEF2412F1B7004A15CF /* CoreDataHelper.swift in Sources */,
+				C8527CE82433919A009D12DB /* MealCell.swift in Sources */,
 				C89BDB25242135F4002D5E36 /* BeforeAfterVC.swift in Sources */,
 				C8C3A17B240E70170031F16A /* MealsViewController.swift in Sources */,
 				C8CCD8CD23FFD7C50061B3F3 /* AppDelegate.swift in Sources */,
@@ -300,7 +378,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C8D5AA97244074D0009DBD58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8D5AA9E244074D0009DBD58 /* FitCookTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C8D5AAA1244074D0009DBD58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C8CCD8C823FFD7C50061B3F3 /* FitCook */;
+			targetProxy = C8D5AAA0244074D0009DBD58 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C8CCD8D223FFD7C50061B3F3 /* Main.storyboard */ = {
@@ -474,6 +568,48 @@
 			};
 			name = Release;
 		};
+		C8D5AAA2244074D0009DBD58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S23K6FZZPL;
+				INFOPLIST_FILE = FitCookTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tuxracer.FitCookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FitCook.app/FitCook";
+			};
+			name = Debug;
+		};
+		C8D5AAA3244074D0009DBD58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S23K6FZZPL;
+				INFOPLIST_FILE = FitCookTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.tuxracer.FitCookTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FitCook.app/FitCook";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -491,6 +627,15 @@
 			buildConfigurations = (
 				C8CCD8DE23FFD7C60061B3F3 /* Debug */,
 				C8CCD8DF23FFD7C60061B3F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C8D5AAA4244074D0009DBD58 /* Build configuration list for PBXNativeTarget "FitCookTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8D5AAA2244074D0009DBD58 /* Debug */,
+				C8D5AAA3244074D0009DBD58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

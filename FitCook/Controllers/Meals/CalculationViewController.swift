@@ -53,6 +53,7 @@ class CalculationViewController: UIViewController {
 	
 	@IBAction func servingsStepper(_ sender: UIStepper) {
 		servings = Int64(sender.value)
+		meal?.calPerServing = caloriesPerServing
 		updateView()
 	}
 	
@@ -70,11 +71,11 @@ class CalculationViewController: UIViewController {
 		servingWeightLabel.text = String(servingWeight)
 		customServingCaloriesLabel.text = String(customServingCalories)
 	}
+	
 	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
 		meal?.totalWeight = totalWeight
 		meal?.calPerWeight = caloriesPerWeight
 		meal?.calPerServing = caloriesPerServing
-		coreData?.save()
 		activeTextField?.resignFirstResponder()
 	}
 }

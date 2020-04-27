@@ -4,9 +4,9 @@ import CoreData
 
 class RecipeViewController: UIViewController {
 	
+	var coreData: CoreDataHelper?
 	var meal: Meal?
 	private var recipeItems = [RecipeItem]()
-	var coreData: CoreDataHelper?
 	
 	@IBOutlet var toolbar: UIToolbar!
 	@IBOutlet weak var tableView: UITableView!
@@ -20,13 +20,20 @@ class RecipeViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
-		if let selectedIndexPath = tableView.indexPathForSelectedRow {
-			tableView.reloadRows(at: [selectedIndexPath], with: UITableView.RowAnimation.automatic)
-			tableView.deselectRow(at: selectedIndexPath, animated: animated)
+		tableView.reloadAndDeselectRow()
+	}
+	
+	func showAlert(title: String, actionTitle: String) {
+		let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+		let action = UIAlertAction(title: actionTitle, style: .default, handler: nil)
+		alert.addAction(action)
+		present(alert, animated: true) {
+			self.ingredientTextField.text = ""
 		}
 	}
 	
 	//MARK: - IBActions
+	
 	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
 		let string = ingredientTextField.text!
 		if string != "" {
@@ -35,7 +42,7 @@ class RecipeViewController: UIViewController {
 				tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
 				ingredientTextField.text = ""
 			} else {
-				showAlert()
+				showAlert(title: "Уже есть такой ингредиент", actionTitle: "ОК")
 			}
 		}
 		ingredientTextField.resignFirstResponder()
@@ -64,15 +71,6 @@ class RecipeViewController: UIViewController {
 			self.coreData!.save()
 		}
 	}
-	
-	func showAlert(){
-		let alert = UIAlertController(title: "Уже есть такой ингредиент", message: "Давайте попробуем что-нибудь новенькое", preferredStyle: .alert)
-		let action = UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil)
-		alert.addAction(action)
-		present(alert, animated: true) {
-			self.ingredientTextField.text = ""
-		}
-	}
 }
 
 //MARK: - UITextfield Delegate
@@ -92,7 +90,7 @@ extension RecipeViewController: UITextFieldDelegate {
 				recipeItems.insert(newRecipeItem, at: 0)
 				tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
 			} else {
-				showAlert()
+				showAlert(title: "Уже есть такой ингредиент", actionTitle: "OK")
 			}
 			ingredientTextField.text = ""
 			textField.keyboardType = .default
@@ -107,7 +105,7 @@ extension RecipeViewController: UITextFieldDelegate {
 			field.coreData = coreData
 			var textstring = field.text!
 			textstring.append(string)
-			field.suggest(textstring)
+			field.showSuggestions(name: textstring)
 		}
 		return true
 	}
@@ -120,7 +118,7 @@ extension RecipeViewController: UITextFieldDelegate {
 				ingredientTextField.text = ""
 				coreData?.save()
 			} else {
-				showAlert()
+				showAlert(title: "Уже есть такой ингредиент", actionTitle: "OK")
 			}
 		}
 	}

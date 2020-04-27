@@ -9,9 +9,6 @@ class KitchenWareController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if let tbc = self.navigationController?.tabBarController as? TabBarController {
-			coreData = tbc.coreData
-		}
 		kitchenWare = coreData!.load()
 		tableView.register(UINib(nibName: "KitchenWareCell", bundle: .main), forCellReuseIdentifier: "dish")
 		tableView.rowHeight = CGFloat(exactly: 84)!
@@ -118,9 +115,6 @@ extension KitchenWareController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension KitchenWareController: KitchenWareDetailDelegate {
 	func detailViewDismisseed() {
-		if let selectedRow = tableView.indexPathForSelectedRow {
-			tableView.reloadRows(at: [selectedRow], with: .automatic)
-			tableView.deselectRow(at: selectedRow, animated: true)
-		}
+		tableView.reloadAndDeselectRow()
 	}
 }

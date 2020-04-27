@@ -5,24 +5,38 @@ class MealsViewController: UITableViewController {
 	
 	private var meals = [Meal]()
 	private var coreData: CoreDataHelper?
+	private var addMealButton: UIButton?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		//not dependency injection, but I have no other ideas how to pass this through...
-		if let tbc = self.navigationController?.tabBarController as? TabBarController {
-			coreData = tbc.coreData
-		}
+		coreData = CoreDataHelper()
 		meals = coreData!.load()
+		tableView.register(UINib(nibName: "MealCell", bundle: .main), forCellReuseIdentifier: "mealCell")
+		navigationController?.navigationBar.backgroundColor = UIColor(named: "Blue")
+		self.clearsSelectionOnViewWillAppear = false
+		tableView.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.968627451, blue: 0.9803921569, alpha: 1)
+		createButton()
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		if let selectedRow = tableView.indexPathForSelectedRow {
-			tableView.reloadRows(at: [selectedRow], with: .automatic)
-			tableView.deselectRow(at: selectedRow, animated: true)
-		}
+	override func viewWillAppear(_ animated: Bool) {
+		tableView.reloadAndDeselectRow()
+	}
+		
+	//MARK: - Button methods
+	
+	func createButton() {
+		addMealButton = UIButton(type: .custom)
+		addMealButton?.setImage(UIImage(named: "AddMealButton"), for: .normal)
+		addMealButton?.adjustsImageWhenHighlighted = false
+		navigationController?.view.addSubview(addMealButton!)
+		addMealButton?.frame.size = CGSize(width: 70, height: 70)
+		addMealButton?.translatesAutoresizingMaskIntoConstraints = false
+		addMealButton?.centerXAnchor.constraint(equalTo: (navigationController?.view.centerXAnchor)!).isActive = true
+		addMealButton?.bottomAnchor.constraint(equalTo: navigationController!.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+		addMealButton?.addTarget(self, action: #selector(addMealButtonPressed), for: .touchUpInside)
 	}
 	
-	@IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+	@objc func addMealButtonPressed(_ sender: UIButton!) {
 		var textField = UITextField()
 		let alert = UIAlertController(title: "Add new meal", message: nil, preferredStyle: .alert)
 		let action = UIAlertAction(title: "Add", style: .default) { (action) in
@@ -54,9 +68,14 @@ extension MealsViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath)
-		cell.textLabel?.text = meals[indexPath.row].name
+		let cell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealCell
+		cell.mealNameLabel.text = meals[indexPath.row].name
 		
+		cell.servingCaloriesLabel.text = meals[indexPath.row].calPerServing != 0 ? String(meals[indexPath.row].calPerServing) : ""
+		
+		let cellAlpha = 0.1 * CGFloat(1 + indexPath.row)
+		let gradientColor = cell.backgroundColor?.withAlphaComponent(cellAlpha)
+		cell.backgroundColor = gradientColor
 		return cell
 	}
 	

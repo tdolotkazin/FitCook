@@ -7,9 +7,6 @@ class IngredientsViewController: UITableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		if let tbc = self.navigationController?.tabBarController as? TabBarController {
-			coreData = tbc.coreData
-		}
 		ingredients = coreData!.load()
 	}
 	
