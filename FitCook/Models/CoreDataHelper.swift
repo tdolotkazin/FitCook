@@ -17,6 +17,7 @@ class CoreDataHelper {
 		if context.hasChanges {
 			do {
 				try context.save()
+				print("CoreData saved")
 			} catch {
 				fatalError("Can't save context: \(error)")
 			}
@@ -61,21 +62,15 @@ class CoreDataHelper {
 		}
 	}
 	
-	func addRecipeItem(from string: String, to recipeItems: inout [RecipeItem]) -> RecipeItem? {
-		let parsedRecipeItem = parseRecipe(string)
-		if recipeItems.contains(where: { (recipeItem) -> Bool in
-			recipeItem.ingredient?.name == parsedRecipeItem.name
-		}) {
-			return nil //in case there's already a recipeItem with this name
-		}
+	func addRecipeItem(named name: String) -> RecipeItem {
+		
 		let newRecipeItem: RecipeItem = create()
-		if let ingredient = checkIfExists("Ingredient", named: parsedRecipeItem.name) {
-			newRecipeItem.ingredient = (ingredient as! Ingredient)
+		if let ingredient: Ingredient = checkIfExists("Ingredient", named: name) {
+			newRecipeItem.ingredient = ingredient
 		} else {
-			let newIngredient: Ingredient = (create(named: parsedRecipeItem.name))
+			let newIngredient: Ingredient = (create(named: name))
 			newRecipeItem.ingredient = newIngredient
 		}
-		newRecipeItem.weight = parsedRecipeItem.weight
 		return newRecipeItem
 	}
 	
@@ -90,7 +85,7 @@ class CoreDataHelper {
 	func loadSearchResults<T: NSManagedObject>(string: String) -> [T] {
 		var results = [T]()
 		if let request = T.fetchRequest() as? NSFetchRequest<T> {
-			let predicate = NSPredicate(format: "name CONTAINS %@", string)
+			let predicate = NSPredicate(format: "name CONTAINS[c] %@", string)
 			request.predicate = predicate
 			do {
 				results = try context.fetch(request)

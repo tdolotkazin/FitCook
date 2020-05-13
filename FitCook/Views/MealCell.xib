@@ -13,8 +13,9 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="mealCell" rowHeight="82" id="KGk-i7-Jjw" customClass="MealCell" customModule="FitCook" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KGk-i7-Jjw" translatesAutoresizingMaskIntoConstraints="NO" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="344" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRf-oA-oWW">
                         <rect key="frame" x="16" y="16" width="49" height="28"/>
@@ -23,7 +24,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePr-MA-yja">
-                        <rect key="frame" x="260" y="8.5" width="80" height="43"/>
+                        <rect key="frame" x="259" y="8.5" width="80" height="43"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -33,17 +34,11 @@
                     <constraint firstItem="ePr-MA-yja" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CHQ-Da-dn9"/>
                     <constraint firstItem="FRf-oA-oWW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="KhJ-w0-5ku"/>
                     <constraint firstAttribute="bottom" secondItem="FRf-oA-oWW" secondAttribute="bottom" constant="16" id="OW1-N9-25U"/>
-                    <constraint firstItem="ePr-MA-yja" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-35" id="Xm6-7n-Qaa"/>
+                    <constraint firstItem="ePr-MA-yja" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-5" id="Xm6-7n-Qaa"/>
                     <constraint firstItem="FRf-oA-oWW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="cqt-o1-TEd"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="Blue"/>
-            <constraints>
-                <constraint firstItem="H2p-sc-9uM" firstAttribute="bottom" secondItem="njF-e1-oar" secondAttribute="bottom" id="SuX-vv-rZY"/>
-                <constraint firstItem="H2p-sc-9uM" firstAttribute="trailing" secondItem="njF-e1-oar" secondAttribute="trailing" id="lL4-x4-1Pm"/>
-                <constraint firstItem="H2p-sc-9uM" firstAttribute="top" secondItem="njF-e1-oar" secondAttribute="top" id="q5t-cW-uyD"/>
-                <constraint firstItem="H2p-sc-9uM" firstAttribute="leading" secondItem="njF-e1-oar" secondAttribute="leading" id="vEQ-6d-QDj"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="mealNameLabel" destination="FRf-oA-oWW" id="Z7x-qg-MTL"/>

@@ -3,7 +3,7 @@ import UIKit
 class CustomTextField: UITextField {
 	var coreData: CoreDataHelper?
 	var resultsList = [Ingredient]()
-	private var tableView : UITableView?
+	var tableView : UITableView?
 	
 	override func willMove(toWindow newWindow: UIWindow?) {
 		super.willMove(toWindow: newWindow)
@@ -17,9 +17,10 @@ class CustomTextField: UITextField {
 			tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 			//converting tableView origin to window-based coordinates
 			tableView.frame.origin = self.convert(tableView.frame.origin, to: nil)
-			tableView.frame.origin.y += self.frame.height + 5
+			tableView.frame.origin.y += self.frame.height
 			tableView.isHidden = true
 			tableView.frame.size.width = self.frame.width
+			tableView.rowHeight = 44
 			self.window?.addSubview(tableView)
 		}
 	}
@@ -57,7 +58,7 @@ extension CustomTextField: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
-		cell.backgroundColor = UIColor.clear
+		cell.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.968627451, blue: 0.9803921569, alpha: 1)
 		cell.textLabel?.text = "\(resultsList[indexPath.row].name!) - \(resultsList[indexPath.row].kcal)ккал/100гр"
 		return cell
 	}

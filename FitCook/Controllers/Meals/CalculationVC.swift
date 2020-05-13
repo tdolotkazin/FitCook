@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class CalculationViewController: UIViewController {
+class CalculationVC: UIViewController {
 	
 	var coreData: CoreDataHelper?
 	var activeTextField: UITextField?
@@ -80,7 +80,7 @@ class CalculationViewController: UIViewController {
 	}
 }
 
-extension CalculationViewController: UITextFieldDelegate {
+extension CalculationVC: UITextFieldDelegate {
 	
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 		textField.inputAccessoryView = toolbar

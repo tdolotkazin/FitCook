@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class MealsViewController: UITableViewController {
+class MealsVC: UITableViewController {
 	
 	private var meals = [Meal]()
 	private var coreData: CoreDataHelper?
@@ -13,13 +13,17 @@ class MealsViewController: UITableViewController {
 		meals = coreData!.load()
 		tableView.register(UINib(nibName: "MealCell", bundle: .main), forCellReuseIdentifier: "mealCell")
 		navigationController?.navigationBar.backgroundColor = UIColor(named: "Blue")
+		navigationController?.navigationBar.isHidden = true
 		self.clearsSelectionOnViewWillAppear = false
 		tableView.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.968627451, blue: 0.9803921569, alpha: 1)
-		createButton()
+		tableView.separatorStyle = .none
+		
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
+		navigationController?.navigationBar.isHidden = true
 		tableView.reloadAndDeselectRow()
+		createButton()
 	}
 		
 	//MARK: - Button methods
@@ -61,7 +65,7 @@ class MealsViewController: UITableViewController {
 
 //MARK: - TableView Data Source
 
-extension MealsViewController {
+extension MealsVC {
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return meals.count
@@ -72,8 +76,8 @@ extension MealsViewController {
 		cell.mealNameLabel.text = meals[indexPath.row].name
 		
 		cell.servingCaloriesLabel.text = meals[indexPath.row].calPerServing != 0 ? String(meals[indexPath.row].calPerServing) : ""
-		
-		let cellAlpha = 0.1 * CGFloat(1 + indexPath.row)
+		let tempIndex = CGFloat(meals.count - (indexPath.row + 1)) * 0.1
+		let cellAlpha = 1 - tempIndex
 		let gradientColor = cell.backgroundColor?.withAlphaComponent(cellAlpha)
 		cell.backgroundColor = gradientColor
 		return cell
@@ -95,7 +99,7 @@ extension MealsViewController {
 
 //MARK: - TableView Delegate
 
-extension MealsViewController {
+extension MealsVC {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		performSegue(withIdentifier: "toIngredients", sender: self)
 	}
@@ -103,9 +107,10 @@ extension MealsViewController {
 
 //MARK: - Navigation
 
-extension MealsViewController {
+extension MealsVC {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		let nextVC = segue.destination as! RecipeViewController
+		addMealButton?.removeFromSuperview()
+		let nextVC = segue.destination as! RecipeVC
 		if let selectedRow = tableView.indexPathForSelectedRow {
 			nextVC.meal = meals[selectedRow.row]
 			nextVC.coreData = coreData
