@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Dish" representedClassName="Dish" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class">
-        <attribute name="kcal" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="kcal" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="inRecipe" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RecipeItem" inverseName="ingredient" inverseEntity="RecipeItem"/>
     </entity>
@@ -19,8 +19,8 @@
     </entity>
     <entity name="RecipeItem" representedClassName="RecipeItem" syncable="YES" codeGenerationType="class">
         <attribute name="weight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="ingredient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="inRecipe" inverseEntity="Ingredient"/>
-        <relationship name="inMeal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="recipeItems" inverseEntity="Meal"/>
+        <relationship name="ingredient" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="inRecipe" inverseEntity="Ingredient"/>
+        <relationship name="inMeal" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="recipeItems" inverseEntity="Meal"/>
     </entity>
     <elements>
         <element name="Dish" positionX="-32.484375" positionY="-461.61328125" width="128" height="88"/>

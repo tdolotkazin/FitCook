@@ -5,13 +5,13 @@ protocol WeightEnterDelegate {
 	func didEndEnteringWeight()
 }
 
-class BeforeAfterVC: UIViewController, UITextFieldDelegate {
+class BeforeAfterVC: UIViewController, UITextFieldDelegate, DoneToolbarDelegate {
 	
 	var weightBefore:Int64 = 0
 	var weightAfter:Int64 = 0
 	var beforeTextField: UITextField!
 	var afterTextField: UITextField!
-	var toolbar: UIToolbar!
+	var toolbar: DoneToolbar?
 	var delegate: WeightEnterDelegate?
 	
 	override func viewDidLoad() {
@@ -29,11 +29,8 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 		afterTextField.delegate = self
 		beforeTextField.becomeFirstResponder()
 		
-		toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-		toolbar.items = [UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-						 UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))]
-		toolbar.translatesAutoresizingMaskIntoConstraints = false
-		toolbar.contentMode = .scaleAspectFit
+		toolbar = DoneToolbar()
+		toolbar?.buttonDelegate = self
 		
 	}
 	

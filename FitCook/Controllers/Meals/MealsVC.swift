@@ -22,16 +22,20 @@ class MealsVC: UITableViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		navigationController?.navigationBar.isHidden = true
-		tableView.reloadAndDeselectRow()
 		createButton()
 	}
-		
+	
+	override func viewDidAppear(_ animated: Bool) {
+		tableView.reloadAndDeselectRow()
+	}
+			
 	//MARK: - Button methods
 	
 	func createButton() {
 		addMealButton = UIButton(type: .custom)
 		addMealButton?.setImage(UIImage(named: "AddMealButton"), for: .normal)
 		addMealButton?.adjustsImageWhenHighlighted = false
+		//MARK: - adding button to navigationVC view to keep it in front of tableview. Double check!
 		navigationController?.view.addSubview(addMealButton!)
 		addMealButton?.frame.size = CGSize(width: 70, height: 70)
 		addMealButton?.translatesAutoresizingMaskIntoConstraints = false

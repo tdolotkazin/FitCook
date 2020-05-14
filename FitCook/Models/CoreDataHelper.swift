@@ -75,6 +75,7 @@ class CoreDataHelper {
 	}
 	
 	func deleteRecipeItem(recipeItem: RecipeItem) {
+		//MARK: - remove this part, because ingredients should only be deleted manually!
 		if recipeItem.ingredient?.inRecipe?.count == 1 {
 			delete(recipeItem.ingredient!)
 		}

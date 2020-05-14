@@ -24,11 +24,12 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		navigationController?.navigationBar.isHidden = false
+		tableView.reloadAndDeselectRow()
+		coreData.save()
 	}
 	
-	//deselecting row when getting back from detailed view
-	func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
-		tableView.reloadAndDeselectRow()
+	override func viewWillDisappear(_ animated: Bool) {
+		ingredientTextField.tableView?.removeFromSuperview()
 	}
 	
 	//Alert presenting method
@@ -137,9 +138,10 @@ extension RecipeVC: UITextFieldDelegate {
 	func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 		if let field = textField as? CustomTextField {
 			field.coreData = coreData
-			var textstring = field.text!
-			textstring.append(string)
-			field.showSuggestions(name: textstring)
+			if let text = field.text, let textRange = Range(range, in: text) {
+				let finalText = text.replacingCharacters(in: textRange, with: string)
+			field.showSuggestions(name: finalText)
+			}
 		}
 		return true
 	}
@@ -168,7 +170,11 @@ extension RecipeVC: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		performSegue(withIdentifier: "toIngredientDetail", sender: self)
+		let pageVC = RecipePageVC()
+		pageVC.coreData = coreData
+		pageVC.recipeItems = recipeItems
+		pageVC.selectedItemIndex = indexPath.row
+		navigationController?.pushViewController(pageVC, animated: true)
 	}
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -193,7 +199,7 @@ extension RecipeVC {
 			let detailVC = segue.destination as! RecipeItemVC
 			detailVC.presentationController?.delegate = self
 			if let indexPath = tableView.indexPathForSelectedRow {
-				detailVC.selectedRecipeItem = recipeItems[indexPath.row]
+				detailVC.recipeItem = recipeItems[indexPath.row]
 				detailVC.coreData = coreData
 			}
 		}
