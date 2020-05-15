@@ -159,6 +159,6 @@ extension RecipeItemVC: DoneToolbarDelegate {
 			recipeItem.weight = weight
 	}
 		endEnteringWeight()
-			
+		weightTextField.resignFirstResponder()
 	}
 }
