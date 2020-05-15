@@ -8,7 +8,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	private var constraints: [NSLayoutConstraint]!
 	private var hiddenConstraints: [NSLayoutConstraint]!
 	private var segmentedControl: UISegmentedControl!
-	private var toolbar: DoneToolbar!
+	private var toolbar: CustomToolbar!
 	
 	private var weightView: UIView?
 	
@@ -37,7 +37,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		weightTextField.text = recipeItem.weight != 0 ? String(recipeItem.weight) : ""
 		kcalTextField.text = recipeItem.ingredient!.kcal != 0 ? String(recipeItem.ingredient!.kcal) : ""
 		weightTextField.delegate = self
-		toolbar = DoneToolbar()
+		toolbar = CustomToolbar(leftButtonType: .None, rightButtonType: .Done)
 		toolbar.buttonDelegate = self
 		
 	}
@@ -153,8 +153,16 @@ extension RecipeItemVC: WeightEnterDelegate {
 
 //MARK: - Done Toolbar delegate methods
 
-extension RecipeItemVC: DoneToolbarDelegate {
-	func doneButtonPressed() {
+extension RecipeItemVC: CustomToolbarDelegate {
+	func weightPressed() {
+		
+	}
+	
+	func nextPressed() {
+		
+	}
+
+	func donePressed() {
 		if let weight = Int64(weightTextField.text!) {
 			recipeItem.weight = weight
 	}

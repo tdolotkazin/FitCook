@@ -19,8 +19,8 @@
     </entity>
     <entity name="RecipeItem" representedClassName="RecipeItem" syncable="YES" codeGenerationType="class">
         <attribute name="weight" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="ingredient" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="inRecipe" inverseEntity="Ingredient"/>
-        <relationship name="inMeal" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="recipeItems" inverseEntity="Meal"/>
+        <relationship name="ingredient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="inRecipe" inverseEntity="Ingredient"/>
+        <relationship name="inMeal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Meal" inverseName="recipeItems" inverseEntity="Meal"/>
     </entity>
     <elements>
         <element name="Dish" positionX="-32.484375" positionY="-461.61328125" width="128" height="88"/>

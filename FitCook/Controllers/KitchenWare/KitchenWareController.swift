@@ -1,17 +1,14 @@
 import UIKit
-import CoreData
 
 class KitchenWareController: UITableViewController {
 	var kitchenWare: [Dish] = []
 	var coreData: CoreDataHelper?
-	var selectedCell: KitchenWareCell?
-	
+		
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		kitchenWare = coreData!.load()
 		tableView.register(UINib(nibName: "KitchenWareCell", bundle: .main), forCellReuseIdentifier: "dish")
-		tableView.rowHeight = CGFloat(exactly: 84)!
+		tableView.rowHeight = CGFloat(exactly: 60)!
 	}
 	
 	func saveImage(data: Data, for dish: Dish) {
@@ -27,15 +24,8 @@ class KitchenWareController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "dish", for: indexPath) as! KitchenWareCell
-		cell.delegate = self
 		cell.nameLabel.text = kitchenWare[indexPath.row].name!
 		cell.weightLabel.text = String(kitchenWare[indexPath.row].weight)
-		if let imageData = kitchenWare[indexPath.row].image {
-			let image = UIImage(data: imageData)
-			cell.imageButton.setImage(image, for: .normal)
-		} else {
-			cell.imageButton.setImage(UIImage(systemName: "camera"), for: .normal)
-		}
 		return cell
 	}
 	
@@ -78,36 +68,6 @@ class KitchenWareController: UITableViewController {
 			textField.autocapitalizationType = .sentences
 		}
 		present(alert, animated: true, completion: nil)
-	}
-}
-//MARK: - Image Picking Methods
-
-/*
-Image Picker cropping doesn't work as it should be.
-Need to implement my own cropping sometimes.
-*/
-
-extension KitchenWareController: KitchenWareCellDelegate {
-	func cellButtonPressed(cell: KitchenWareCell) {
-		let picker = UIImagePickerController()
-		picker.delegate = self
-		picker.allowsEditing = true
-		picker.sourceType = .camera
-		present(picker, animated: true, completion: nil)
-		selectedCell = cell
-	}
-}
-
-extension KitchenWareController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	func imagePickerController(_ picker: UIImagePickerController,
-							   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
-	{
-		guard let pickedImage = info[.editedImage] as? UIImage else { return }
-		selectedCell!.imageButton.setImage(pickedImage, for: .normal)
-		picker.dismiss(animated: true, completion: nil)
-		let dishRow = tableView.indexPath(for: selectedCell!)!.row
-		let dish = kitchenWare[dishRow]
-		saveImage(data: pickedImage.pngData()!, for: dish)
 	}
 }
 

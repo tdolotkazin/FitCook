@@ -7,9 +7,8 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 	var meal: Meal!
 	private var recipeItems = [RecipeItem]()
 	
-	@IBOutlet var toolbar: UIToolbar!
 	@IBOutlet weak var tableView: UITableView!
-	@IBOutlet weak var ingredientTextField: CustomTextField!
+	@IBOutlet weak var textField: CustomTextField!
 	@IBOutlet weak var calculateButton: UIButton!
 	
 	//preparing the view to show
@@ -20,6 +19,10 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		recipeItems = Array(meal.recipeItems!)
 		tableView.register(UINib(nibName: "RecipeItemCell", bundle: .main), forCellReuseIdentifier: "recipeItemCell")
 		tableView.separatorStyle = .none
+		let toolbar = CustomToolbar(leftButtonType: .Weight, rightButtonType: .Done)
+		textField.inputAccessoryView = toolbar
+		toolbar.buttonDelegate = self
+		
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +32,7 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
-		ingredientTextField.tableView?.removeFromSuperview()
+		textField.tableView?.removeFromSuperview()
 	}
 	
 	//Alert presenting method
@@ -39,7 +42,7 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		alert.addAction(action)
 		alert.view.layoutIfNeeded()
 		present(alert, animated: true) {
-			self.ingredientTextField.text = ""
+			self.textField.text = ""
 		}
 	}
 	
@@ -66,34 +69,13 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		newRecipeItem.inMeal = meal
 		recipeItems.insert(newRecipeItem, at: 0)
 		tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-		ingredientTextField.tableView?.isHidden = true
+		textField.tableView?.isHidden = true
 
 		//check if need to save CoreData!!!!
 		coreData.save()
 		
 	}
-	
-	//MARK: - IBActions
-	
-	//Done button is pressed on the toolbar.
-	
-	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-		//taking new item name
-		let string = ingredientTextField.text!
-		createNewItem(from: string)
-		ingredientTextField.text = ""
-		ingredientTextField.resignFirstResponder()
-	}
-	
-	//":weight" button is pressed on the toolbar.
-	
-	@IBAction func weightButtonPressed(_ sender: UIBarButtonItem) {
-		if ingredientTextField.text != "" {
-			ingredientTextField.text! = ingredientTextField.text! + ": "
-			ingredientTextField.keyboardType = .numbersAndPunctuation
-			ingredientTextField.reloadInputViews()
-		}
-	}
+		//MARK: - IBActions
 	
 	//"Edit" button is pressed in the Navigation bar.
 	
@@ -114,22 +96,43 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 	}
 }
 
+extension RecipeVC: CustomToolbarDelegate {
+	func donePressed() {
+		let string = textField.text!
+		createNewItem(from: string)
+		textField.text = ""
+		textField.resignFirstResponder()
+	}
+	
+	func nextPressed() {
+		
+	}
+	
+	func weightPressed() {
+		if textField.text != "" {
+			textField.text! = textField.text! + ": "
+			textField.keyboardType = .numbersAndPunctuation
+			textField.reloadInputViews()
+		}
+	}
+}
+
+
 //MARK: - UITextfield Delegate
 
 extension RecipeVC: UITextFieldDelegate {
 	
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-		textField.inputAccessoryView = toolbar
 		return true
 	}
 	
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		let string = ingredientTextField.text!
+		let string = textField.text!
 		if string == "" {
 			return false
 		}
 		createNewItem(from: string)
-		ingredientTextField.text = ""
+		textField.text = ""
 		textField.keyboardType = .default
 		textField.reloadInputViews()
 		return true
@@ -146,9 +149,9 @@ extension RecipeVC: UITextFieldDelegate {
 		return true
 	}
 	func textFieldDidEndEditing(_ textField: UITextField) {
-		let string = ingredientTextField.text!
+		let string = textField.text!
 		createNewItem(from: string)
-		ingredientTextField.text = ""
+		textField.text = ""
 	}
 }
 
@@ -194,7 +197,7 @@ extension RecipeVC: UITableViewDataSource, UITableViewDelegate {
 
 extension RecipeVC {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		ingredientTextField.tableView?.removeFromSuperview()
+		textField.tableView?.removeFromSuperview()
 		if segue.identifier == "toIngredientDetail" {
 			let detailVC = segue.destination as! RecipeItemVC
 			detailVC.presentationController?.delegate = self

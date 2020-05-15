@@ -23,7 +23,7 @@ class TarePickerVC: UIViewController {
 		weightTextField.placeholder = "Введите вес с посудой"
 		weightTextField.textAlignment = .center
 		weightTextField.keyboardType = .numberPad
-		let toolbar = DoneToolbar()
+		let toolbar = CustomToolbar()
 		weightTextField.inputAccessoryView = toolbar
 		weightTextField.becomeFirstResponder()
 	}
@@ -35,6 +35,7 @@ class TarePickerVC: UIViewController {
 		kitchenWareTextField.placeholder = "Выберите посуду"
 		kitchenWareTextField.textAlignment = .center
 		kitchenWareTextField.inputView = picker
+		
 		let kitchenWareDictionaryButton = UIButton()
 		kitchenWareDictionaryButton.translatesAutoresizingMaskIntoConstraints = false
 		kitchenWareTextField.addSubview(kitchenWareDictionaryButton)
@@ -48,7 +49,14 @@ class TarePickerVC: UIViewController {
 	}
 	
 	@objc func kitchenWareDictionaryButtonPressed() {
-		print("Go to kitchenware")
+		if let kitchenWareVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "kitchenwareVC") as? KitchenWareController {
+			kitchenWareVC.coreData = coreData
+			navigationController?.pushViewController(kitchenWareVC, animated: true)
+		} else {
+			fatalError("No Kitchenware Controller!")
+		}
+		
+		
 	}
 	
 	func buildPicker() {
@@ -72,7 +80,7 @@ extension TarePickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-		let componentView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
+		let componentView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
 		let label = UILabel(frame: CGRect(x: 0, y: 10, width: 300, height: 30))
 		label.text = tares![row].name
 		componentView.addSubview(label)

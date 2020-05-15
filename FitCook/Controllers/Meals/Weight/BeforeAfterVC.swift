@@ -5,13 +5,13 @@ protocol WeightEnterDelegate {
 	func didEndEnteringWeight()
 }
 
-class BeforeAfterVC: UIViewController, UITextFieldDelegate, DoneToolbarDelegate {
+class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 	
 	var weightBefore:Int64 = 0
 	var weightAfter:Int64 = 0
 	var beforeTextField: UITextField!
 	var afterTextField: UITextField!
-	var toolbar: DoneToolbar?
+	var toolbar: CustomToolbar?
 	var delegate: WeightEnterDelegate?
 	
 	override func viewDidLoad() {
@@ -28,21 +28,24 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate, DoneToolbarDelegate 
 		beforeTextField.delegate = self
 		afterTextField.delegate = self
 		beforeTextField.becomeFirstResponder()
-		
-		toolbar = DoneToolbar()
-		toolbar?.buttonDelegate = self
-		
+				
 	}
-	
-	@objc func doneButtonPressed() {
-		self.view.removeFromSuperview()
-		self.removeFromParent()
-		delegate?.didEndEnteringWeight()
-	}
-	
+
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 		textField.keyboardType = .numberPad
-		textField.inputAccessoryView = toolbar
+		switch textField {
+			case beforeTextField:
+				let toolbar = CustomToolbar(leftButtonType: .None, rightButtonType: .Next)
+				toolbar.buttonDelegate = self
+				textField.inputAccessoryView = toolbar
+			case afterTextField:
+				let toolbar = CustomToolbar(leftButtonType: .None, rightButtonType: .Done)
+				toolbar.buttonDelegate = self
+				textField.inputAccessoryView = toolbar
+			default:
+			fatalError("Unknown textfield in BA VC")
+		}
+		
 		return true
 	}
 	
@@ -75,4 +78,23 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate, DoneToolbarDelegate 
 			return false
 		}
 	}
+}
+
+
+extension BeforeAfterVC: CustomToolbarDelegate {
+	func donePressed() {
+		self.view.removeFromSuperview()
+		self.removeFromParent()
+		delegate?.didEndEnteringWeight()
+	}
+	
+	func nextPressed() {
+		afterTextField.becomeFirstResponder()
+	}
+	
+	func weightPressed() {
+		
+	}
+	
+	
 }
