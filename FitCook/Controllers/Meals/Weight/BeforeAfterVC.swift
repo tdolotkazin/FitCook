@@ -1,6 +1,6 @@
 import UIKit
 
-protocol WeightEnterDelegate {
+protocol WeightEnterDelegate: AnyObject {
 	func didUpdatedWeight(weight: Int64)
 	func didEndEnteringWeight()
 }
@@ -12,7 +12,7 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 	var beforeTextField: UITextField!
 	var afterTextField: UITextField!
 	var toolbar: CustomToolbar?
-	var delegate: WeightEnterDelegate?
+	weak var delegate: WeightEnterDelegate?
 	
 	override func viewDidLoad() {
 		beforeTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 375, height: 50))
@@ -28,7 +28,7 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 		beforeTextField.delegate = self
 		afterTextField.delegate = self
 		beforeTextField.becomeFirstResponder()
-				
+//		beforeTextField.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
 	}
 
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -82,17 +82,17 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 
 
 extension BeforeAfterVC: CustomToolbarDelegate {
-	func donePressed() {
+	func donePressed(toolbar: CustomToolbar) {
 		self.view.removeFromSuperview()
 		self.removeFromParent()
 		delegate?.didEndEnteringWeight()
 	}
 	
-	func nextPressed() {
+	func nextPressed(toolbar: CustomToolbar) {
 		afterTextField.becomeFirstResponder()
 	}
 	
-	func weightPressed() {
+	func weightPressed(toolbar: CustomToolbar) {
 		
 	}
 	

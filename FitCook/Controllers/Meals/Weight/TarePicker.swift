@@ -8,6 +8,7 @@ class TarePickerVC: UIViewController {
 	private var addButton: UIButton!
 	private var tares: [Dish]?
 	var coreData: CoreDataHelper?
+	var delegate: WeightEnterDelegate?
 	
 	override func viewDidLoad() {
 		buildWeightTextField()
@@ -23,9 +24,12 @@ class TarePickerVC: UIViewController {
 		weightTextField.placeholder = "Введите вес с посудой"
 		weightTextField.textAlignment = .center
 		weightTextField.keyboardType = .numberPad
-		let toolbar = CustomToolbar()
+		let toolbar = CustomToolbar(rightButtonType: .Next)
+		toolbar.buttonDelegate = self
 		weightTextField.inputAccessoryView = toolbar
+		//MARK: - Check if it is bug in iOS or my mistake. Simple becomeFirstResponder() doesn't work
 		weightTextField.becomeFirstResponder()
+//		weightTextField.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
 	}
 	
 	func buildKitchenWareTextField() {
@@ -35,6 +39,9 @@ class TarePickerVC: UIViewController {
 		kitchenWareTextField.placeholder = "Выберите посуду"
 		kitchenWareTextField.textAlignment = .center
 		kitchenWareTextField.inputView = picker
+		let toolbar = CustomToolbar(rightButtonType: .Done)
+		toolbar.buttonDelegate = self
+		kitchenWareTextField.inputAccessoryView = toolbar
 		
 		let kitchenWareDictionaryButton = UIButton()
 		kitchenWareDictionaryButton.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +75,24 @@ class TarePickerVC: UIViewController {
 		picker.dataSource = self
 		tares = coreData?.load()
 	}
+}
+
+extension TarePickerVC: CustomToolbarDelegate {
+	func donePressed(toolbar: CustomToolbar) {
+		self.view.removeFromSuperview()
+		self.removeFromParent()
+		delegate?.didEndEnteringWeight()
+	}
+	
+	func nextPressed(toolbar: CustomToolbar) {
+		kitchenWareTextField.becomeFirstResponder()
+	}
+	
+	func weightPressed(toolbar: CustomToolbar) {
+		
+	}
+	
+	
 }
 
 extension TarePickerVC: UIPickerViewDelegate, UIPickerViewDataSource {

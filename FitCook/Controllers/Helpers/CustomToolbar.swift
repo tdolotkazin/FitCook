@@ -1,9 +1,9 @@
 import UIKit
 
 protocol CustomToolbarDelegate {
-	func donePressed()
-	func nextPressed()
-	func weightPressed()
+	func donePressed(toolbar: CustomToolbar)
+	func nextPressed(toolbar: CustomToolbar)
+	func weightPressed(toolbar: CustomToolbar)
 }
 
 enum CustomToolbarButton {
@@ -18,7 +18,7 @@ class CustomToolbar: UIToolbar {
 	var buttonDelegate: CustomToolbarDelegate?
 	
 	
-	init(leftButtonType: CustomToolbarButton, rightButtonType: CustomToolbarButton) {
+	init(leftButtonType: CustomToolbarButton = .None, rightButtonType: CustomToolbarButton) {
 		super.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
 		let leftButton = createButton(buttonType: leftButtonType)
 		let rightButton = createButton(buttonType: rightButtonType)
@@ -52,14 +52,14 @@ class CustomToolbar: UIToolbar {
 	}
 	
 	@objc func doneButtonPressed() {
-		buttonDelegate?.donePressed()
+		buttonDelegate?.donePressed(toolbar: self)
 	}
 	
 	@objc func nextButtonPressed() {
-		buttonDelegate?.nextPressed()
+		buttonDelegate?.nextPressed(toolbar: self)
 	}
 	
 	@objc func weightButtonPressed() {
-		buttonDelegate?.weightPressed()
+		buttonDelegate?.weightPressed(toolbar: self)
 	}
 }

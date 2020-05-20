@@ -9,9 +9,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	private var hiddenConstraints: [NSLayoutConstraint]!
 	private var segmentedControl: UISegmentedControl!
 	private var toolbar: CustomToolbar!
-	
 	private var weightView: UIView?
-	
 	
 	@IBOutlet weak var itemNameLabel: UILabel!
 	@IBOutlet weak var weightTextField: UITextField!
@@ -37,25 +35,18 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		weightTextField.text = recipeItem.weight != 0 ? String(recipeItem.weight) : ""
 		kcalTextField.text = recipeItem.ingredient!.kcal != 0 ? String(recipeItem.ingredient!.kcal) : ""
 		weightTextField.delegate = self
+		kcalTextField.delegate = self
 		toolbar = CustomToolbar(leftButtonType: .None, rightButtonType: .Done)
 		toolbar.buttonDelegate = self
-		
+		updateTotalKcalLabel()
 	}
 	
 	func textFieldDidBeginEditing(_ textField: UITextField) {
 		textField.keyboardType = .numberPad
 		textField.inputAccessoryView = toolbar
-		beginEnteringWeight()
-	}
-	
-	func textFieldDidEndEditing(_ textField: UITextField) {
-		
-	}
-	
-	
-	
-	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-		weightTextField.resignFirstResponder()
+		if textField == weightTextField {
+			beginEnteringWeight()
+		}
 	}
 	
 	func beginEnteringWeight() {
@@ -72,7 +63,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		weightView?.topAnchor.constraint(equalTo: weightTextField.bottomAnchor).isActive = true
 		weightView?.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
 		weightView?.heightAnchor.constraint(equalToConstant: 230).isActive = true
-		showPureWeightView()
+		segmentedAction(segmentedControl)
 	}
 	
 	func endEnteringWeight() {
@@ -118,12 +109,14 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		pureView.alpha = 0.5
 		weightView?.addSubview(pureView)
 		weightTextField.placeholder = "Введите вес"
+		weightTextField.becomeFirstResponder()
 	}
 	
 	func showPickerView() {
 		let pickerVC = TarePickerVC()
 		addChild(pickerVC)
 		pickerVC.coreData = coreData
+		pickerVC.delegate = self
 		weightView?.addSubview(pickerVC.view)
 		weightTextField.placeholder = "Вводите ниже, я посчитаю"
 	}
@@ -134,6 +127,12 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		weightView?.addSubview(beforeAfterVC.view)
 		beforeAfterVC.delegate = self
 		weightTextField.placeholder = "Вводите ниже, я посчитаю"
+	}
+	
+	func updateTotalKcalLabel() {
+		if recipeItem.weight != 0 && recipeItem.ingredient?.kcal != 0 {
+			totalKcalLabel.text = String(recipeItem.weight * recipeItem.ingredient!.kcal / 100)
+		}
 	}
 }
 
@@ -154,19 +153,27 @@ extension RecipeItemVC: WeightEnterDelegate {
 //MARK: - Done Toolbar delegate methods
 
 extension RecipeItemVC: CustomToolbarDelegate {
-	func weightPressed() {
+	func weightPressed(toolbar: CustomToolbar) {
 		
 	}
 	
-	func nextPressed() {
+	func nextPressed(toolbar: CustomToolbar) {
 		
 	}
-
-	func donePressed() {
-		if let weight = Int64(weightTextField.text!) {
-			recipeItem.weight = weight
-	}
-		endEnteringWeight()
-		weightTextField.resignFirstResponder()
+	
+	func donePressed(toolbar: CustomToolbar) {
+		if weightTextField.isEditing {
+			if let weight = Int64(weightTextField.text!) {
+				recipeItem.weight = weight
+			}
+			endEnteringWeight()
+			weightTextField.resignFirstResponder()
+		} else if kcalTextField.isEditing {
+			if let kcal = Int64(kcalTextField.text!) {
+				recipeItem.ingredient?.kcal = kcal
+			}
+			kcalTextField.resignFirstResponder()
+		}
+		updateTotalKcalLabel()
 	}
 }

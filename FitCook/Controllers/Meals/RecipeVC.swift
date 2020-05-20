@@ -70,12 +70,12 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		recipeItems.insert(newRecipeItem, at: 0)
 		tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
 		textField.tableView?.isHidden = true
-
+		
 		//check if need to save CoreData!!!!
 		coreData.save()
 		
 	}
-		//MARK: - IBActions
+	//MARK: - IBActions
 	
 	//"Edit" button is pressed in the Navigation bar.
 	
@@ -94,21 +94,41 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 			self.coreData!.save()
 		}
 	}
+	
+	@IBAction func calculationButtonPressed(_ sender: UIButton) {
+		if (checkIfReadyForCalculation(ingredients: recipeItems) { (error) in
+			switch error {
+				case "Fill Ingredients":
+					let alert = UIAlertController(title: "Ну уж нет", message: "Сначала введите вес и калорийность всех ингредиентов =)", preferredStyle: .alert)
+					alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
+					present(alert, animated: true, completion: nil)
+				case "Add Ingredients": let alert = UIAlertController(title: "А из чего готовить будем?", message: "Ну хоть что-нибудь введите =)", preferredStyle: .alert)
+				alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
+				present(alert, animated: true, completion: nil)
+				default: break
+			}
+		})
+		 {
+			performSegue(withIdentifier: "toCalculation", sender: self)
+		}
+	}
+	
+	
 }
 
 extension RecipeVC: CustomToolbarDelegate {
-	func donePressed() {
+	func donePressed(toolbar: CustomToolbar) {
 		let string = textField.text!
 		createNewItem(from: string)
 		textField.text = ""
 		textField.resignFirstResponder()
 	}
 	
-	func nextPressed() {
+	func nextPressed(toolbar: CustomToolbar) {
 		
 	}
 	
-	func weightPressed() {
+	func weightPressed(toolbar: CustomToolbar) {
 		if textField.text != "" {
 			textField.text! = textField.text! + ": "
 			textField.keyboardType = .numbersAndPunctuation
@@ -143,7 +163,7 @@ extension RecipeVC: UITextFieldDelegate {
 			field.coreData = coreData
 			if let text = field.text, let textRange = Range(range, in: text) {
 				let finalText = text.replacingCharacters(in: textRange, with: string)
-			field.showSuggestions(name: finalText)
+				field.showSuggestions(name: finalText)
 			}
 		}
 		return true
@@ -206,29 +226,11 @@ extension RecipeVC {
 				detailVC.coreData = coreData
 			}
 		}
-		if segue.identifier == "goToCalculation" {
+		if segue.identifier == "toCalculation" {
 			let calculationVC = segue.destination as! CalculationVC
 			calculationVC.ingredients = recipeItems
 			calculationVC.meal = meal
 			calculationVC.coreData = coreData
 		}
-		
-	}
-	override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-		if identifier == "goToCalculation" {
-			return checkIfReadyForCalculation(ingredients: recipeItems) { (error) in
-				switch error {
-					case "Fill Ingredients":
-						let alert = UIAlertController(title: "Ну уж нет", message: "Сначала введите вес и калорийность всех ингредиентов =)", preferredStyle: .alert)
-						alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
-						present(alert, animated: true, completion: nil)
-					case "Add Ingredients": let alert = UIAlertController(title: "А из чего готовить будем?", message: "Ну хоть что-нибудь введите =)", preferredStyle: .alert)
-					alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
-					present(alert, animated: true, completion: nil)
-					default: break
-				}
-			}
-		}
-		return true
 	}
 }
