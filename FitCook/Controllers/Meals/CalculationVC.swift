@@ -22,8 +22,8 @@ class CalculationVC: UIViewController {
 	var caloriesPerServing: Int64 { totalCalories / servings }
 	var customServingWeight: Int64 = 0
 	var customServingCalories: Int64 { customServingWeight * totalCalories / totalWeight }
+	var weightVC: WeightVC?
 	
-	@IBOutlet weak var mealLabel: UILabel!
 	@IBOutlet weak var totalWeightTextField: UITextField!
 	@IBOutlet weak var totalCaloriesLabel: UILabel!
 	@IBOutlet weak var servingsLabel: UILabel!
@@ -72,20 +72,54 @@ class CalculationVC: UIViewController {
 	}
 	
 	func updateView() {
-		totalWeightTextField.text = String(totalWeight)
+		totalWeightTextField.text = String(meal!.totalWeight)
 		totalCaloriesLabel.text = String(totalCalories)
 		servingsLabel.text = String(servings)
 		servingCaloriesLabel.text = String(caloriesPerServing)
 		customServingCaloriesLabel.text = String(customServingCalories)
 	}
-	
-	//	@IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-	//		meal?.totalWeight = totalWeight
-	//		meal?.calPerWeight = caloriesPerWeight
-	//		meal?.calPerServing = caloriesPerServing
-	//		activeTextField?.resignFirstResponder()
-	//	}
 }
+
+extension CalculationVC: WeightEnterDelegate {
+	func beginEnteringWeight() {
+		for subview in view.subviews {
+			if subview.tag != 1 {
+				subview.isHidden = true
+			}
+		}
+		weightVC = WeightVC()
+		weightVC?.coreData = coreData
+		weightVC?.delegate = self
+		addChild(weightVC!)
+		weightVC!.didMove(toParent: self)
+		view.addSubview(weightVC!.view)
+		weightVC?.view.translatesAutoresizingMaskIntoConstraints = false
+		weightVC?.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
+		weightVC?.view.heightAnchor.constraint(equalToConstant: 260).isActive = true
+		weightVC?.view.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+	}
+	
+	func endEnteringWeight() {
+		for subview in view.subviews {
+			subview.isHidden = false
+		}
+		weightVC?.view.removeFromSuperview()
+		weightVC?.removeFromParent()
+		weightVC = nil
+	}
+	
+	func didUpdatedWeight(weight: Int64) {
+		totalWeightTextField.text = String(weight)
+		meal?.totalWeight = weight
+	}
+	
+	func didEndEnteringWeight() {
+		endEnteringWeight()
+		coreData?.save()
+	}
+	
+}
+
 
 extension CalculationVC: UITextFieldDelegate {
 	
@@ -97,24 +131,18 @@ extension CalculationVC: UITextFieldDelegate {
 		return true
 	}
 	
-//	func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//		guard textField.text != "" else {
-//			return false
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		if textField == totalWeightTextField {
+			beginEnteringWeight()
+		}
+	}
+	
+//	func textFieldDidEndEditing(_ textField: UITextField) {
+//		if textField == totalWeightTextField {
+//			endEnteringWeight()
 //		}
-//		switch textField.tag {
-//			case 1:
-//				totalWeight = Int64(textField.text!)!
-//				meal?.totalWeight = totalWeight
-//				updateView()
-//			case 2:
-//				customServingWeight = Int64(textField.text!)!
-//				updateView()
-//			default:
-//				print("Error")
-//		}
-//		coreData?.save()
-//		return true
 //	}
+	
 }
 
 extension CalculationVC: CustomToolbarDelegate {
@@ -129,8 +157,9 @@ extension CalculationVC: CustomToolbarDelegate {
 			if let customWeight = Int64(customServingWeightTextField.text!) {
 				customServingWeight = customWeight
 				updateView()
-				customServingWeightTextField.endEditing(false)
+				
 			}
+			customServingWeightTextField.endEditing(false)
 		}
 	}
 	

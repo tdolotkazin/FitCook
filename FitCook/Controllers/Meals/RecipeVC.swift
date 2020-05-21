@@ -22,8 +22,22 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		let toolbar = CustomToolbar(leftButtonType: .Weight, rightButtonType: .Done)
 		textField.inputAccessoryView = toolbar
 		toolbar.buttonDelegate = self
+		buildIngredientsButton()
 		
 	}
+	
+	func buildIngredientsButton() {
+		let ingredientsButton = UIButton()
+			ingredientsButton.translatesAutoresizingMaskIntoConstraints = false
+			textField.addSubview(ingredientsButton)
+			ingredientsButton.tintColor = .black
+			ingredientsButton.setImage(UIImage(systemName: "book"), for: .normal)
+			ingredientsButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
+			ingredientsButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+			ingredientsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+			ingredientsButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor).isActive = true
+			ingredientsButton.addTarget(self, action: #selector(ingredientsButtonPressed), for: .touchUpInside)
+		}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		navigationController?.navigationBar.isHidden = false
@@ -94,6 +108,15 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 			self.coreData!.save()
 		}
 	}
+
+@objc func ingredientsButtonPressed() {
+	if let ingredientsVC = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "IngredientsVC") as? IngredientsVC {
+		ingredientsVC.coreData = coreData
+		navigationController?.pushViewController(ingredientsVC, animated: true)
+	} else {
+		fatalError("No Ingredients Controller!")
+	}
+}
 	
 	@IBAction func calculationButtonPressed(_ sender: UIButton) {
 		if (checkIfReadyForCalculation(ingredients: recipeItems) { (error) in
@@ -112,8 +135,6 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 			performSegue(withIdentifier: "toCalculation", sender: self)
 		}
 	}
-	
-	
 }
 
 extension RecipeVC: CustomToolbarDelegate {

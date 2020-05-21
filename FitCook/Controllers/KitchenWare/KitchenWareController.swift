@@ -30,7 +30,7 @@ class KitchenWareController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let presentVC = self.storyboard?.instantiateViewController(identifier: "dishDetailVC") as! KitchenWareDetailViewController
+		let presentVC = self.storyboard?.instantiateViewController(identifier: "dishDetailVC") as! KitchenWareDetailVC
 		presentVC.dish = kitchenWare[indexPath.row]
 		presentVC.coreData = coreData
 		presentVC.delegate = self
@@ -60,8 +60,9 @@ class KitchenWareController: UITableViewController {
 			self.coreData!.save()
 			self.tableView.reloadData()
 		}
-		
+		let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
 		alert.addAction(action)
+		alert.addAction(cancelAction)
 		alert.addTextField { (field) in
 			textField = field
 			textField.placeholder = "Введите посуду"

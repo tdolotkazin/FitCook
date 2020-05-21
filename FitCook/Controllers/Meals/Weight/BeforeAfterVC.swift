@@ -27,10 +27,12 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 		afterTextField.placeholder = "Введите вес ПОСЛЕ"
 		beforeTextField.delegate = self
 		afterTextField.delegate = self
-		beforeTextField.becomeFirstResponder()
-//		beforeTextField.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
 	}
 
+	override func viewDidAppear(_ animated: Bool) {
+		beforeTextField.becomeFirstResponder()
+	}
+	
 	func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
 		textField.keyboardType = .numberPad
 		switch textField {

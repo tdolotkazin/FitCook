@@ -1,6 +1,6 @@
 import UIKit
 
-class IngredientsViewController: UITableViewController {
+class IngredientsVC: UITableViewController {
 	
 	var coreData: CoreDataHelper?
 	var ingredients: [Ingredient] = []

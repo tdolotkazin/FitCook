@@ -16,8 +16,7 @@ class MealsVC: UITableViewController {
 		navigationController?.navigationBar.isHidden = true
 		self.clearsSelectionOnViewWillAppear = false
 		tableView.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.968627451, blue: 0.9803921569, alpha: 1)
-		tableView.separatorStyle = .none
-		
+		tableView.separatorStyle = .none		
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +97,6 @@ extension MealsVC {
 		config.performsFirstActionWithFullSwipe = true
 		return config
 	}
-	
 }
 
 //MARK: - TableView Delegate

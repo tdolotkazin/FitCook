@@ -16,8 +16,6 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	@IBOutlet weak var kcalTextField: UITextField!
 	@IBOutlet weak var totalKcalLabel: UILabel!
 	
-	
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		createSegmentedControl()
@@ -56,7 +54,6 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 			self.view.layoutIfNeeded()
 			self.view.addSubview(self.segmentedControl)
 		})
-		
 		weightView = UIView(frame: CGRect.zero)
 		weightView?.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(weightView!)
@@ -105,8 +102,6 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	func showPureWeightView() {
 		let pureView = UIView()
 		pureView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-		pureView.backgroundColor = .red
-		pureView.alpha = 0.5
 		weightView?.addSubview(pureView)
 		weightTextField.placeholder = "Введите вес"
 		weightTextField.becomeFirstResponder()

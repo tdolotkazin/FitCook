@@ -65,6 +65,7 @@ extension CustomTextField: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.text = resultsList[indexPath.row].name
+		self.endEditing(false)
 		tableView.isHidden = true
 	}
 }

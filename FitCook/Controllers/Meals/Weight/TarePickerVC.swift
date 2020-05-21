@@ -14,7 +14,10 @@ class TarePickerVC: UIViewController {
 		buildWeightTextField()
 		buildPicker()
 		buildKitchenWareTextField()
-		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		weightTextField.becomeFirstResponder()
 	}
 	
 	func buildWeightTextField() {
@@ -27,9 +30,6 @@ class TarePickerVC: UIViewController {
 		let toolbar = CustomToolbar(rightButtonType: .Next)
 		toolbar.buttonDelegate = self
 		weightTextField.inputAccessoryView = toolbar
-		//MARK: - Check if it is bug in iOS or my mistake. Simple becomeFirstResponder() doesn't work
-		weightTextField.becomeFirstResponder()
-//		weightTextField.perform(#selector(becomeFirstResponder), with: nil, afterDelay: 0.1)
 	}
 	
 	func buildKitchenWareTextField() {
@@ -62,15 +62,13 @@ class TarePickerVC: UIViewController {
 		} else {
 			fatalError("No Kitchenware Controller!")
 		}
-		
-		
 	}
 	
 	func buildPicker() {
 		picker = UIPickerView()
 		
-//		picker.frame = CGRect(x: 0, y: 50, width: view.bounds.width, height: 250)
-//		view.addSubview(picker)
+		//		picker.frame = CGRect(x: 0, y: 50, width: view.bounds.width, height: 250)
+		//		view.addSubview(picker)
 		picker.delegate = self
 		picker.dataSource = self
 		tares = coreData?.load()
@@ -107,10 +105,17 @@ extension TarePickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
 	func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 		let componentView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
 		let label = UILabel(frame: CGRect(x: 0, y: 10, width: 300, height: 30))
-		label.text = tares![row].name
+		label.text = "\(tares![row].name!) - \(tares![row].weight)гр."
 		componentView.addSubview(label)
 		return componentView
-		
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		if let totalWeight = Int64(weightTextField.text!) {
+			let tareWeight = tares![row].weight
+			let calculatedWeight = totalWeight - tareWeight > 0 ? totalWeight - tareWeight : 0
+			delegate?.didUpdatedWeight(weight: calculatedWeight)
+		}
 	}
 }
 

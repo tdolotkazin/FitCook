@@ -113,13 +113,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите калорийность" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ltB-BJ-E1r">
-                                <rect key="frame" x="0.0" y="157.66666666666666" width="375" height="42.666666666666657"/>
+                                <rect key="frame" x="0.0" y="157.66666666666666" width="375" height="43"/>
                                 <color key="backgroundColor" name="Blue"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyo-EB-0WM">
-                                <rect key="frame" x="0.0" y="200.33333333333334" width="375" height="40.666666666666657"/>
+                                <rect key="frame" x="0.0" y="200.66666666666666" width="375" height="41"/>
                                 <color key="backgroundColor" name="Red"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
                                 <nil key="textColor"/>
@@ -163,16 +163,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRQ-xi-BZD">
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRQ-xi-BZD">
                                 <rect key="frame" x="0.0" y="88" width="375" height="80"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Общий вес" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Va-cp-JNd">
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Общий вес" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Va-cp-JNd">
                                         <rect key="frame" x="143" y="8" width="89" height="21"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4H-jC-g8A">
+                                    <textField opaque="NO" alpha="0.20000000000000001" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4H-jC-g8A">
                                         <rect key="frame" x="123.66666666666669" y="31" width="128" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="Spb-ns-cTY"/>
@@ -412,10 +412,10 @@
             </objects>
             <point key="canvasLocation" x="-743" y="867"/>
         </scene>
-        <!--Kitchen Ware Detail View Controller-->
+        <!--Kitchen Ware DetailVC-->
         <scene sceneID="ju8-WW-G1h">
             <objects>
-                <viewController storyboardIdentifier="dishDetailVC" id="kJi-FL-KJF" customClass="KitchenWareDetailViewController" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="dishDetailVC" id="kJi-FL-KJF" customClass="KitchenWareDetailVC" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HRw-bW-VJ7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -491,6 +491,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v7a-En-tTB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="49" y="867"/>
+        </scene>
+        <!--IngredientsVC-->
+        <scene sceneID="giq-aM-vMC">
+            <objects>
+                <tableViewController storyboardIdentifier="IngredientsVC" id="Erd-FR-33a" customClass="IngredientsVC" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4lr-ev-f8Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientCell" id="CN8-Aq-1lh">
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CN8-Aq-1lh" id="4nv-a2-vY5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Erd-FR-33a" id="3Yw-ob-njs"/>
+                            <outlet property="delegate" destination="Erd-FR-33a" id="uxn-7e-zf9"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="vil-Ru-bkd"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zfc-09-fLw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-743" y="1581"/>
         </scene>
     </scenes>
     <resources>

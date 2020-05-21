@@ -4,7 +4,7 @@ protocol KitchenWareDetailDelegate {
 	func detailViewDismisseed()
 }
 
-class KitchenWareDetailViewController: UIViewController {
+class KitchenWareDetailVC: UIViewController {
 	var coreData: CoreDataHelper?
 	var dish: Dish?
 	var delegate: KitchenWareDetailDelegate?
