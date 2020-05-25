@@ -12,13 +12,13 @@
 		C80CCB75240ED70700EE21A3 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80CCB74240ED70700EE21A3 /* Model.swift */; };
 		C823BA37240E5C0200048111 /* RecipeItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C823BA36240E5C0200048111 /* RecipeItemVC.swift */; };
 		C828466324769747007176D1 /* UIPageViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C828466224769747007176D1 /* UIPageViewContoller.swift */; };
-		C82DE14A24130801003C6C0F /* Meal+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82DE14824130801003C6C0F /* Meal+CoreDataClass.swift */; };
-		C82DE14B24130801003C6C0F /* Meal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82DE14924130801003C6C0F /* Meal+CoreDataProperties.swift */; };
+		C82A719C2476A14C00D4C352 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82A719B2476A14C00D4C352 /* Meal.swift */; };
 		C83683A324113A230075419F /* IngredientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83683A224113A230075419F /* IngredientsVC.swift */; };
 		C841569F242292C200C0B2A0 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C841569E242292C200C0B2A0 /* UITableView.swift */; };
 		C8527CE82433919A009D12DB /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8527CE62433919A009D12DB /* MealCell.swift */; };
 		C8527CE92433919A009D12DB /* MealCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8527CE72433919A009D12DB /* MealCell.xib */; };
 		C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C856EEF8240E79C200EB3586 /* Model.xcdatamodeld */; };
+		C860A12C2477F1240003A28F /* AlertBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C860A12B2477F1240003A28F /* AlertBuilder.swift */; };
 		C8732FAF24183948009776C0 /* KitchenWareDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8732FAE24183948009776C0 /* KitchenWareDetailVC.swift */; };
 		C8754C59240FA3050099EDAF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8754C58240FA3050099EDAF /* CustomTextField.swift */; };
 		C879248E24768809005838CA /* WeightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C879248D24768809005838CA /* WeightVC.swift */; };
@@ -57,13 +57,13 @@
 		C80CCB74240ED70700EE21A3 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C823BA36240E5C0200048111 /* RecipeItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeItemVC.swift; sourceTree = "<group>"; };
 		C828466224769747007176D1 /* UIPageViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPageViewContoller.swift; sourceTree = "<group>"; };
-		C82DE14824130801003C6C0F /* Meal+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataClass.swift"; sourceTree = "<group>"; };
-		C82DE14924130801003C6C0F /* Meal+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meal+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C82A719B2476A14C00D4C352 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		C83683A224113A230075419F /* IngredientsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsVC.swift; sourceTree = "<group>"; };
 		C841569E242292C200C0B2A0 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		C8527CE62433919A009D12DB /* MealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
 		C8527CE72433919A009D12DB /* MealCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MealCell.xib; sourceTree = "<group>"; };
 		C856EEF9240E79C200EB3586 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		C860A12B2477F1240003A28F /* AlertBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBuilder.swift; sourceTree = "<group>"; };
 		C8732FAE24183948009776C0 /* KitchenWareDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenWareDetailVC.swift; sourceTree = "<group>"; };
 		C8754C58240FA3050099EDAF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		C879248D24768809005838CA /* WeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightVC.swift; sourceTree = "<group>"; };
@@ -131,6 +131,7 @@
 			children = (
 				C856EEF8240E79C200EB3586 /* Model.xcdatamodeld */,
 				C80CCB74240ED70700EE21A3 /* Model.swift */,
+				C82A719B2476A14C00D4C352 /* Meal.swift */,
 				C8FE2AEE2412F1B7004A15CF /* CoreDataHelper.swift */,
 			);
 			path = Models;
@@ -168,6 +169,7 @@
 			children = (
 				C8754C58240FA3050099EDAF /* CustomTextField.swift */,
 				C80A9F21246C51ED00890B79 /* CustomToolbar.swift */,
+				C860A12B2477F1240003A28F /* AlertBuilder.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -212,8 +214,6 @@
 		C8CCD8C023FFD7C50061B3F3 = {
 			isa = PBXGroup;
 			children = (
-				C82DE14824130801003C6C0F /* Meal+CoreDataClass.swift */,
-				C82DE14924130801003C6C0F /* Meal+CoreDataProperties.swift */,
 				C8CCD8CB23FFD7C50061B3F3 /* FitCook */,
 				C8D5AA9C244074D0009DBD58 /* FitCookTests */,
 				C8CCD8CA23FFD7C50061B3F3 /* Products */,
@@ -360,19 +360,19 @@
 			files = (
 				C80CCB75240ED70700EE21A3 /* Model.swift in Sources */,
 				C80CCB71240EA67200EE21A3 /* CalculationVC.swift in Sources */,
+				C82A719C2476A14C00D4C352 /* Meal.swift in Sources */,
 				C8B6ECE52465AC7F002B3ECB /* BeforeAfterVC.swift in Sources */,
-				C82DE14B24130801003C6C0F /* Meal+CoreDataProperties.swift in Sources */,
 				C8D38ADC2411464C0012EB03 /* KitchenWareController.swift in Sources */,
 				C828466324769747007176D1 /* UIPageViewContoller.swift in Sources */,
 				C841569F242292C200C0B2A0 /* UITableView.swift in Sources */,
 				C823BA37240E5C0200048111 /* RecipeItemVC.swift in Sources */,
+				C860A12C2477F1240003A28F /* AlertBuilder.swift in Sources */,
 				C8754C59240FA3050099EDAF /* CustomTextField.swift in Sources */,
 				C8D38AE1241152D70012EB03 /* KitchenWareCell.swift in Sources */,
 				C8827A4B2456DB49003EA583 /* RecipeItemCell.swift in Sources */,
 				C879248E24768809005838CA /* WeightVC.swift in Sources */,
 				C83683A324113A230075419F /* IngredientsVC.swift in Sources */,
 				C8CCD8D123FFD7C50061B3F3 /* RecipeVC.swift in Sources */,
-				C82DE14A24130801003C6C0F /* Meal+CoreDataClass.swift in Sources */,
 				C856EEFA240E79C200EB3586 /* Model.xcdatamodeld in Sources */,
 				C8ECDE49246DB59100FA420E /* RecipePageVC.swift in Sources */,
 				C8FE2AEF2412F1B7004A15CF /* CoreDataHelper.swift in Sources */,

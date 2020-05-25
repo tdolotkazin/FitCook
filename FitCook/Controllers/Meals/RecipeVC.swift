@@ -11,19 +11,18 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 	@IBOutlet weak var textField: CustomTextField!
 	@IBOutlet weak var calculateButton: UIButton!
 	
-	//preparing the view to show
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		calculateButton.layer.cornerRadius = 8
 		title = meal.name
-		recipeItems = Array(meal.recipeItems!)
+		recipeItems = Array(_immutableCocoaArray: meal.recipeItems!)
 		tableView.register(UINib(nibName: "RecipeItemCell", bundle: .main), forCellReuseIdentifier: "recipeItemCell")
 		tableView.separatorStyle = .none
 		let toolbar = CustomToolbar(leftButtonType: .Weight, rightButtonType: .Done)
 		textField.inputAccessoryView = toolbar
+		textField.keyboardType = .default
 		toolbar.buttonDelegate = self
 		buildIngredientsButton()
-		
 	}
 	
 	func buildIngredientsButton() {

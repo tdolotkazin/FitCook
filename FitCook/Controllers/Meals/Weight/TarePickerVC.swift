@@ -11,6 +11,7 @@ class TarePickerVC: UIViewController {
 	var delegate: WeightEnterDelegate?
 	
 	override func viewDidLoad() {
+		super.viewDidLoad()
 		buildWeightTextField()
 		buildPicker()
 		buildKitchenWareTextField()

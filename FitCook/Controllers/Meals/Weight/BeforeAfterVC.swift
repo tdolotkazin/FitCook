@@ -15,6 +15,7 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 	weak var delegate: WeightEnterDelegate?
 	
 	override func viewDidLoad() {
+		super.viewDidLoad()
 		beforeTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 375, height: 50))
 		afterTextField = UITextField(frame: CGRect(x: 0, y: 50, width: 375, height: 50))
 		view.addSubview(beforeTextField)

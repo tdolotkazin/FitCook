@@ -4,7 +4,7 @@ import CoreData
 class CalculationVC: UIViewController {
 	
 	var coreData: CoreDataHelper?
-	var meal: Meal?
+	var meal: Meal!
 	var ingredients = [RecipeItem]()
 	var totalWeight: Int64 = 0
 	var totalCalories: Int64 {
@@ -33,9 +33,9 @@ class CalculationVC: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		totalWeight = meal!.totalWeight
+		totalWeight = meal.totalWeight
 		if totalWeight == 0 {
-			calcTotalWeight()
+			totalWeight = meal.calcWeight()
 		}
 		servings = 6
 		title = meal?.name
@@ -64,15 +64,9 @@ class CalculationVC: UIViewController {
 		meal?.calPerServing = caloriesPerServing
 		updateView()
 	}
-	
-	func calcTotalWeight() {
-		for item in ingredients {
-			totalWeight += item.weight
-		}
-	}
-	
+		
 	func updateView() {
-		totalWeightTextField.text = String(meal!.totalWeight)
+		totalWeightTextField.text = String(totalWeight)
 		totalCaloriesLabel.text = String(totalCalories)
 		servingsLabel.text = String(servings)
 		servingCaloriesLabel.text = String(caloriesPerServing)

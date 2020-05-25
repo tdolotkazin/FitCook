@@ -10,6 +10,7 @@ class RecipePageVC: UIViewController {
 	private var currentIndex = 0
 	
 	override func viewDidLoad() {
+		super.viewDidLoad()
 		pageController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 		pageController?.dataSource = self
 		pageController?.delegate = self

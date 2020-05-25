@@ -59,7 +59,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		view.addSubview(weightView!)
 		weightView?.topAnchor.constraint(equalTo: weightTextField.bottomAnchor).isActive = true
 		weightView?.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-		weightView?.heightAnchor.constraint(equalToConstant: 230).isActive = true
+		weightView?.heightAnchor.constraint(equalToConstant: 180).isActive = true
 		segmentedAction(segmentedControl)
 	}
 	
@@ -77,7 +77,10 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	func createSegmentedControl() {
 		let items = ["Чистый вес", "Вес с тарой", "Вес до/после"]
 		segmentedControl = UISegmentedControl(items: items)
-		segmentedControl.frame = CGRect(x: 13, y: 420, width: 343, height: 32)
+		segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+		segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 13).isActive = true
+		segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 13).isActive = true
+		segmentedControl.frame = CGRect(x: 13, y: 350, width: 343, height: 32)
 		segmentedControl.selectedSegmentIndex = 0
 		segmentedControl.addTarget(self, action: #selector(segmentedAction), for: .valueChanged)
 	}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RlV-gx-naN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RlV-gx-naN">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -118,7 +118,7 @@
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyo-EB-0WM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Общая калорийность" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyo-EB-0WM">
                                 <rect key="frame" x="0.0" y="200.66666666666666" width="375" height="41"/>
                                 <color key="backgroundColor" name="Red"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
@@ -345,24 +345,21 @@
             <point key="canvasLocation" x="846" y="867"/>
         </scene>
         <!--MealsVC-->
-        <scene sceneID="xuK-DX-NEh">
+        <scene sceneID="QtK-1n-Ode">
             <objects>
-                <tableViewController id="f3u-Bw-YK9" customClass="MealsVC" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ewF-Nd-XyF">
+                <viewController title="MealsVC" id="R8z-nr-Vp6" customClass="MealsVC" customModule="FitCook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XPL-Ux-KPm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <connections>
-                            <outlet property="dataSource" destination="f3u-Bw-YK9" id="NnG-Xd-Mrj"/>
-                            <outlet property="delegate" destination="f3u-Bw-YK9" id="P1Z-md-38h"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="wOj-Zy-b5O"/>
+                        <viewLayoutGuide key="safeArea" id="1t1-6a-d5x"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="mgU-KT-uGH"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toIngredients" id="3RJ-CC-hm9"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toIngredients" id="bT9-Ml-5Ak"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QsW-Uz-6O3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ka-Cz-cTc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="49" y="149"/>
         </scene>
@@ -378,7 +375,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="f3u-Bw-YK9" kind="relationship" relationship="rootViewController" id="z33-wu-0Fy"/>
+                        <segue destination="R8z-nr-Vp6" kind="relationship" relationship="rootViewController" id="PyE-Ls-B38"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EjI-Og-vbm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -421,7 +418,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="u6M-ck-w8S">
-                                <rect key="frame" x="20" y="64" width="335" height="384"/>
+                                <rect key="frame" x="20" y="64" width="335" height="76"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Название посуды" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Niy-9f-5bP">
                                         <rect key="frame" x="20" y="0.0" width="295" height="34"/>
@@ -447,13 +444,6 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aVi-6m-nhd">
-                                        <rect key="frame" x="17.666666666666657" y="84" width="300" height="300"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="300" id="DzH-Lu-RDh"/>
-                                            <constraint firstAttribute="height" constant="300" id="l4Y-qg-hA4"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="WVk-BD-Hbe" secondAttribute="trailing" constant="20" symbolic="YES" id="8th-Zd-5iv"/>
@@ -463,7 +453,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2o9-bC-8N3">
-                                <rect key="frame" x="161.66666666666666" y="448" width="52" height="41"/>
+                                <rect key="frame" x="161.66666666666666" y="140" width="52" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
@@ -483,7 +473,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="cS1-ea-Qym"/>
                     <connections>
-                        <outlet property="image" destination="aVi-6m-nhd" id="XTW-tm-7d0"/>
                         <outlet property="nameTextField" destination="Niy-9f-5bP" id="weI-BJ-Nrq"/>
                         <outlet property="weightTextField" destination="Npc-22-cPn" id="ybS-FX-Pv2"/>
                     </connections>

@@ -10,7 +10,6 @@ class KitchenWareDetailVC: UIViewController {
 	var delegate: KitchenWareDetailDelegate?
 	
 	@IBOutlet weak var nameTextField: UITextField!
-	@IBOutlet weak var image: UIImageView!
 	@IBOutlet weak var weightTextField: UITextField!
 	
 	
@@ -19,11 +18,6 @@ class KitchenWareDetailVC: UIViewController {
 		nameTextField.text = dish?.name
 		nameTextField.autocorrectionType = .no
 		weightTextField.text = String(dish!.weight)
-		if let imageData = dish?.image {
-			image.image = UIImage(data: imageData)
-		} else {
-			image.image = UIImage(systemName: "camera")
-		}
     }
 	
 	@IBAction func saveButtonPressed(_ sender: UIButton) {

@@ -11,11 +11,6 @@ class KitchenWareController: UITableViewController {
 		tableView.rowHeight = CGFloat(exactly: 60)!
 	}
 	
-	func saveImage(data: Data, for dish: Dish) {
-		dish.image = data
-		coreData?.save()
-	}
-	
 	// MARK: - Table View Methods
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -6,6 +6,7 @@ class WeightVC: UIViewController {
 	var delegate: WeightEnterDelegate?
 	
 	override func viewDidLoad() {
+		super.viewDidLoad()
 		let pickerVC = TarePickerVC()
 		addChild(pickerVC)
 		pickerVC.coreData = coreData
