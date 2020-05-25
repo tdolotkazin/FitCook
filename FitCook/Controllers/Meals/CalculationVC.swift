@@ -45,6 +45,7 @@ class CalculationVC: UIViewController {
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
+		meal.calPerServing = caloriesPerServing
 		coreData?.save()
 	}
 	
@@ -144,6 +145,7 @@ extension CalculationVC: CustomToolbarDelegate {
 		if totalWeightTextField.isEditing {
 			if let weight = Int64(totalWeightTextField.text!) {
 				meal?.totalWeight = weight
+				meal?.calPerServing = caloriesPerServing
 				updateView()
 				totalWeightTextField.endEditing(false)
 			}

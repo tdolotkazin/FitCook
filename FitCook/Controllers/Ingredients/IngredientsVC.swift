@@ -24,6 +24,7 @@ class IngredientsVC: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
 		cell.textLabel?.text = ingredients[indexPath.row].name
+		
 		return cell
 	}
 	

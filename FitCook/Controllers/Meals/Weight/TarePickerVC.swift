@@ -15,10 +15,12 @@ class TarePickerVC: UIViewController {
 		buildWeightTextField()
 		buildPicker()
 		buildKitchenWareTextField()
+		buildKitchenWareDictionaryButton()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		weightTextField.becomeFirstResponder()
+		updatePicker()
 	}
 	
 	func buildWeightTextField() {
@@ -44,9 +46,13 @@ class TarePickerVC: UIViewController {
 		toolbar.buttonDelegate = self
 		kitchenWareTextField.inputAccessoryView = toolbar
 		
+		
+	}
+	
+	func buildKitchenWareDictionaryButton() {
 		let kitchenWareDictionaryButton = UIButton()
 		kitchenWareDictionaryButton.translatesAutoresizingMaskIntoConstraints = false
-		kitchenWareTextField.addSubview(kitchenWareDictionaryButton)
+		view.addSubview(kitchenWareDictionaryButton)
 		kitchenWareDictionaryButton.tintColor = .black
 		kitchenWareDictionaryButton.setImage(UIImage(systemName: "book"), for: .normal)
 		kitchenWareDictionaryButton.trailingAnchor.constraint(equalTo: kitchenWareTextField.trailingAnchor).isActive = true
@@ -74,10 +80,22 @@ class TarePickerVC: UIViewController {
 		picker.dataSource = self
 		tares = coreData?.load()
 	}
+	
+	func updatePicker() {
+		tares = coreData?.load()
+		picker.reloadAllComponents()
+	}
 }
 
 extension TarePickerVC: CustomToolbarDelegate {
 	func donePressed(toolbar: CustomToolbar) {
+		
+		if let totalWeight = Int64(weightTextField.text!), let tareWeight = tares?[picker.selectedRow(inComponent: 0)].weight {
+				let calculatedWeight = totalWeight - tareWeight > 0 ? totalWeight - tareWeight : 0
+				delegate?.didUpdatedWeight(weight: calculatedWeight)
+		}
+		
+		
 		self.view.removeFromSuperview()
 		self.removeFromParent()
 		delegate?.didEndEnteringWeight()
@@ -100,22 +118,27 @@ extension TarePickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-		return tares!.count
+		return tares!.count != 0 ? tares!.count : 1
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
 		let componentView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
 		let label = UILabel(frame: CGRect(x: 0, y: 10, width: 300, height: 30))
-		label.text = "\(tares![row].name!) - \(tares![row].weight)гр."
+		if tares?.count == 0 {
+			label.text = "Добавьте посуду"
+		} else {
+			label.text = "\(tares![row].name!) - \(tares![row].weight)гр."
+		}
 		componentView.addSubview(label)
 		return componentView
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		if let totalWeight = Int64(weightTextField.text!) {
-			let tareWeight = tares![row].weight
-			let calculatedWeight = totalWeight - tareWeight > 0 ? totalWeight - tareWeight : 0
-			delegate?.didUpdatedWeight(weight: calculatedWeight)
+		if tares?.count != 0 {
+			if let totalWeight = Int64(weightTextField.text!), let tareWeight = tares?[row].weight {
+				let calculatedWeight = totalWeight - tareWeight > 0 ? totalWeight - tareWeight : 0
+				delegate?.didUpdatedWeight(weight: calculatedWeight)
+			}
 		}
 	}
 }

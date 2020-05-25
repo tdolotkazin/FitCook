@@ -15,7 +15,7 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		super.viewDidLoad()
 		calculateButton.layer.cornerRadius = 8
 		title = meal.name
-		recipeItems = Array(_immutableCocoaArray: meal.recipeItems!)
+		recipeItems = meal.recipeItems?.allObjects as! [RecipeItem]
 		tableView.register(UINib(nibName: "RecipeItemCell", bundle: .main), forCellReuseIdentifier: "recipeItemCell")
 		tableView.separatorStyle = .none
 		let toolbar = CustomToolbar(leftButtonType: .Weight, rightButtonType: .Done)
@@ -23,6 +23,23 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		textField.keyboardType = .default
 		toolbar.buttonDelegate = self
 		buildIngredientsButton()
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		navigationController?.navigationBar.isHidden = false
+		coreData.save()
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		tableView.reloadAndDeselectRow()
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		textField.tableView?.removeFromSuperview()
+		textField.tableView = nil
 	}
 	
 	func buildIngredientsButton() {
@@ -37,17 +54,7 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 			ingredientsButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor).isActive = true
 			ingredientsButton.addTarget(self, action: #selector(ingredientsButtonPressed), for: .touchUpInside)
 		}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		navigationController?.navigationBar.isHidden = false
-		tableView.reloadAndDeselectRow()
-		coreData.save()
-	}
-	
-	override func viewWillDisappear(_ animated: Bool) {
-		textField.tableView?.removeFromSuperview()
-	}
-	
+
 	//Alert presenting method
 	func showAlert(title: String, actionTitle: String) {
 		let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -205,10 +212,7 @@ extension RecipeVC: UITableViewDataSource, UITableViewDelegate {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "recipeItemCell") as! RecipeItemCell
-		let tempIndex = CGFloat(recipeItems.count - (indexPath.row + 1)) * 0.1
-		let cellAlpha = 1 - tempIndex
-		let gradientColor = cell.backgroundColor?.withAlphaComponent(cellAlpha)
-		cell.backgroundColor = gradientColor
+		cell.setGradient(row: indexPath.row, of: recipeItems.count)
 		return cell.showIngredient(recipeItems[indexPath.row])
 	}
 	

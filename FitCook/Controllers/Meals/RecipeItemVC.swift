@@ -10,6 +10,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	private var segmentedControl: UISegmentedControl!
 	private var toolbar: CustomToolbar!
 	private var weightView: UIView?
+	private var isEnteringWeight = false
 	
 	@IBOutlet weak var itemNameLabel: UILabel!
 	@IBOutlet weak var weightTextField: UITextField!
@@ -18,7 +19,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		createSegmentedControl()
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 		constraints = [
 			itemNameLabel.heightAnchor.constraint(equalToConstant: 80),
 			kcalTextField.heightAnchor.constraint(equalToConstant: 80),
@@ -47,12 +48,23 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		}
 	}
 	
+	@objc func keyboardWillShow(_ notification: Notification) {
+		
+		if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+			let keyboardHeight = keyboardRect.height
+			if isEnteringWeight {
+				if segmentedControl == nil {
+					createSegmentedControl(bottom: keyboardHeight)
+				}
+			}
+		}
+	}
+	
 	func beginEnteringWeight() {
 		UIView.animate(withDuration: 0.3, animations: {
 			NSLayoutConstraint.deactivate(self.constraints)
 			NSLayoutConstraint.activate(self.hiddenConstraints)
 			self.view.layoutIfNeeded()
-			self.view.addSubview(self.segmentedControl)
 		})
 		weightView = UIView(frame: CGRect.zero)
 		weightView?.translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +72,8 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		weightView?.topAnchor.constraint(equalTo: weightTextField.bottomAnchor).isActive = true
 		weightView?.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
 		weightView?.heightAnchor.constraint(equalToConstant: 180).isActive = true
-		segmentedAction(segmentedControl)
+//		segmentedAction(segmentedControl)
+		isEnteringWeight = true
 	}
 	
 	func endEnteringWeight() {
@@ -68,21 +81,29 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 			NSLayoutConstraint.deactivate(self.hiddenConstraints)
 			NSLayoutConstraint.activate(self.constraints)
 			self.view.layoutIfNeeded()
-			self.segmentedControl.removeFromSuperview()
+			
 		}
 		weightView?.removeFromSuperview()
 		weightView = nil
+		segmentedControl.removeFromSuperview()
+		segmentedControl = nil
+		isEnteringWeight = false
 	}
 	
-	func createSegmentedControl() {
+	func createSegmentedControl(bottom: CGFloat) {
 		let items = ["Чистый вес", "Вес с тарой", "Вес до/после"]
 		segmentedControl = UISegmentedControl(items: items)
+		view.addSubview(segmentedControl)
 		segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-		segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 13).isActive = true
-		segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 13).isActive = true
-		segmentedControl.frame = CGRect(x: 13, y: 350, width: 343, height: 32)
+		NSLayoutConstraint.activate([
+		segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+		segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+		segmentedControl.heightAnchor.constraint(equalToConstant: 30),
+		segmentedControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bottom - 12)
+		])
 		segmentedControl.selectedSegmentIndex = 0
 		segmentedControl.addTarget(self, action: #selector(segmentedAction), for: .valueChanged)
+	
 	}
 	
 	@objc func segmentedAction(_ control: UISegmentedControl) {
@@ -130,6 +151,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	func updateTotalKcalLabel() {
 		if recipeItem.weight != 0 && recipeItem.ingredient?.kcal != 0 {
 			totalKcalLabel.text = String(recipeItem.weight * recipeItem.ingredient!.kcal / 100)
+			
 		}
 	}
 }
@@ -145,6 +167,13 @@ extension RecipeItemVC: WeightEnterDelegate {
 	func didEndEnteringWeight() {
 		recipeItem?.weight = weight ?? 0
 		endEnteringWeight()
+		if let weight = Int64(weightTextField.text!) {
+			recipeItem.weight = weight
+		}
+		if let kcal = Int64(kcalTextField.text!) {
+			recipeItem.ingredient?.kcal = kcal
+		}
+		updateTotalKcalLabel()
 	}
 }
 
@@ -160,18 +189,19 @@ extension RecipeItemVC: CustomToolbarDelegate {
 	}
 	
 	func donePressed(toolbar: CustomToolbar) {
+		if let weight = Int64(weightTextField.text!) {
+			recipeItem.weight = weight
+		}
+		if let kcal = Int64(kcalTextField.text!) {
+			recipeItem.ingredient?.kcal = kcal
+		}
 		if weightTextField.isEditing {
-			if let weight = Int64(weightTextField.text!) {
-				recipeItem.weight = weight
-			}
 			endEnteringWeight()
 			weightTextField.resignFirstResponder()
 		} else if kcalTextField.isEditing {
-			if let kcal = Int64(kcalTextField.text!) {
-				recipeItem.ingredient?.kcal = kcal
-			}
 			kcalTextField.resignFirstResponder()
 		}
-		updateTotalKcalLabel()
+	updateTotalKcalLabel()
+	
 	}
 }

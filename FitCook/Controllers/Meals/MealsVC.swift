@@ -1,11 +1,10 @@
 import UIKit
-import CoreData
 
 class MealsVC: UIViewController {
 	
 	private var meals = [Meal]()
 	private var coreData: CoreDataHelper!
-	private var addMealButton: UIButton?
+	private var addMealButton: UIButton!
 	private var tableView: UITableView!
 	
 	override func viewDidLoad() {
@@ -17,11 +16,12 @@ class MealsVC: UIViewController {
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
 		navigationController?.navigationBar.isHidden = true
-	
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
 		tableView.reloadAndDeselectRow()
 	}
 			
@@ -29,13 +29,13 @@ class MealsVC: UIViewController {
 	
 	func createButton() {
 		addMealButton = UIButton(type: .custom)
-		addMealButton?.setImage(UIImage(named: "AddMealButton"), for: .normal)
-		view.addSubview(addMealButton!)
-		addMealButton?.frame.size = CGSize(width: 70, height: 70)
-		addMealButton?.translatesAutoresizingMaskIntoConstraints = false
-		addMealButton?.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		addMealButton?.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-		addMealButton?.addTarget(self, action: #selector(addMealButtonPressed), for: .touchUpInside)
+		addMealButton.setImage(UIImage(named: "AddMealButton"), for: .normal)
+		view.addSubview(addMealButton)
+		addMealButton.frame.size = CGSize(width: 70, height: 70)
+		addMealButton.translatesAutoresizingMaskIntoConstraints = false
+		addMealButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+		addMealButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+		addMealButton.addTarget(self, action: #selector(addMealButtonPressed), for: .touchUpInside)
 	}
 	
 	@objc func addMealButtonPressed(_ sender: UIButton!) {
@@ -54,15 +54,13 @@ extension MealsVC {
 	
 	func createTableView() {
 		tableView = UITableView()
-		tableView.translatesAutoresizingMaskIntoConstraints = false
 		view.addSubview(tableView)
 		tableView.frame = view.bounds
-		tableView?.dataSource = self
-		tableView?.delegate = self
 		tableView.register(UINib(nibName: "MealCell", bundle: .main), forCellReuseIdentifier: "mealCell")
-		navigationController?.navigationBar.backgroundColor = UIColor(named: "Blue")
 		tableView.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.968627451, blue: 0.9803921569, alpha: 1)
 		tableView.separatorStyle = .none
+		tableView?.dataSource = self
+		tableView?.delegate = self
 	}
 }
 
@@ -74,13 +72,8 @@ extension MealsVC: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "mealCell", for: indexPath) as! MealCell
-		cell.mealNameLabel.text = meals[indexPath.row].name
-		
-		cell.servingCaloriesLabel.text = meals[indexPath.row].calPerServing != 0 ? String(meals[indexPath.row].calPerServing) : ""
-		let tempIndex = CGFloat(meals.count - (indexPath.row + 1)) * 0.1
-		let cellAlpha = 1 - tempIndex
-		let gradientColor = cell.backgroundColor?.withAlphaComponent(cellAlpha)
-		cell.backgroundColor = gradientColor
+		cell.configureCell(meal: meals[indexPath.row])
+		cell.setGradient(row: indexPath.row, of: meals.count)
 		return cell
 	}
 	

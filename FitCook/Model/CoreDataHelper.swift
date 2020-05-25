@@ -17,7 +17,7 @@ class CoreDataHelper {
 		if context.hasChanges {
 			do {
 				try context.save()
-				print("CoreData saved")
+
 			} catch {
 				fatalError("Can't save context: \(error)")
 			}
@@ -76,9 +76,9 @@ class CoreDataHelper {
 	
 	func deleteRecipeItem(recipeItem: RecipeItem) {
 		//MARK: - remove this part, because ingredients should only be deleted manually!
-		if recipeItem.ingredient?.inRecipe?.count == 1 {
-			delete(recipeItem.ingredient!)
-		}
+//		if recipeItem.ingredient?.inRecipe?.count == 1 {
+//			delete(recipeItem.ingredient!)
+//		}
 		delete(recipeItem)
 		save()
 	}
@@ -91,7 +91,7 @@ class CoreDataHelper {
 			do {
 				results = try context.fetch(request)
 			} catch {
-				print("Error loading suggestions \(error)")
+				fatalError("Error loading suggestions \(error)")
 			}
 			return results
 		} else {
