@@ -27,7 +27,7 @@ class TarePickerVC: UIViewController {
 		weightTextField = UITextField()
 		weightTextField.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 50)
 		view.addSubview(weightTextField)
-		weightTextField.placeholder = "Введите вес с посудой"
+		weightTextField.placeholder = NSLocalizedString("Enter gross weight", comment: "Placeholder for gross weight textfield")
 		weightTextField.textAlignment = .center
 		weightTextField.keyboardType = .numberPad
 		let toolbar = CustomToolbar(rightButtonType: .Next)
@@ -39,7 +39,7 @@ class TarePickerVC: UIViewController {
 		kitchenWareTextField = UITextField()
 		kitchenWareTextField.frame = CGRect(x: 0, y: 50, width: view.bounds.width, height: 50)
 		view.addSubview(kitchenWareTextField)
-		kitchenWareTextField.placeholder = "Выберите посуду"
+		kitchenWareTextField.placeholder = NSLocalizedString("Select tare", comment: "Placeholder for selecting tare")
 		kitchenWareTextField.textAlignment = .center
 		kitchenWareTextField.inputView = picker
 		let toolbar = CustomToolbar(rightButtonType: .Done)
@@ -125,9 +125,9 @@ extension TarePickerVC: UIPickerViewDelegate, UIPickerViewDataSource {
 		let componentView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
 		let label = UILabel(frame: CGRect(x: 0, y: 10, width: 300, height: 30))
 		if tares?.count == 0 {
-			label.text = "Добавьте посуду"
+			label.text = NSLocalizedString("Add kitchenware", comment: "Placeholder for picker with no dishes")
 		} else {
-			label.text = "\(tares![row].name!) - \(tares![row].weight)гр."
+			label.text = "\(tares![row].name!) - \(tares![row].weight)" + NSLocalizedString("gr", comment: "")
 		}
 		componentView.addSubview(label)
 		return componentView

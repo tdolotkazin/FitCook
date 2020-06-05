@@ -1,0 +1,72 @@
+/* Weight button in the toolbar */
+": weight" = ": вес";
+
+/* Add button */
+"Add" = "Добавить";
+
+/* Alert showing there are no ingredients */
+"Add ingredient" = "Добавьте хоть один игредиент";
+
+/* Placeholder for picker with no dishes */
+"Add kitchenware" = "Добавьте посуду";
+
+/* No comment provided by engineer. */
+"Add kitchenware name" = "Введите название посуды";
+
+/* Title for adding new meal alert */
+"Add new meal" = "Добавьте новое блюдо";
+
+/* Weight before and after */
+"Before/after weight" = "Вес ДО/ПОСЛЕ";
+
+/* Cancel button */
+"Cancel" = "Отмена";
+
+/* Delete button */
+"Delete" = "Удалить";
+
+/* Placeholder for complex weight entering */
+"Enter below, I'll calculate" = "Вводите ниже, я посчитаю";
+
+/* Placeholder for gross weight textfield */
+"Enter gross weight" = "Введите вес с посудой";
+
+/* Weight textfield placeholder */
+"Enter weight" = "Введите вес";
+
+/* Placeholder for entering after weight */
+"Enter weight AFTER" = "Введите вес ПОСЛЕ";
+
+/* Placeholder for entering before weight */
+"Enter weight BEFORE" = "Введите вес ДО";
+
+/* Alert explainig that user have to enter all ingredients first */
+"Fill all ingredients weight and nutrition facts first" = "Сначала нужно ввести вес и калорийность всех ингредиентов";
+
+/* Unit measurment of gramms */
+"gr" = "гр";
+
+/* Weight with tare */
+"Gross weight" = "Вес с посудой";
+
+/* Alert showing that ingredient already exists */
+"Ingredient already exists" = "Такой ингредиент уже есть";
+
+/* Unit of measurement of calories per weight */
+"kcal/100gr" = "ккал/100гр";
+
+/* Next button in the toolbar */
+"next" = "дальше";
+
+/* OK title for alerts */
+"OK" = "ОК";
+
+/* Pure weight title of segmented control */
+"Pure weight" = "Вес";
+
+/* Title for rename dish alert */
+"Rename dish" = "Переименовать блюдо";
+
+/* Placeholder for selecting tare */
+"Select tare" = "Выберите посуду";
+

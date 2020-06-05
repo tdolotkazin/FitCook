@@ -59,7 +59,8 @@ extension CustomTextField: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
 		cell.backgroundColor = #colorLiteral(red: 0.9294117647, green: 0.968627451, blue: 0.9803921569, alpha: 1)
-		cell.textLabel?.text = "\(resultsList[indexPath.row].name!) - \(resultsList[indexPath.row].kcal)ккал/100гр"
+		let kcalPerWeight = NSLocalizedString("kcal/100gr", comment: "Unit of measurement of calories per weight")
+		cell.textLabel?.text = "\(resultsList[indexPath.row].name!) - \(resultsList[indexPath.row].kcal)" + kcalPerWeight
 		return cell
 	}
 	

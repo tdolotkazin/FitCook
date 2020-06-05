@@ -1,0 +1,72 @@
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "2o9-bC-8N3"; */
+"2o9-bC-8N3.normalTitle" = "Сохранить";
+
+/* Class = "UILabel"; text = "395 ккал"; ObjectID = "5Dx-y4-eNN"; */
+"5Dx-y4-eNN.text" = "395 ккал";
+
+/* Class = "UIButton"; normalTitle = "Рассчитать"; ObjectID = "665-r0-GCU"; */
+"665-r0-GCU.normalTitle" = "Рассчитать";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "6C8-ZB-gKL"; */
+"6C8-ZB-gKL.title" = "Переименовать";
+
+/* Class = "UILabel"; text = "Всего калорий"; ObjectID = "7bY-FM-tJX"; */
+"7bY-FM-tJX.text" = "Всего калорий";
+
+/* Class = "UILabel"; text = "Общий вес"; ObjectID = "9Va-cp-JNd"; */
+"9Va-cp-JNd.text" = "Общий вес";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "IS2-Py-Qma"; */
+"IS2-Py-Qma.text" = "Label";
+
+/* Class = "UILabel"; text = "Порций"; ObjectID = "NMh-KI-a7o"; */
+"NMh-KI-a7o.text" = "Порций";
+
+/* Class = "UITextField"; text = "Название посуды"; ObjectID = "Niy-9f-5bP"; */
+"Niy-9f-5bP.text" = "Название посуды";
+
+/* Class = "UIViewController"; title = "MealsVC"; ObjectID = "R8z-nr-Vp6"; */
+"R8z-nr-Vp6.title" = "MealsVC";
+
+/* Class = "UILabel"; text = "Вес порции"; ObjectID = "VVd-C2-R2l"; */
+"VVd-C2-R2l.text" = "Вес порции";
+
+/* Class = "UITextField"; placeholder = "Добавьте ингредиенты"; ObjectID = "aj4-8w-6ib"; */
+"aj4-8w-6ib.placeholder" = "Добавьте ингредиенты";
+
+/* Class = "UILabel"; text = "3795 ккал"; ObjectID = "cNj-SX-2ND"; */
+"cNj-SX-2ND.text" = "3795 ккал";
+
+/* Class = "UITabBarItem"; title = "Meals"; ObjectID = "eMS-sL-bTP"; */
+"eMS-sL-bTP.title" = "Meals";
+
+/* Class = "UIViewController"; title = "RecipeItemVC"; ObjectID = "gsN-MR-Z2y"; */
+"gsN-MR-Z2y.title" = "RecipeItemVC";
+
+/* Class = "UILabel"; text = "Общая калорийность"; ObjectID = "gyo-EB-0WM"; */
+"gyo-EB-0WM.text" = "Общая калорийность";
+
+/* Class = "UILabel"; text = "395 ккал"; ObjectID = "iOB-yB-Js7"; */
+"iOB-yB-Js7.text" = "395 ккал";
+
+/* Class = "UITextField"; placeholder = "Введите вес"; ObjectID = "lon-KF-l8p"; */
+"lon-KF-l8p.placeholder" = "Введите вес";
+
+/* Class = "UITextField"; placeholder = "Введите калорийность"; ObjectID = "ltB-BJ-E1r"; */
+"ltB-BJ-E1r.placeholder" = "Введите калорийность";
+
+/* Class = "UINavigationItem"; title = "Soup"; ObjectID = "nTG-TJ-Cxm"; */
+"nTG-TJ-Cxm.title" = "Soup";
+
+/* Class = "UILabel"; text = "Калорий в порции"; ObjectID = "oDn-4O-xWk"; */
+"oDn-4O-xWk.text" = "Калорий в порции";
+
+/* Class = "UILabel"; text = "Вес"; ObjectID = "qgd-LY-6W4"; */
+"qgd-LY-6W4.text" = "Вес";
+
+/* Class = "UILabel"; text = "12"; ObjectID = "rla-2H-JX0"; */
+"rla-2H-JX0.text" = "12";
+
+/* Class = "UILabel"; text = "В нестандартной порции"; ObjectID = "uWF-UB-5wf"; */
+"uWF-UB-5wf.text" = "В нестандартной порции";

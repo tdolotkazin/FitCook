@@ -32,7 +32,7 @@ class IngredientsVC: UITableViewController {
 							trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration?
 	{
 		if ingredients[indexPath.row].inRecipe?.count == 0 {
-			let delete = UIContextualAction(style: .destructive, title: "Delete") {
+			let delete = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) {
 				(action, sourceView, completionHandler) in
 				self.coreData?.delete(self.ingredients[indexPath.row])
 				self.ingredients.remove(at: indexPath.row)

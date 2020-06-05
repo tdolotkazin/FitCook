@@ -15,12 +15,12 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		super.viewDidLoad()
 		calculateButton.layer.cornerRadius = 8
 		title = meal.name
-		recipeItems = meal.recipeItems?.allObjects as! [RecipeItem]
+		recipeItems = meal.getRecipeItems()
 		tableView.register(UINib(nibName: "RecipeItemCell", bundle: .main), forCellReuseIdentifier: "recipeItemCell")
 		tableView.separatorStyle = .none
 		let toolbar = CustomToolbar(leftButtonType: .Weight, rightButtonType: .Done)
 		textField.inputAccessoryView = toolbar
-		textField.keyboardType = .default
+//		textField.keyboardType = .default
 		toolbar.buttonDelegate = self
 		buildIngredientsButton()
 	}
@@ -28,7 +28,6 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		navigationController?.navigationBar.isHidden = false
-		coreData.save()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +40,8 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		textField.tableView?.removeFromSuperview()
 		textField.tableView = nil
 	}
+	
+	
 	
 	func buildIngredientsButton() {
 		let ingredientsButton = UIButton()
@@ -79,7 +80,9 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		if recipeItems.contains(where: { (recipeItem) -> Bool in
 			recipeItem.ingredient?.name == parsedItem.name
 		}) {
-			showAlert(title: "Уже есть такой ингредиент", actionTitle: "OK")
+			let ingredientExistsTitle = NSLocalizedString("Ingredient already exists", comment: "Alert showing that ingredient already exists")
+			let OKTitle = NSLocalizedString("OK", comment: "OK title for alerts")
+			showAlert(title: ingredientExistsTitle, actionTitle: OKTitle)
 			return
 		}
 		
@@ -101,8 +104,10 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 	
 	@IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
 		var textField = UITextField()
-		let alert = UIAlertController(title: "Переименовать блюдо", message: nil, preferredStyle: .alert)
-		let action = UIAlertAction(title: "OK", style: .default) { (alertAction) in
+		let dishRenameTitle = NSLocalizedString("Rename dish", comment: "Title for rename dish alert")
+		let alert = UIAlertController(title: dishRenameTitle, message: nil, preferredStyle: .alert)
+		let okTitle = NSLocalizedString("OK", comment: "OK title for alerts")
+		let action = UIAlertAction(title: okTitle, style: .default) { (alertAction) in
 			self.meal?.name = textField.text!
 		}
 		alert.addAction(action)
@@ -128,11 +133,16 @@ class RecipeVC: UIViewController, UIAdaptivePresentationControllerDelegate {
 		if (checkIfReadyForCalculation(ingredients: recipeItems) { (error) in
 			switch error {
 				case "Fill Ingredients":
-					let alert = UIAlertController(title: "Ну уж нет", message: "Сначала введите вес и калорийность всех ингредиентов =)", preferredStyle: .alert)
-					alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
+					let enterAllIngredientsFirst = NSLocalizedString("Fill all ingredients weight and nutrition facts first", comment: "Alert explainig that user have to enter all ingredients first")
+					let alert = UIAlertController(title: enterAllIngredientsFirst, message: nil, preferredStyle: .alert)
+					let okTitle = NSLocalizedString("OK", comment: "OK title for alerts")
+					alert.addAction(UIAlertAction(title: okTitle, style: .default, handler: nil))
 					present(alert, animated: true, completion: nil)
-				case "Add Ingredients": let alert = UIAlertController(title: "А из чего готовить будем?", message: "Ну хоть что-нибудь введите =)", preferredStyle: .alert)
-				alert.addAction(UIAlertAction(title: "Ну ладно =(", style: .default, handler: nil))
+				case "Add Ingredients":
+					let noIngredients = NSLocalizedString("Add ingredient", comment: "Alert showing there are no ingredients")
+					let alert = UIAlertController(title: noIngredients, message: nil, preferredStyle: .alert)
+					let okTitle = NSLocalizedString("OK", comment: "OK title for alerts")
+					alert.addAction(UIAlertAction(title: okTitle, style: .default, handler: nil))
 				present(alert, animated: true, completion: nil)
 				default: break
 			}
@@ -225,7 +235,8 @@ extension RecipeVC: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+		let deleteTitle = NSLocalizedString("Delete", comment: "Delete button")
+		let delete = UIContextualAction(style: .destructive, title: deleteTitle) { (action, sourceView, completionHandler) in
 			self.coreData?.deleteRecipeItem(recipeItem: self.recipeItems[indexPath.row])
 			self.recipeItems.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)

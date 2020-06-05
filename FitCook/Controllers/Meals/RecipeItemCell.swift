@@ -21,17 +21,19 @@ class RecipeItemCell: UITableViewCell {
 		self.nameLabel.text = recipeItem.ingredient!.name
 		let weight = recipeItem.weight
 		if weight != 0 {
-			self.weightLabel.text = "\(weight)гр"
+			let gr = NSLocalizedString("gr", comment: "Unit measurment of gramms")
+			self.weightLabel.text = String(weight)+gr
 			self.weightLabel.textColor = .label
 		} else {
-			self.weightLabel.text = "гр"
+			self.weightLabel.text = NSLocalizedString("gr", comment: "Unit measurment of gramms")
 			self.weightLabel.textColor = .systemGray
 		}
 		let kcal = recipeItem.ingredient!.kcal
 		if kcal != 0 {
-			self.kcalLabel.text = "\(kcal)ккал/100гр"
+			let kcalPerWeight = NSLocalizedString("kcal/100gr", comment: "Unit of measurement of calories per weight")
+			self.kcalLabel.text = String(kcal)+kcalPerWeight
 		} else {
-			self.kcalLabel.text = "ккал/100гр"
+			self.kcalLabel.text = NSLocalizedString("kcal/100gr", comment: "Unit of measurement of calories per weight")
 		}
 		return self
 	}

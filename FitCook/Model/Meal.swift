@@ -8,4 +8,9 @@ extension Meal {
 		}
 		return totalWeight
 	}
+	
+	func getRecipeItems() -> [RecipeItem] {
+		return self.recipeItems?.allObjects as! [RecipeItem]
+	}
+	
 }

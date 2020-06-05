@@ -52,7 +52,7 @@ class CalculationVC: UIViewController {
 	@IBAction func buttonPressed(_ sender: UIButton) {
 		switch sender.tag {
 			case 0:
-				if servings != 20 {
+				if servings != Settings.maxServings {
 					servings += 1
 			}
 			case 1:

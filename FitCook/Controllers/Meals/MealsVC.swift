@@ -4,7 +4,6 @@ class MealsVC: UIViewController {
 	
 	private var meals = [Meal]()
 	private var coreData: CoreDataHelper!
-	private var addMealButton: UIButton!
 	private var tableView: UITableView!
 	
 	override func viewDidLoad() {
@@ -24,22 +23,22 @@ class MealsVC: UIViewController {
 		super.viewDidAppear(animated)
 		tableView.reloadAndDeselectRow()
 	}
-			
-	//MARK: - Button methods
-	
+}
+
+//MARK: - Button
+
+extension MealsVC: ButtonDelegate {
+
 	func createButton() {
-		addMealButton = UIButton(type: .custom)
-		addMealButton.setImage(UIImage(named: "AddMealButton"), for: .normal)
-		view.addSubview(addMealButton)
-		addMealButton.frame.size = CGSize(width: 70, height: 70)
-		addMealButton.translatesAutoresizingMaskIntoConstraints = false
-		addMealButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-		addMealButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-		addMealButton.addTarget(self, action: #selector(addMealButtonPressed), for: .touchUpInside)
+		let addMealButton = AddMealButton(parent: view)
+		addMealButton.delegate = self
 	}
-	
-	@objc func addMealButtonPressed(_ sender: UIButton!) {
-		let alert = buildAlert(title: "Новое блюдо", message: "Добавьте новое блюдо", OKTitle: "Добавить", cancelTitle: "Отмена") { (mealName) in
+
+	func buttonPressed(sender: Any?) {
+		let newMealTitle = NSLocalizedString("Add new meal", comment: "Title for adding new meal alert")
+		let addTitle = NSLocalizedString("Add", comment: "Add button")
+		let cancelTitle = NSLocalizedString("Cancel", comment: "Cancel button")
+		let alert = buildAlert(title: newMealTitle, message: nil, OKTitle: addTitle, cancelTitle: cancelTitle) { (mealName) in
 			let newMeal: Meal = self.coreData.create(named: mealName)
 			self.meals.insert(newMeal, at: 0)
 			self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
@@ -78,7 +77,8 @@ extension MealsVC: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, sourceView, completionHandler) in
+		let deleteTitle = NSLocalizedString("Delete", comment: "Delete button")
+		let delete = UIContextualAction(style: .destructive, title: deleteTitle) { (action, sourceView, completionHandler) in
 			self.coreData.delete(self.meals[indexPath.row])
 			self.meals.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
@@ -92,8 +92,7 @@ extension MealsVC: UITableViewDataSource {
 
 //MARK: - TableView Delegate
 
-extension MealsVC: UITableViewDelegate {
-	
+extension MealsVC: UITableViewDelegate {	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		performSegue(withIdentifier: "toIngredients", sender: self)
 	}

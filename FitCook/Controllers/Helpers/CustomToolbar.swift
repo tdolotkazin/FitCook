@@ -30,9 +30,13 @@ class CustomToolbar: UIToolbar {
 		let button: UIBarButtonItem
 		switch buttonType {
 			case .Done: button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonPressed))
-			case .Next: button = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextButtonPressed))
-			case .Weight: button = UIBarButtonItem(title: ": weight", style: .plain, target: self, action:	#selector(weightButtonPressed))
-			button.title = ": weight"
+			case .Next:
+				let nextText = NSLocalizedString("next", comment: "Next button in the toolbar")
+				button = UIBarButtonItem(title: nextText, style: .plain, target: self, action: #selector(nextButtonPressed))
+			case .Weight:
+				let weightText = NSLocalizedString(": weight", comment: "Weight button in the toolbar")
+				button = UIBarButtonItem(title: weightText, style: .plain, target: self, action:	#selector(weightButtonPressed))
+//				button.title = weightText
 			case .None: button = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
 		}
 		return button

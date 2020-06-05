@@ -91,7 +91,10 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 	}
 	
 	func createSegmentedControl(bottom: CGFloat) {
-		let items = ["Чистый вес", "Вес с тарой", "Вес до/после"]
+		let pureWeight = NSLocalizedString("Pure weight", comment: "Pure weight title of segmented control")
+		let tareWeight = NSLocalizedString("Gross weight", comment: "Weight with tare")
+		let beforeAfterWeight = NSLocalizedString("Before/after weight", comment: "Weight before and after")
+		let items = [pureWeight, tareWeight, beforeAfterWeight]
 		segmentedControl = UISegmentedControl(items: items)
 		view.addSubview(segmentedControl)
 		segmentedControl.translatesAutoresizingMaskIntoConstraints = false
@@ -127,7 +130,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		let pureView = UIView()
 		pureView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		weightView?.addSubview(pureView)
-		weightTextField.placeholder = "Введите вес"
+		weightTextField.placeholder = NSLocalizedString("Enter weight", comment: "Weight textfield placeholder")
 		weightTextField.becomeFirstResponder()
 	}
 	
@@ -137,7 +140,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		pickerVC.coreData = coreData
 		pickerVC.delegate = self
 		weightView?.addSubview(pickerVC.view)
-		weightTextField.placeholder = "Вводите ниже, я посчитаю"
+		weightTextField.placeholder = NSLocalizedString("Enter below, I'll calculate", comment: "Placeholder for complex weight entering")
 	}
 	
 	func showBeforeAfterView() {
@@ -145,7 +148,7 @@ class RecipeItemVC: UIViewController, UITextFieldDelegate {
 		addChild(beforeAfterVC)
 		weightView?.addSubview(beforeAfterVC.view)
 		beforeAfterVC.delegate = self
-		weightTextField.placeholder = "Вводите ниже, я посчитаю"
+		weightTextField.placeholder = NSLocalizedString("Enter below, I'll calculate", comment: "Placeholder for complex weight entering")
 	}
 	
 	func updateTotalKcalLabel() {

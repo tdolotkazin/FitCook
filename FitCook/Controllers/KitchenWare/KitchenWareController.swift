@@ -33,7 +33,7 @@ class KitchenWareController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-		let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+		let delete = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "")) { (action, view, completionHandler) in
 			self.coreData?.delete(self.kitchenWare[indexPath.row])
 			self.kitchenWare.remove(at: indexPath.row)
 			tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -48,19 +48,19 @@ class KitchenWareController: UITableViewController {
 	
 	@IBAction func addDishPressed(_ sender: UIBarButtonItem) {
 		var textField = UITextField()
-		let alert = UIAlertController(title: "Введите посуду", message: nil, preferredStyle: .alert)
-		let action = UIAlertAction(title: "OK", style: .default) { (action) in
+		let alert = UIAlertController(title: NSLocalizedString("Add kitchenware", comment: ""), message: nil, preferredStyle: .alert)
+		let action = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default) { (action) in
 			let newDish:Dish = self.coreData!.create(named: textField.text!)
 			self.kitchenWare.append(newDish)
 			self.coreData!.save()
 			self.tableView.reloadData()
 		}
-		let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
 		alert.addAction(action)
 		alert.addAction(cancelAction)
 		alert.addTextField { (field) in
 			textField = field
-			textField.placeholder = "Введите посуду"
+			textField.placeholder = NSLocalizedString("Add kitchenware name", comment: "")
 			textField.autocapitalizationType = .sentences
 		}
 		present(alert, animated: true, completion: nil)

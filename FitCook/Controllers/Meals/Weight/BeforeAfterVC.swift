@@ -24,8 +24,8 @@ class BeforeAfterVC: UIViewController, UITextFieldDelegate {
 		afterTextField.keyboardType = .numberPad
 		beforeTextField.textAlignment = .center
 		afterTextField.textAlignment = .center
-		beforeTextField.placeholder = "Введите вес ДО"
-		afterTextField.placeholder = "Введите вес ПОСЛЕ"
+		beforeTextField.placeholder = NSLocalizedString("Enter weight BEFORE", comment: "Placeholder for entering before weight")
+		afterTextField.placeholder = NSLocalizedString("Enter weight AFTER", comment: "Placeholder for entering after weight")
 		beforeTextField.delegate = self
 		afterTextField.delegate = self
 	}
